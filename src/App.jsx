@@ -12,6 +12,10 @@ import TotalIncome from "./Pages/Dashboard/Income/TotalIncome";
 import Wallet from "./Pages/Dashboard/Income/Wallet";
 import Subscription from "./Pages/Dashboard/Subscription/Subscription";
 import Settings from "./Pages/Dashboard/Settings/Settings";
+import Signin from "./Pages/Signin/Signin";
+import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
+import Otp from "./Pages/Otp/Otp";
+import NewPassword from "./Pages/NewPassword/NewPassword";
 
 function App() {
   return (
@@ -22,7 +26,7 @@ function App() {
             path="/"
             element={
               // <PrivateRoute>
-                <Dashboard />
+              <Dashboard />
               // </PrivateRoute>
             }
           >
@@ -34,22 +38,15 @@ function App() {
             <Route path="/totalIncome" element={<TotalIncome />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/subscription" element={<Subscription />} />
-            <Route path="/settings" element={<Settings />} />
-
-
-
-
             <Route path="/notification" element={<Notification />} />
-            {/* <Route path="/profile" element={<Profile />} />
-            <Route path="/index" element={<Inbox />} /> */}
-   
-            {/* <Route path="/settings" element={<Settings />} />
-            <Route path="/settings/:dynamic" element={<SettingPage />} /> */}
+            <Route path="/settings" element={<Settings />} />
+            {/* <Route path="/settings/:dynamic" element={<SettingPage />} /> */}
           </Route>
-          {/* <Route path="/signin" element={<Signin />} />
+
+          <Route path="/login" element={<Signin />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/otp/:email" element={<Otp />} />
-          <Route path="/new-password/:email" element={<NewPassword />} /> */}
+          <Route path="/new-password/:email" element={<NewPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
