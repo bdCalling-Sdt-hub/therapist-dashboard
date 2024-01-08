@@ -144,7 +144,7 @@ const Dashboard = () => {
               onClick={(e) => navigate("/")}
               className="w-[220px] cursor-pointer mx-auto p-5"
               src="https://i.ibb.co/BZyk1GG/image-2.png"
-              alt=""
+              alt="logo"
             />
           </h1>
           <Menu
