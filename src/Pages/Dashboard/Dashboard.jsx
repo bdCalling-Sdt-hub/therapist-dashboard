@@ -54,24 +54,64 @@ const Dashboard = () => {
       <RxDashboard style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p
-        onClick={(e) => navigate("/therapistList")}
-        className="text-[20px] leading-normal"
-      >
-        Therapist List
-      </p>,
-      "2",
-      <FaUserDoctor style={{ fontSize: "18px" }} />
+      <p className="text-[20px] leading-normal">Therapist</p>,
+      "sub1",
+      <FaUserDoctor style={{ fontSize: "18px" }} />,
+      [
+        getItem(
+          <li
+            onClick={(e) => navigate("/allTherapist")}
+            className="text-[20px] leading-normal"
+          >
+            All Therapist
+          </li>,
+          "2"
+        ),
+        getItem(
+          <li
+            onClick={(e) => navigate("/therapistRequest")}
+            className="text-[20px] leading-normal"
+          >
+            Therapist Request
+          </li>,
+          "3"
+        ),
+      ]
     ),
+
     getItem(
-      <p
-        onClick={(e) => navigate("/patientList")}
-        className="text-[20px] leading-normal"
-      >
-        Patient List
-      </p>,
-      "3",
-      <FaRegUser style={{ fontSize: "18px" }} />
+      <p className="text-[20px] leading-normal">Patient</p>,
+      "sub2",
+      <FaRegUser style={{ fontSize: "18px" }} />,
+      [
+        getItem(
+          <li
+            onClick={(e) => navigate("/allPatients")}
+            className="text-[20px] leading-normal"
+          >
+            All Patients
+          </li>,
+          "4"
+        ),
+        getItem(
+          <li
+            onClick={(e) => navigate("/patientsRequest")}
+            className="text-[20px] leading-normal"
+          >
+            Patients Request
+          </li>,
+          "5"
+        ),
+        getItem(
+          <li
+            onClick={(e) => navigate("/matchedTherapist")}
+            className="text-[20px] leading-normal"
+          >
+            Matched Therapist
+          </li>,
+          "6"
+        ),
+      ]
     ),
     getItem(
       <p
@@ -80,7 +120,7 @@ const Dashboard = () => {
       >
         Appointments
       </p>,
-      "4",
+      "7",
       <BsBookmarkCheck style={{ fontSize: "18px" }} />
     ),
     getItem(
@@ -90,13 +130,13 @@ const Dashboard = () => {
       >
         Transaction
       </p>,
-      "5",
+      "8",
       <FaArrowRightArrowLeft style={{ fontSize: "18px" }} />
     ),
 
     getItem(
       <p className="text-[20px] leading-normal">Income</p>,
-      "sub1",
+      "sub3",
       <IoWalletOutline style={{ fontSize: "18px" }} />,
       [
         getItem(
@@ -106,7 +146,7 @@ const Dashboard = () => {
           >
             Total Income
           </li>,
-          "6"
+          "9"
         ),
         getItem(
           <li
@@ -115,7 +155,7 @@ const Dashboard = () => {
           >
             Wallet
           </li>,
-          "7"
+          "10"
         ),
       ]
     ),
@@ -126,7 +166,7 @@ const Dashboard = () => {
       >
         Subscription
       </p>,
-      "8",
+      "11",
       <RxDashboard style={{ fontSize: "18px" }} />
     ),
     getItem(
@@ -136,14 +176,14 @@ const Dashboard = () => {
       >
         Settings
       </p>,
-      "9",
+      "12",
       <IoMdSettings style={{ fontSize: "18px" }} />
     ),
     getItem(
       <p onClick={logout} className="text-[20px] leading-normal">
         Logout
       </p>,
-      "10",
+      "13",
       <TbLogout2 style={{ fontSize: "18px" }} />
     ),
   ];
@@ -165,7 +205,7 @@ const Dashboard = () => {
           </h1>
           <Menu
             style={{ overflowY: "auto", height: "80vh" }}
-            className="w-[302px] p-[20px] pt-0  bg-white text-black  rounded-b-xl "
+            className="w-[302px] p-[20px] pt-0  pb-[60px] bg-white text-black  rounded-b-xl "
             defaultSelectedKeys={["1"]}
             // defaultOpenKeys={["sub1"]}
             mode={mode}

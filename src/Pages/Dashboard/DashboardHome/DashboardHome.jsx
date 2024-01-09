@@ -1,6 +1,7 @@
 import React from "react";
 import Status from "./Status";
 import BarChartIncomeRatio from "./BarChartIncomeRatio";
+import RecentSession from "./RecentSession";
 
 
 function DashboardHome() {
@@ -10,7 +11,7 @@ function DashboardHome() {
         <div className="w-[708px] flex flex-col pl-[20px] pt-[20px] ">
           <Status />
           <BarChartIncomeRatio/>
-          <div className="">3</div>
+          <RecentSession />
         </div>
         <div className="w-[342px] pl-[20px] pt-[20px]">right</div>
       </div>

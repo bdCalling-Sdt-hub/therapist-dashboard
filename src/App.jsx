@@ -4,8 +4,6 @@ import Notification from "./Pages/Dashboard/Notification/Notification";
 import DashboardHome from "./Pages/Dashboard/DashboardHome/DashboardHome";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import NotFound from "./Pages/NotFound";
-import TherapistList from "./Pages/Dashboard/TherapistList/TherapistList";
-import PatientList from "./Pages/Dashboard/PatientList/PatientList";
 import Appointments from "./Pages/Dashboard/Appointments/Appointments";
 import Transaction from "./Pages/Dashboard/Transaction/Transaction";
 import TotalIncome from "./Pages/Dashboard/Income/TotalIncome";
@@ -16,6 +14,11 @@ import Signin from "./Pages/Signin/Signin";
 import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
 import Otp from "./Pages/Otp/Otp";
 import NewPassword from "./Pages/NewPassword/NewPassword";
+import AllTherapist from "./Pages/Dashboard/PatientList/AllTherapist";
+import TherapistRequest from "./Pages/Dashboard/PatientList/TherapistRequest";
+import AllPatients from "./Pages/Dashboard/TherapistList/AllPatients";
+import MatchedTherapist from "./Pages/Dashboard/TherapistList/MatchedTherapist";
+import PatientsRequest from "./Pages/Dashboard/TherapistList/PatientsRequest";
 
 function App() {
   return (
@@ -31,8 +34,11 @@ function App() {
             }
           >
             <Route path="/" element={<DashboardHome />} />
-            <Route path="/therapistList" element={<TherapistList />} />
-            <Route path="/patientList" element={<PatientList />} />
+            <Route path="/allTherapist" element={<AllTherapist />} />
+            <Route path="/therapistRequest" element={<TherapistRequest />} />
+            <Route path="/allPatients" element={<AllPatients />} />
+            <Route path="/matchedTherapist" element={<MatchedTherapist />} />
+            <Route path="/patientsRequest" element={<PatientsRequest />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/transaction" element={<Transaction />} />
             <Route path="/totalIncome" element={<TotalIncome />} />
@@ -42,7 +48,6 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             {/* <Route path="/settings/:dynamic" element={<SettingPage />} /> */}
           </Route>
-
           <Route path="/login" element={<Signin />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/otp/:email" element={<Otp />} />
