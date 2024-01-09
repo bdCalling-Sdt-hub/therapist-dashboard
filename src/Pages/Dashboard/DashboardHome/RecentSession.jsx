@@ -131,7 +131,7 @@ function RecentSession() {
       dataIndex: "accountType",
       render: (_, record) => (
         <>
-          <a>{record?.accountType}</a>
+          <p>{record?.accountType}</p>
         </>
       ),
     },

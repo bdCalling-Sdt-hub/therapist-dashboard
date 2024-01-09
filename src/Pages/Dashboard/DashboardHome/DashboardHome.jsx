@@ -2,6 +2,7 @@ import React from "react";
 import Status from "./Status";
 import BarChartIncomeRatio from "./BarChartIncomeRatio";
 import RecentSession from "./RecentSession";
+import UserSurveyRatio from "./UserSurveyRatio";
 
 
 function DashboardHome() {
@@ -13,7 +14,9 @@ function DashboardHome() {
           <BarChartIncomeRatio/>
           <RecentSession />
         </div>
-        <div className="w-[342px] pl-[20px] pt-[20px]">right</div>
+        <div className="w-[342px] pl-[20px] pt-[20px]">
+          <UserSurveyRatio />
+        </div>
       </div>
     </div>
   );

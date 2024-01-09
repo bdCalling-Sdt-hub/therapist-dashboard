@@ -89,14 +89,14 @@ function BarChartIncomeRatio() {
     <div className="bg-white mt-5 rounded-xl border-1 shadow-xl border-secondary ">
       <div className="flex justify-between p-[16px]">
         <div>
-          <h1 className="text-[20px] font-medium">Income Ratio</h1>{" "}
+          <h1 className="text-[20px] font-medium">Income Ratio</h1>
           <div className="flex gap-5 mt-[20px]">
             <div className="flex gap-2 items-center">
-              <span className="bg-[#54A630] w-4 h-4 rounded-full"></span>{" "}
+              <span className="bg-[#54A630] w-4 h-4 rounded-full"></span>
               <span>This month</span>
             </div>
             <div className="flex gap-2 items-center">
-              <span className="bg-[#B0D6A0] w-4 h-4 rounded-full"></span>{" "}
+              <span className="bg-[#B0D6A0] w-4 h-4 rounded-full"></span>
               <span>Last month</span>
             </div>
           </div>
