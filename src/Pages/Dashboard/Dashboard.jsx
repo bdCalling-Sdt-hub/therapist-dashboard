@@ -6,7 +6,7 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa";
 import { BsBookmarkCheck } from "react-icons/bs";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
-import { IoWalletOutline,IoSettingsOutline } from "react-icons/io5";
+import { IoWalletOutline, IoSettingsOutline } from "react-icons/io5";
 import { TbLogout2 } from "react-icons/tb";
 import { IoMdSettings } from "react-icons/io";
 
@@ -27,25 +27,24 @@ const Dashboard = () => {
   const [mode, setMode] = useState("inline");
   const [theme, setTheme] = useState("light");
 
-  // const logout = () => {
-  //   Swal.fire({
-  //     title: "Do you want to Logout from here?",
-  //     showDenyButton: true,
-  //     showCancelButton: false,
-  //     confirmButtonText: "Yes",
-  //     denyButtonText: `No`,
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       localStorage.removeItem("token");
-  //       localStorage.removeItem("yourInfo");
+  const logout = () => {
+    Swal.fire({
+      title: "Do you want to Logout from here?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("yourInfo");
 
-  //       navigate("/signin");
-  //     } else if (result.isDenied) {
-  //       Swal.fire("Ok", "", "info");
-  //     }
-  //   });
-  // };
-
+        navigate("/login");
+      } else if (result.isDenied) {
+        Swal.fire("Ok", "", "info");
+      }
+    });
+  };
   const items = [
     getItem(
       <p onClick={(e) => navigate("/")} className="text-[20px] leading-normal">
@@ -55,29 +54,41 @@ const Dashboard = () => {
       <RxDashboard style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p onClick={(e) => navigate("/therapistList")} className="text-[20px] leading-normal">
+      <p
+        onClick={(e) => navigate("/therapistList")}
+        className="text-[20px] leading-normal"
+      >
         Therapist List
       </p>,
       "2",
       <FaUserDoctor style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p onClick={(e) => navigate("/patientList")} className="text-[20px] leading-normal">
+      <p
+        onClick={(e) => navigate("/patientList")}
+        className="text-[20px] leading-normal"
+      >
         Patient List
       </p>,
       "3",
       <FaRegUser style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p onClick={(e) => navigate("/appointments")} className="text-[20px] leading-normal">
-       Appointments
+      <p
+        onClick={(e) => navigate("/appointments")}
+        className="text-[20px] leading-normal"
+      >
+        Appointments
       </p>,
       "4",
       <BsBookmarkCheck style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p onClick={(e) => navigate("/transaction")} className="text-[20px] leading-normal">
-     Transaction
+      <p
+        onClick={(e) => navigate("/transaction")}
+        className="text-[20px] leading-normal"
+      >
+        Transaction
       </p>,
       "5",
       <FaArrowRightArrowLeft style={{ fontSize: "18px" }} />
@@ -102,30 +113,35 @@ const Dashboard = () => {
             onClick={(e) => navigate("/wallet")}
             className="text-[20px] leading-normal"
           >
-          Wallet
+            Wallet
           </li>,
           "7"
         ),
-
       ]
     ),
     getItem(
-      <p onClick={(e) => navigate("/subscription")} className="text-[20px] leading-normal">
-     Subscription
+      <p
+        onClick={(e) => navigate("/subscription")}
+        className="text-[20px] leading-normal"
+      >
+        Subscription
       </p>,
       "8",
       <RxDashboard style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p onClick={(e) => navigate("/settings")} className="text-[20px] leading-normal">
-     Settings
+      <p
+        onClick={(e) => navigate("/settings")}
+        className="text-[20px] leading-normal"
+      >
+        Settings
       </p>,
       "9",
       <IoMdSettings style={{ fontSize: "18px" }} />
     ),
     getItem(
-      <p onClick={(e) => navigate("/")} className="text-[20px] leading-normal">
-     Logout
+      <p onClick={logout} className="text-[20px] leading-normal">
+        Logout
       </p>,
       "10",
       <TbLogout2 style={{ fontSize: "18px" }} />
