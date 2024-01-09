@@ -7,7 +7,7 @@ function DashboardHome() {
   return (
     <div>
       <div className="flex">
-        <div className="w-[708px] flex flex-col pl-[20px] pt-[20px]">
+        <div className="w-[708px] flex flex-col pl-[20px] pt-[20px] ">
           <Status />
           <BarChartIncomeRatio/>
           <div className="">3</div>

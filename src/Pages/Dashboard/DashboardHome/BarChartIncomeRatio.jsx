@@ -102,7 +102,7 @@ function BarChartIncomeRatio() {
           </div>
         </div>
         <div>
-          <DatePicker onChange={onChange} picker="month" />
+          <DatePicker onChange={onChange}  picker="month" />
         </div>
       </div>
       <div>
@@ -121,11 +121,13 @@ function BarChartIncomeRatio() {
           <Bar
             dataKey="LastMonth"
             fill="#B0D6A0"
+            barSize={6}
             activeBar={<Rectangle fill="pink" stroke="blue" />}
           />
           <Bar
             dataKey="ThisMonth"
             fill="#54A630"
+            barSize={6}
             activeBar={<Rectangle fill="gold" stroke="purple" />}
           />
         </BarChart>
