@@ -21,7 +21,7 @@ function Signin() {
   };
   return (
     <div
-      className="flex mx-auto overflow-hidden  w-[1440px] rounded-xl shadow-xl bg-[url('https://i.ibb.co/t2TdKRm/signin.png')] "
+      className="flex mx-auto overflow-hidden container rounded-xl shadow-xl bg-[url('https://i.ibb.co/t2TdKRm/signin.png')] "
       style={{ height: "100vh" }}
     >
       <div className=" w-[500px] h-[550px] p-[32px] bg-white shadow rounded-3xl my-auto mx-auto">

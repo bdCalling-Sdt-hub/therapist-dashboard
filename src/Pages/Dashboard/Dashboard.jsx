@@ -190,7 +190,7 @@ const Dashboard = () => {
 
   return (
     <div
-      className="flex mx-auto overflow-hidden border-2 w-[1440px] rounded-xl shadow-xl"
+      className="flex mx-auto overflow-hidden border-2 container rounded-xl shadow-xl"
       style={{ height: "100vh" }}
     >
       <div className="">
