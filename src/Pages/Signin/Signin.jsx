@@ -4,19 +4,20 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Signin() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    // dispatch(UserData({ email: email, password: password }));
-    if (email == "" || password == "") {
-      
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill all the fields",
-      });
-    }
+    navigate("/")
+    // if (email == "" || password == "") {
+
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Please fill all the fields",
+    //   });
+    // }
   };
   return (
     <div
@@ -55,7 +56,7 @@ function Signin() {
             <Checkbox className="text-[18px] items-center">
               Remember me
             </Checkbox>
-            <h1 className="text-primary cursor-pointer text-[24px] font-medium">
+            <h1 onClick={() => navigate("/forget-password")} className="text-primary cursor-pointer text-[24px] font-medium">
               Forgot Password?
             </h1>
           </div>
