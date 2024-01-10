@@ -176,13 +176,13 @@ function RecentSession() {
   ];
   return (
     <div className="mt-5 bg-white rounded-xl border-1 h-[325px] shadow-xl border-secondary">
-      <div className="flex justify-between p-[16px]">
+      <div className="flex justify-between mt-[16px] pb-[16px] mx-5 border-b-[1px] border-primary">
         <h1 className="text-primary text-[18px] font-bold">Recent Session</h1>
         <div>
           <DatePicker className="bg-secondary" onChange={onChange} />
         </div>
       </div>
-      <div className=" overflow-hidden h-[250px] overflow-y-scroll">
+      <div className="overflow-hidden px-5 h-[250px] overflow-y-scroll">
         <Table
           showHeader={false}
           pagination={false}
