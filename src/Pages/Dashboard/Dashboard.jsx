@@ -26,6 +26,13 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [mode, setMode] = useState("inline");
   const [theme, setTheme] = useState("light");
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  console.log(collapsed);
 
   const logout = () => {
     Swal.fire({
@@ -198,6 +205,7 @@ const Dashboard = () => {
           <h1 className=" text-center text-white">
             <img
               onClick={(e) => navigate("/")}
+              // onClick={toggleCollapsed}
               className="w-[220px] cursor-pointer mx-auto p-5"
               src="https://i.ibb.co/BZyk1GG/image-2.png"
               alt="logo"
@@ -205,12 +213,13 @@ const Dashboard = () => {
           </h1>
           <Menu
             style={{ overflowY: "auto", height: "80vh" }}
-            className="w-[302px] p-[20px] pt-0  pb-[60px] bg-white text-black  rounded-b-xl "
+            className={`w-[302px] p-[20px] pt-0  pb-[60px] bg-white text-black  rounded-b-xl `}
             defaultSelectedKeys={["1"]}
             // defaultOpenKeys={["sub1"]}
             mode={mode}
             theme={theme}
             items={items}
+            inlineCollapsed={collapsed}
           />
         </>
       </div>
