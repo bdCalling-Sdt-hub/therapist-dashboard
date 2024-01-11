@@ -1,18 +1,12 @@
 import React from "react";
-import { Input, Checkbox } from "antd";
+import { Input } from "antd";
 
 function PasswordAndSecurity() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [currentPassword, setCurrentPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
   console.log(currentPassword, newPassword, confirmPassword);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   return (
     <div>
@@ -57,10 +51,14 @@ function PasswordAndSecurity() {
           </div>
         </div>
         <div>
-          <h2 className="text-primary font-semibold my-4 cursor-pointer">Forgot Password?</h2>
+          <h2 className="text-primary font-semibold my-4 cursor-pointer">
+            Forgot Password?
+          </h2>
         </div>
         <div>
-          <button className="text-[16px] font-semibold text-white bg-primary p-[16px] py-[10px] rounded-md">Change Password</button>
+          <button className="text-[16px] font-semibold text-white bg-primary p-[16px] py-[10px] rounded-md">
+            Change Password
+          </button>
         </div>
       </div>
     </div>
