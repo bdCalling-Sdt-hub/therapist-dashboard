@@ -210,7 +210,6 @@ function BlockList() {
           scroll={{
             y: 560,
           }}
-          // showHeader={false}
           pagination={false}
           columns={columns}
           dataSource={BlockListDAta}
