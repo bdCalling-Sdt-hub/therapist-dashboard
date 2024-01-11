@@ -6,7 +6,6 @@ function PasswordAndSecurity() {
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  console.log(currentPassword, newPassword, confirmPassword);
 
   return (
     <div>
