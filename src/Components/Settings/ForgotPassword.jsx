@@ -59,7 +59,7 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
               </div>
             </div>
           </>
-        );
+        )
       case 2:
         return (
           <>
@@ -98,7 +98,7 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
               </div>
             </div>
           </>
-        );
+        )
       case 3:
         return (
           <>
@@ -128,7 +128,7 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
               </div>
             </div>
           </>
-        );
+        )
       default:
         return null;
     }
