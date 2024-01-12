@@ -25,7 +25,9 @@ function Activity() {
             <p className="text-primary">Current Session</p>
           </div>
           <div>
-            <button className="text-[#F44336] text-[14px] hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
+            <button className="text-[#F44336] text-[14px] hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
           </div>
         </div>
         <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
@@ -40,28 +42,12 @@ function Activity() {
             <h2 className="text-[18px]">Windows</h2>
             <p>IP: 192.168.10.01</p>
             <p>Google Chrome</p>
-            <p className="">Current Session</p>
+            <p className="">16 Jan, 2023</p>
           </div>
           <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
-          </div>
-        </div>
-        <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
-          <div>
-            <img
-              className="w-[80px] h-[80px]"
-              src="https://i.ibb.co/pxFgvjs/Laptop.png"
-              alt=""
-            />
-          </div>
-          <div>
-            <h2 className="text-[18px]">Windows</h2>
-            <p>IP: 192.168.10.01</p>
-            <p>Google Chrome</p>
-            <p className="">Current Session</p>
-          </div>
-          <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
           </div>
         </div>
         <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
@@ -76,28 +62,12 @@ function Activity() {
             <h2 className="text-[18px]">Windows</h2>
             <p>IP: 192.168.10.01</p>
             <p>Google Chrome</p>
-            <p className="">Current Session</p>
+            <p className="">16 Jan, 2023</p>
           </div>
           <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
-          </div>
-        </div>
-        <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
-          <div>
-            <img
-              className="w-[80px] h-[80px]"
-              src="https://i.ibb.co/pxFgvjs/Laptop.png"
-              alt=""
-            />
-          </div>
-          <div>
-            <h2 className="text-[18px]">Windows</h2>
-            <p>IP: 192.168.10.01</p>
-            <p>Google Chrome</p>
-            <p className="">Current Session</p>
-          </div>
-          <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
           </div>
         </div>
         <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
@@ -112,28 +82,12 @@ function Activity() {
             <h2 className="text-[18px]">Windows</h2>
             <p>IP: 192.168.10.01</p>
             <p>Google Chrome</p>
-            <p className="">Current Session</p>
+            <p className="">16 Jan, 2023</p>
           </div>
           <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
-          </div>
-        </div>
-        <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
-          <div>
-            <img
-              className="w-[80px] h-[80px]"
-              src="https://i.ibb.co/pxFgvjs/Laptop.png"
-              alt=""
-            />
-          </div>
-          <div>
-            <h2 className="text-[18px]">Windows</h2>
-            <p>IP: 192.168.10.01</p>
-            <p>Google Chrome</p>
-            <p className="">Current Session</p>
-          </div>
-          <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
           </div>
         </div>
         <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
@@ -148,10 +102,12 @@ function Activity() {
             <h2 className="text-[18px]">Windows</h2>
             <p>IP: 192.168.10.01</p>
             <p>Google Chrome</p>
-            <p className="">Current Session</p>
+            <p className="">16 Jan, 2023</p>
           </div>
           <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
           </div>
         </div>
         <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
@@ -166,10 +122,72 @@ function Activity() {
             <h2 className="text-[18px]">Windows</h2>
             <p>IP: 192.168.10.01</p>
             <p>Google Chrome</p>
-            <p className="">Current Session</p>
+            <p className="">16 Jan, 2023</p>
           </div>
           <div>
-            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">Sign Out</button>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
+          <div>
+            <img
+              className="w-[80px] h-[80px]"
+              src="https://i.ibb.co/pxFgvjs/Laptop.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <h2 className="text-[18px]">Windows</h2>
+            <p>IP: 192.168.10.01</p>
+            <p>Google Chrome</p>
+            <p className="">16 Jan, 2023</p>
+          </div>
+          <div>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
+          <div>
+            <img
+              className="w-[80px] h-[80px]"
+              src="https://i.ibb.co/pxFgvjs/Laptop.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <h2 className="text-[18px]">Windows</h2>
+            <p>IP: 192.168.10.01</p>
+            <p>Google Chrome</p>
+            <p className="">16 Jan, 2023</p>
+          </div>
+          <div>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-between items-center px-[24px] py-[8px] border-b-[1px] pb-3 border-secondary">
+          <div>
+            <img
+              className="w-[80px] h-[80px]"
+              src="https://i.ibb.co/pxFgvjs/Laptop.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <h2 className="text-[18px]">Windows</h2>
+            <p>IP: 192.168.10.01</p>
+            <p>Google Chrome</p>
+            <p className="">16 Jan, 2023</p>
+          </div>
+          <div>
+            <button className="text-[#F44336] hover: text-[14px]  hover:bg-[#F44336] hover:text-white rounded font-semibold border-[1px] px-[25px] py-[5px] border-[#F44336]">
+              Sign Out
+            </button>
           </div>
         </div>
       </div>
