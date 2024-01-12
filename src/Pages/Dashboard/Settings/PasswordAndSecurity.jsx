@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "antd";
+import ForgotPassword from "../../../Components/Settings/ForgotPassword";
 
 function PasswordAndSecurity() {
   const [currentPassword, setCurrentPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleForgotPassword = () => {
+    setIsModalOpen(true);
+  }
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
 
 
   return (
@@ -50,7 +60,7 @@ function PasswordAndSecurity() {
           </div>
         </div>
         <div>
-          <h2 className="text-primary font-semibold my-4 cursor-pointer">
+          <h2 onClick={handleForgotPassword} className="text-primary font-semibold my-4 cursor-pointer">
             Forgot Password?
           </h2>
         </div>
@@ -60,6 +70,7 @@ function PasswordAndSecurity() {
           </button>
         </div>
       </div>
+      <ForgotPassword isModalOpen={isModalOpen} handleCancel={handleCancel} setIsModalOpen={setIsModalOpen} />
     </div>
   );
 }
