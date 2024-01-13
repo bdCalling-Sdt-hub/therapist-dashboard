@@ -14,11 +14,11 @@ import Signin from "./Pages/Signin/Signin";
 import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
 import Otp from "./Pages/Otp/Otp";
 import NewPassword from "./Pages/NewPassword/NewPassword";
-import AllTherapist from "./Pages/Dashboard/PatientList/AllTherapist";
-import TherapistRequest from "./Pages/Dashboard/PatientList/TherapistRequest";
-import AllPatients from "./Pages/Dashboard/TherapistList/AllPatients";
-import MatchedTherapist from "./Pages/Dashboard/TherapistList/MatchedTherapist";
-import PatientsRequest from "./Pages/Dashboard/TherapistList/PatientsRequest";
+import AllTherapist from "./Pages/Dashboard/Therapist/AllTherapist";
+import TherapistRequest from "./Pages/Dashboard/Therapist/TherapistRequest";
+import AllPatients from "./Pages/Dashboard/Patients/AllPatients";
+import MatchedTherapist from "./Pages/Dashboard/Patients/MatchedTherapist";
+import PatientsRequest from "./Pages/Dashboard/Patients/PatientsRequest";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Pagination, ConfigProvider } from "antd";
 
-function BlockList() {
+function AllPatientsTable() {
   const BlockListDAta = [
     {
       accountType: "user",
@@ -141,12 +141,12 @@ function BlockList() {
 
   const columns = [
     {
-      title: "Nick Name",
+      title: "Name",
       dataIndex: "name",
       render: (_, record) => (
         <>
           <div>
-            <p className="text-primary text-[16px]">{record?.name}</p>
+            <p className="text-[16px]">{record?.name}</p>
           </div>
         </>
       ),
@@ -157,7 +157,7 @@ function BlockList() {
       width: "32%",
       render: (_, record) => (
         <>
-          <p>{record?.email}</p>
+          <p className="text-[16px]">{record?.email}</p>
         </>
       ),
     },
@@ -168,7 +168,7 @@ function BlockList() {
       width: "32%",
       render: (_, record) => (
         <>
-          <p>{record?.phoneNumber}</p>
+          <p className="text-[16px]">{record?.phoneNumber}</p>
         </>
       ),
     },
@@ -193,30 +193,43 @@ function BlockList() {
     color: "#54A630", // Set your desired text color
     // Add any other styles you want to apply to the entire header
   };
-
   return (
-    <div className="rounded-xl border-1 h-[77vh] overflow-hidden bg-white border-secondary">
-      <h1 className="bg-primary text-white text-[32px] p-[20px] font-semibold">
-        Block List
-      </h1>
-      <div>
-        <Table
-          className="overflow-y-scroll"
-          components={{
-            header: {
-              cell: (props) => <th style={headerStyle}>{props.children}</th>,
-            },
-          }}
-          scroll={{
-            y: 560,
-          }}
-          pagination={false}
-          columns={columns}
-          dataSource={BlockListDAta}
-        />
+    <div>
+      <Table
+        className="overflow-y-scroll"
+        components={{
+          header: {
+            cell: (props) => <th style={headerStyle}>{props.children}</th>,
+          },
+        }}
+        scroll={{
+          y: 550,
+        }}
+        pagination={false}
+        columns={columns}
+        dataSource={BlockListDAta}
+      />
+      <div className="flex justify-between p-5">
+        <div className="text-[18px] text-primary">SHOWING 1-8 OF 250</div>
+        <div>
+          <ConfigProvider
+            theme={{
+              token: {
+                // Seed Token
+                colorPrimary: "#00b96b",
+                borderRadius: 2,
+
+                // Alias Token
+                colorBgContainer: "#f6ffed",
+              },
+            }}
+          >
+            <Pagination defaultCurrent={1} total={50} />
+          </ConfigProvider>
+        </div>
       </div>
     </div>
   );
 }
 
-export default BlockList;
+export default AllPatientsTable;
