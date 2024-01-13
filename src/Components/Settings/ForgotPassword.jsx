@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Modal, Input, Button } from "antd";
+import { Modal, Input } from "antd";
 import OtpInput from "react-otp-input";
 
 function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
   const [step, setStep] = useState(1);
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+  const [email, setEmail] = useState("");
   const [isNewPasswordSet, setIsNewPasswordSet] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

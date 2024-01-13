@@ -1,7 +1,16 @@
-import React from "react";
-import { Table, Pagination, ConfigProvider } from "antd";
+import React, { useState } from "react";
+import { Table, Pagination, ConfigProvider, Modal } from "antd";
 
 function AllPatientsTable() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const BlockListDAta = [
     {
       accountType: "user",
@@ -179,7 +188,10 @@ function AllPatientsTable() {
       render: (_, record) => (
         <>
           <div>
-            <p className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block">
+            <p
+              onClick={handleOpenModal}
+              className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
+            >
               Details
             </p>
           </div>
@@ -216,7 +228,7 @@ function AllPatientsTable() {
             theme={{
               token: {
                 // Seed Token
-                colorPrimary: "#00b96b",
+                colorPrimary: "#54A630",
                 borderRadius: 2,
 
                 // Alias Token
@@ -227,6 +239,48 @@ function AllPatientsTable() {
             <Pagination defaultCurrent={1} total={50} />
           </ConfigProvider>
         </div>
+      </div>
+      <div>
+        <Modal
+          visible={isModalOpen}
+          title={
+            <div className=" py-2 border-b-[1px] border-primary font-['Montserrat'] ">
+              <span className="text-[24px] text-primary ">Patient Details</span>
+              <p className=" text-[14px] text-[#B9B9B9]">
+                See all details about John Doe
+              </p>
+            </div>
+          }
+          onCancel={handleCancel}
+          centered
+          footer={[]}
+          width={500}
+        >
+          <div className="flex flex-col">
+            <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
+              <img
+                className="w-[70px] h-[70px]"
+                src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
+                alt=""
+              />
+              <h1 className="text-primary text-[24px] ">John Doe</h1>
+            </div>
+            <div>
+                <h1 className=" text-[24px] font-semibold">Information</h1>
+                <div className="text-[16px] flex flex-col gap-2">
+                <p >Name: John Doe</p>
+                <p>Email: 6bHnN@example.com</p>
+                <p>Phone Number: 1234567890</p>
+                <p>Date of Birth: 01/01/2000</p>
+                <p>Gender: Male</p>
+                <p>Survey: Teen Therapy(13-18)</p>
+                </div>
+            </div>
+            <div className="flex mt-[24px]">
+              <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">Block</p>  
+            </div>
+          </div>
+        </Modal>
       </div>
     </div>
   );
