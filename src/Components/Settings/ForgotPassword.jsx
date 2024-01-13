@@ -87,7 +87,7 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
 
             <div className="flex justify-between mb-[60px]">
               <p className="text-[18px]">Didn’t get OTP?</p>
-              <p className="text-primary text-[24px]">Resend</p>
+              <p className="text-primary cursor-pointer text-[24px]">Resend</p>
             </div>
 
             <div onClick={handleVerifyOTP} className="cursor-pointer">

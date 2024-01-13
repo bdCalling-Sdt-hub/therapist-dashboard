@@ -266,18 +266,20 @@ function AllPatientsTable() {
               <h1 className="text-primary text-[24px] ">John Doe</h1>
             </div>
             <div>
-                <h1 className=" text-[24px] font-semibold">Information</h1>
-                <div className="text-[16px] flex flex-col gap-2">
-                <p >Name: John Doe</p>
+              <h1 className=" text-[24px] font-semibold">Information</h1>
+              <div className="text-[16px] flex flex-col gap-2">
+                <p>Name: John Doe</p>
                 <p>Email: 6bHnN@example.com</p>
                 <p>Phone Number: 1234567890</p>
                 <p>Date of Birth: 01/01/2000</p>
                 <p>Gender: Male</p>
                 <p>Survey: Teen Therapy(13-18)</p>
-                </div>
+              </div>
             </div>
             <div className="flex mt-[24px]">
-              <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">Block</p>  
+              <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">
+                Block
+              </p>
             </div>
           </div>
         </Modal>
