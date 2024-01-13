@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Input, Select, DatePicker } from "antd";
+import AppointmentsTable from "./AppointmentsTable";
 
 const provinceData = ["All", "Completed", "Pending", "Cancelled"];
 
@@ -16,7 +17,7 @@ function AllAppointments() {
     <div className="mt-5">
       <div className="bg-white h-[70vh] rounded-xl overflow-hidden">
         <div className="flex justify-between py-[20px] p-[20px] bg-primary">
-          <h1 className="text-[32px] text-white">Patient List</h1>
+          <h1 className="text-[32px] text-white">All Appointments</h1>
           <div className="flex items-center gap-5">
             <div className="flex gap-5">
               <Select
@@ -78,7 +79,9 @@ function AllAppointments() {
             />
           </div>
         </div>
-        <div>{/* <AllPatientsTable /> */}</div>
+        <div>
+          <AppointmentsTable />
+        </div>
       </div>
     </div>
   );
