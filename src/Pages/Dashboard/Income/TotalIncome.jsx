@@ -1,8 +1,12 @@
 import React from 'react'
+import Status from '../../../Components/Shared/Status'
 
 function TotalIncome() {
   return (
-    <div>TotalIncome</div>
+    <div className="p-[32px]">
+      <Status />
+      {/* <AllAppointments /> */}
+    </div>
   )
 }
 
