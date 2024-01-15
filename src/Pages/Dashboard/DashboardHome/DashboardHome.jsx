@@ -9,7 +9,7 @@ import TopTherapist from "./TopTherapist";
 function DashboardHome() {
   return (
     <div>
-      <div className="flex">
+      <div className="flex h-[90vh] overflow-hidden overflow-y-scroll">
         <div className="w-[708px] flex flex-col pl-[20px] pt-[20px] ">
           <Status />
           <BarChartIncomeRatio/>
