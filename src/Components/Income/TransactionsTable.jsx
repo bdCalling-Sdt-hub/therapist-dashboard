@@ -181,7 +181,7 @@ function TransactionsTable() {
 
   return (
     <div>
-      <div className="overflow-hidden px-5 h-[52vh] overflow-y-scroll">
+      <div className="overflow-hidden  h-[52vh] overflow-y-scroll">
         <Table
           showHeader={false}
           pagination={false}
