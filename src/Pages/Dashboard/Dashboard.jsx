@@ -9,6 +9,7 @@ import { FaArrowRightArrowLeft } from "react-icons/fa6";
 import { IoWalletOutline, IoSettingsOutline } from "react-icons/io5";
 import { TbLogout2 } from "react-icons/tb";
 import { IoMdSettings } from "react-icons/io";
+import { FaClipboardList } from "react-icons/fa6";
 
 import { Menu } from "antd";
 import Swal from "sweetalert2";
@@ -132,12 +133,22 @@ const Dashboard = () => {
     ),
     getItem(
       <p
+        onClick={(e) => navigate("/questionnaires")}
+        className="text-[20px] leading-normal"
+      >
+        Questionnaires
+      </p>,
+      "8",
+      <FaClipboardList style={{ fontSize: "18px" }} />
+    ),
+    getItem(
+      <p
         onClick={(e) => navigate("/transaction")}
         className="text-[20px] leading-normal"
       >
         Transaction
       </p>,
-      "8",
+      "9",
       <FaArrowRightArrowLeft style={{ fontSize: "18px" }} />
     ),
 
@@ -153,7 +164,7 @@ const Dashboard = () => {
           >
             Total Income
           </li>,
-          "9"
+          "10"
         ),
         getItem(
           <li
@@ -162,7 +173,7 @@ const Dashboard = () => {
           >
             Wallet
           </li>,
-          "10"
+          "11"
         ),
       ]
     ),
@@ -173,7 +184,7 @@ const Dashboard = () => {
       >
         Subscription
       </p>,
-      "11",
+      "12",
       <RxDashboard style={{ fontSize: "18px" }} />
     ),
     getItem(
@@ -183,14 +194,14 @@ const Dashboard = () => {
       >
         Settings
       </p>,
-      "12",
+      "13",
       <IoMdSettings style={{ fontSize: "18px" }} />
     ),
     getItem(
       <p onClick={logout} className="text-[20px] leading-normal">
         Logout
       </p>,
-      "13",
+      "14",
       <TbLogout2 style={{ fontSize: "18px" }} />
     ),
   ];
