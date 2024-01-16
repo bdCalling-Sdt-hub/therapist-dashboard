@@ -215,7 +215,6 @@ const Dashboard = () => {
             style={{ overflowY: "auto", height: "80vh" }}
             className={`w-[302px] p-[20px] pt-0  pb-[60px] bg-white text-black  rounded-b-xl `}
             defaultSelectedKeys={["1"]}
-            // defaultOpenKeys={["sub1"]}
             mode={mode}
             theme={theme}
             items={items}
