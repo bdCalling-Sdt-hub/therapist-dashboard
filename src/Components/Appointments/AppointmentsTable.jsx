@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Table, Pagination, ConfigProvider, Modal, Rate } from "antd";
+import { useReactToPrint } from "react-to-print";
 
 function AppointmentsTable() {
+  const componentRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -10,6 +12,11 @@ function AppointmentsTable() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    pageStyle: "",
+  });
 
   const data = [
     {
@@ -235,7 +242,7 @@ function AppointmentsTable() {
         footer={[]}
         width={900}
       >
-        <div className="flex flex-col">
+        <div ref={componentRef} className="flex flex-col">
           <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
             <div className="flex flex-col gap-5">
               <div>
@@ -301,7 +308,10 @@ function AppointmentsTable() {
             <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">
               Block
             </p>
-            <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">
+            <p
+              onClick={handlePrint}
+              className="bg-primary cursor-pointer px-5 py-2 text-white rounded"
+            >
               Download as PDF
             </p>
           </div>
