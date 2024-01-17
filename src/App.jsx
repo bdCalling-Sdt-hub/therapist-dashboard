@@ -19,6 +19,7 @@ import TherapistRequest from "./Pages/Dashboard/Therapist/TherapistRequest";
 import AllPatients from "./Pages/Dashboard/Patients/AllPatients";
 import MatchedTherapist from "./Pages/Dashboard/Patients/MatchedTherapist";
 import PatientsRequest from "./Pages/Dashboard/Patients/PatientsRequest";
+import Questionnaires from "./Pages/Questionnaires/Questionnaires";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/matchedTherapist" element={<MatchedTherapist />} />
             <Route path="/patientsRequest" element={<PatientsRequest />} />
             <Route path="/appointments" element={<Appointments />} />
+            <Route path="/questionnaires" element={<Questionnaires />} />
             <Route path="/transaction" element={<Transaction />} />
             <Route path="/totalIncome" element={<TotalIncome />} />
             <Route path="/wallet" element={<Wallet />} />
