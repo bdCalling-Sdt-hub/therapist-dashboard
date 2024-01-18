@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "antd";
+import AllTherapistTable from "../../../Components/Therapist/AllTherapistTable";
 
 function AllTherapist() {
   return (
@@ -9,7 +10,7 @@ function AllTherapist() {
           <h1 className="text-[32px] text-white">Therapists List</h1>
           <div>
             <Input
-              placeholder="Search Patient"
+              placeholder="Search Therapist"
               className="p-[14px] w-[300px] bg-white rounded-lg"
               prefix={
                 <svg
@@ -31,7 +32,9 @@ function AllTherapist() {
             />
           </div>
         </div>
-        <div>{/* <AllPatientsTable /> */}</div>
+        <div>
+          <AllTherapistTable />
+        </div>
       </div>
     </div>
   );
