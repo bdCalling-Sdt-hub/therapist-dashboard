@@ -260,23 +260,40 @@ function AllTherapistTable() {
           width={500}
         >
           <div className="flex flex-col">
-            <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
+            <div className="flex  gap-5 border-b-[1px] pb-2 border-primary">
               <img
                 className="w-[70px] h-[70px]"
                 src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
                 alt=""
               />
-              <h1 className="text-primary text-[24px] ">John Doe</h1>
+              <div>
+                <h1 className="text-primary text-[24px] ">John Doe</h1>
+                <div className="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-6 h-6 text-yellow-400"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+
+                  <h1 className="text-[18px] font-medium">4.9</h1>
+                </div>
+              </div>
             </div>
             <div>
               <h1 className=" text-[24px] font-semibold">Information</h1>
               <div className="text-[16px] flex flex-col gap-2">
                 <p>Name: John Doe</p>
-                <p>Email: 6bHnN@example.com</p>
-                <p>Phone Number: 1234567890</p>
-                <p>Date of Birth: 01/01/2000</p>
-                <p>Gender: Male</p>
-                <p>Survey: Teen Therapy(13-18)</p>
+                <p>Date of Birth: 12/08/1996</p>
+                <p>Survey Category: Teen Therapy(13-18)</p>
+                <p>Email: johndoe@gmail.com</p>
+                <p>Session Completed: 56</p>
               </div>
             </div>
             <div className="flex mt-[24px]">

@@ -18,7 +18,7 @@ function NewPassword() {
     >
       <div className=" w-[500px] h-[550px] p-[32px] bg-white shadow rounded-3xl my-auto mx-auto">
         <div>
-        <svg
+          <svg
             onClick={() => navigate("/login")}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
