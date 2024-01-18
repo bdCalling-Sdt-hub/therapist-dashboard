@@ -11,6 +11,10 @@ function AllPatientsTable() {
     setIsModalOpen(false);
   };
 
+
+
+  
+
   const BlockListDAta = [
     {
       accountType: "user",
