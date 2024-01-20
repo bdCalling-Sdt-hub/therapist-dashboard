@@ -9,6 +9,7 @@ function AllPatientsTable() {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    
   };
 
   const BlockListDAta = [
