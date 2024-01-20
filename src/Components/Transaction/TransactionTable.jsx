@@ -4,13 +4,20 @@ import { useReactToPrint } from "react-to-print";
 
 function TransactionTable() {
   const componentRef = useRef();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenDetails, setIsModalOpenDetails] = useState(false);
+  const [isModalOpenSendMoney, setIsModalOpenSendMoney] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenModalDetails = () => {
+    setIsModalOpenDetails(true);
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleOpenModalSendMoney = () => {
+    setIsModalOpenSendMoney(true);
+  };
+  const handleCancelDetails = () => {
+    setIsModalOpenDetails(false);
+  };
+  const handleCancelSendMoney = () => {
+    setIsModalOpenSendMoney(false);
   };
 
   const handlePrint = useReactToPrint({
@@ -170,14 +177,14 @@ function TransactionTable() {
           <div>
             {record?.status === "Completed" ? (
               <p
-                onClick={handleOpenModal}
+                onClick={handleOpenModalDetails}
                 className="px-[40px] py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
               >
                 Details
               </p>
             ) : (
               <p
-                onClick={handleOpenModal}
+                onClick={handleOpenModalSendMoney}
                 className="px-6 py-1 text-[14px] bg-primary text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
               >
                 Send Money
@@ -220,7 +227,109 @@ function TransactionTable() {
       </div>
 
       <Modal
-        visible={isModalOpen}
+        visible={isModalOpenDetails}
+        title={
+          <div className=" py-2 border-b-[1px] border-primary font-['Montserrat'] ">
+            <div className="flex items-center gap-5">
+              <span className="text-[24px] text-primary ">
+                Transaction ID:#3CW489645W55697589
+              </span>
+            </div>
+          </div>
+        }
+        onCancel={handleCancelDetails}
+        centered
+        footer={[]}
+        width={900}
+      >
+        <div ref={componentRef} className="flex flex-col">
+          <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
+            <div className="flex flex-col gap-5">
+              <h1 className="text-[24px] font-semibold">
+                Patient Transaction Details
+              </h1>
+              <div className="flex flex-col gap-2">
+                <p className="text-[16px]">
+                  <span className="">Transaction ID: </span>
+                  #3CW489645W55697589
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Patient Name: </span>
+                  John Doe
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Therapist Name: </span>
+                  Jeny Cooper
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Therapist Id: </span>
+                  MGT000002
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Time & Date: </span>
+                  01/12/2023 at 8:30 pm
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Amount: </span>
+                  600 Bwp
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
+            <div className="flex flex-col gap-5">
+              <h1 className="text-[24px] font-semibold">
+                Therapist Transaction Details
+              </h1>
+              <div className="flex flex-col gap-2">
+                <p className="text-[16px]">
+                  <span className="">Transaction ID: </span>
+                  #3CW489645W55697589
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Therapist Name: </span>
+                  Jeny Cooper
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Therapist Id: </span>
+                  MGT000002
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Account Number: </span>
+                  **** **** 4589
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Account Holder Name: </span>
+                  Jeny Cooper
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Received Amount: </span>
+                  600 Bwp
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Mindgaze Fee: </span>
+                  60 Bwp
+                </p>
+                <p className="text-[16px]">
+                  <span className="">Total Amount: </span>
+                  600 Bwp
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-4 mt-[24px]">
+            <p
+              onClick={handlePrint}
+              className="bg-primary cursor-pointer px-5 py-2 text-white rounded"
+            >
+              Download as PDF
+            </p>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        visible={isModalOpenSendMoney}
         title={
           <div className=" py-2 border-b-[1px] border-primary font-['Montserrat'] ">
             <div className="flex items-center gap-5">
@@ -236,7 +345,7 @@ function TransactionTable() {
             </p>
           </div>
         }
-        onCancel={handleCancel}
+        onCancel={handleCancelSendMoney}
         centered
         footer={[]}
         width={900}
