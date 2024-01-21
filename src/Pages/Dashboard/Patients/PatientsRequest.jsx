@@ -48,6 +48,7 @@ function PatientsRequest() {
               </div>
               <div className="flex gap-5">
                 <button className="text-white bg-primary text-[18px] rounded p-[7px] px-[20px]">
+                  
                   Accept
                 </button>
                 <button className=" border-[1px] border-primary text-primary text-[18px]  rounded  p-[7px] px-[20px] ">
