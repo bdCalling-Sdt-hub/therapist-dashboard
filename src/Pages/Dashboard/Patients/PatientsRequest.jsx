@@ -2,7 +2,7 @@ import React from "react";
 
 function PatientsRequest() {
   return (
-    <div className="p-[24px] flex ">
+    <div className="p-[24px] flex gap-[25px]">
       <div>
         <div className=" w-[790px]">
           <h1 className="text-[24px] font-semibold text-white rounded bg-primary p-[16px]">
@@ -150,7 +150,14 @@ function PatientsRequest() {
           </div>
         </div>
       </div>
-      <div className="w-[260px]"></div>
+      <div className="w-[265px] bg-white rounded">
+        <h1 className="text-[24px] font-semibold text-white rounded bg-primary rounded-b-none p-[16px]">
+          Filters
+        </h1>
+        <div className="py-[24px] px-[16px]">
+          <h1 className="text-[18px] font-semibold">Sort by</h1>
+        </div>
+      </div>
     </div>
   );
 }
