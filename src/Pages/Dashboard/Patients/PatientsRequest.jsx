@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
 
 function PatientsRequest() {
   return (
-    <div>PatientsRequest</div>
-  )
+    <div>
+      <div>
+        <div>
+          
+        </div>
+        <div></div>
+      </div>
+      <div></div>
+    </div>
+  );
 }
 
-export default PatientsRequest
+export default PatientsRequest;
