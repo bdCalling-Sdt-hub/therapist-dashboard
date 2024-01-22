@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function TopTherapist() {
+  const navigate = useNavigate();
   return (
     <div className="bg-white border-1 shadow-xl border-secondary rounded-xl  w-[380px] p-[24px] pb-0 mt-[24px]">
       <div className="flex justify-between border-b-[2px] border-secondary  pb-[16px]">
         <h1 className="text-[18px] font-medium text-primary">Top Therapist</h1>
-        <p className="text-[18px] font-medium text-primary cursor-pointer">
+        <p onClick={() => navigate("/allTherapist")} className="text-[18px] font-medium text-primary cursor-pointer">
           See All
         </p>
       </div>
