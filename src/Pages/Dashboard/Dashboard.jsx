@@ -2,6 +2,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 // icons
 import { RxDashboard } from "react-icons/rx";
+import { GiQueenCrown } from "react-icons/gi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa";
 import { BsBookmarkCheck } from "react-icons/bs";
@@ -185,7 +186,7 @@ const Dashboard = () => {
         Subscription
       </p>,
       "12",
-      <RxDashboard style={{ fontSize: "18px" }} />
+      <GiQueenCrown style={{ fontSize: "18px" }} />
     ),
     getItem(
       <p

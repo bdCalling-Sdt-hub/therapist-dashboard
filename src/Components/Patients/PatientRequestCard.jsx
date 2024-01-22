@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function PatientRequestCard() {
+  const navigate = useNavigate();
   return (
     <div className="flex bg-white rounded-md w-[385px] mt-5 p-[16px]">
       <div>
@@ -19,7 +21,10 @@ function PatientRequestCard() {
           <button className="text-white bg-primary text-[18px] rounded  px-[20px]">
             Accept
           </button>
-          <button className=" border-[1px] border-primary text-primary text-[18px]  rounded  p-[7px] px-[20px] ">
+          <button
+            onClick={() => navigate("/patientsRequest/fslkdfs")}
+            className=" border-[1px] border-primary text-primary text-[18px]  rounded  p-[4px] px-[20px] "
+          >
             Details
           </button>
         </div>
