@@ -151,7 +151,9 @@ function PatientRequestDetails() {
           <MultipleChoice
             defaultValue={SurveyAnswers[0]?.answer}
             allData={SurveyAnswers[0]}
+            serialNo={1}
           />
+
         </div>
       </div>
     </div>
