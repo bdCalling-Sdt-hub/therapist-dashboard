@@ -1,6 +1,7 @@
 import React from "react";
 import { Breadcrumb } from "antd";
 import { useNavigate } from "react-router-dom";
+import TherapistsListAssign from "../../../Components/Patients/TherapistsListAssign";
 
 function PatientRequestDetailsAssignTherapist() {
   const navigate = useNavigate();
@@ -65,6 +66,10 @@ function PatientRequestDetailsAssignTherapist() {
           <p>Date of Birth: 17/12/2023</p>
           <p>Survey: Teen Therapy(13-18)</p>
         </div>
+      </div>
+
+      <div>
+        <TherapistsListAssign />
       </div>
     </div>
   );
