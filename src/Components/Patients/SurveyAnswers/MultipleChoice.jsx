@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Radio, Space } from "antd";
+import { Radio, Space } from "antd";
 
 function MultipleChoice({ defaultValue, allData, serialNo }) {
   //   const [value, setValue] = useState(defaultValue);
@@ -14,7 +14,7 @@ function MultipleChoice({ defaultValue, allData, serialNo }) {
   return (
     <div className="mt-4">
       <h1>
-        <span className="text-primary font-semibold">{serialNo}.</span>
+        <span className="text-primary font-semibold">{serialNo}.</span> {" "}
         {allData?.question}
       </h1>
       <Radio.Group onChange={onChange} value={defaultValue}>

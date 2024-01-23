@@ -2,14 +2,16 @@ import React from "react";
 import { Breadcrumb } from "antd";
 import { useNavigate } from "react-router-dom";
 import MultipleChoice from "../../../Components/Patients/SurveyAnswers/MultipleChoice";
+import CheckboxType from "../../../Components/Patients/SurveyAnswers/CheckboxType";
+import InputType from "../../../Components/Patients/SurveyAnswers/InputType";
 
 const SurveyAnswers = [
   {
     id: 1,
     question: "How old is your child?",
-    answer: 18,
+    answer: "18",
     questionType: "multiple-choice",
-    option: [13, 14, 15, 16, 17, 18, 19, 20, 21],
+    option: ["13", "14", "15", "16", "17", "18", "19", "20", "21"],
   },
   {
     id: 2,
@@ -24,26 +26,54 @@ const SurveyAnswers = [
       "Please share with us why you’re looking for help today. ( You can select up to 3)",
     answer: [
       "I’m seeking one on one therapy for my child only",
-      "I want therapy for both me and my child",
       "I just want parental advice",
     ],
     questionType: "checkbox",
     option: [
-      "I’m seeking one on one therapy for my child only",
-      "I want therapy for both me and my child",
-      "I just want parental advice",
+      {
+        label: "I’m seeking one on one therapy for my child only",
+        value: "I’m seeking one on one therapy for my child only",
+      },
+      {
+        label: "I want therapy for both me and my child",
+        value: "I want therapy for both me and my child",
+      },
+      {
+        label: "I just want parental advice",
+        value: "I just want parental advice",
+      },
     ],
   },
   {
     id: 4,
     question:
       "What issues are you having with your child that therapy can help with? (Please type in less then 200 words.)",
-    answer: "Female",
+    answer:
+      "Physical space is often conceived in three linear dimensions, although modern physicists usually con Physical space is often conceived in three linear dimensions, although modern physicists usually con Physical space is often conceived in three linear dimensions, although modern physicists usually conPhysical space is often conceived in three linear dimensions, although modern physicists usually con",
     questionType: "paragraph",
-    option: [
+  },
+  {
+    id: 5,
+    question:
+      "Please share with us why you’re looking for help today. ( You can select up to 3)",
+    answer: [
       "I’m seeking one on one therapy for my child only",
-      "I want therapy for both me and my child",
       "I just want parental advice",
+    ],
+    questionType: "checkbox",
+    option: [
+      {
+        label: "I’m seeking one on one therapy for my child only",
+        value: "I’m seeking one on one therapy for my child only",
+      },
+      {
+        label: "I want therapy for both me and my child",
+        value: "I want therapy for both me and my child",
+      },
+      {
+        label: "I just want parental advice",
+        value: "I just want parental advice",
+      },
     ],
   },
 ];
@@ -146,14 +176,35 @@ function PatientRequestDetails() {
           <p>Survey: Teen Therapy(13-18)</p>
         </div>
         {/* Therapists List */}
-        <div className="p-[24px]">
-          <h1>Survey Answers</h1>
-          <MultipleChoice
-            defaultValue={SurveyAnswers[0]?.answer}
-            allData={SurveyAnswers[0]}
-            serialNo={1}
-          />
+        <div className="px-[24px] mb-6">
+          <h1 className="text-[18px] font-semibold">Survey Answers</h1>
 
+          {SurveyAnswers.map((data, index) => (
+            <div key={index}>
+              {data?.questionType === "multiple-choice" && (
+                <MultipleChoice
+                  defaultValue={data?.answer}
+                  allData={data}
+                  serialNo={index + 1}
+                />
+              )}
+              {data?.questionType === "checkbox" && (
+                <CheckboxType
+                  defaultValues={data?.answer}
+                  allData={data}
+                  serialNo={index + 1}
+                />
+              )}
+
+              {data?.questionType === "paragraph" && (
+                <InputType
+                  defaultValue={data?.answer}
+                  allData={data}
+                  serialNo={index + 1}
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </div>
