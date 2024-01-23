@@ -35,6 +35,39 @@ const formItemLayoutWithOutLabel = {
 };
 
 function Questionnaires() {
+  const makeQuestion = [
+    {
+      id: 1,
+      name: "What issues are you having with your child that therapy can help with? (Please type in less then 200 words.)",
+      type: "paragraph",
+    },
+    {
+      id: 2,
+      name: "How old is your child?",
+      type: "multiple-choice",
+      option: ["13", "14", "15", "16", "17", "18", "19", "20", "21"],
+    },
+    {
+      id: 2,
+      name: "Please share with us why you’re looking for help today. ( You can select up to 3)",
+      type: "checkbox",
+      option: [
+        {
+          label: "I’m seeking one on one therapy for my child only",
+          value: "I’m seeking one on one therapy for my child only",
+        },
+        {
+          label: "I want therapy for both me and my child",
+          value: "I want therapy for both me and my child",
+        },
+        {
+          label: "I just want parental advice",
+          value: "I just want parental advice",
+        },
+      ],
+    },
+  ];
+
   const onFinish = (values) => {
     console.log("Received values of form:", values);
   };
