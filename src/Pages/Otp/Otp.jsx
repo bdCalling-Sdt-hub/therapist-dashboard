@@ -43,7 +43,7 @@ function Otp() {
           </h1>
           <h2 className="text-[18px] mt-[8px] font-medium">
             We have sent you an OTP to your email address.Please check it and
-            place the otp for resetting password
+            place the otp for resetting password 
           </h2>
         </div>
         <div className="flex flex-col mt-[24px] gap-[27px]">
