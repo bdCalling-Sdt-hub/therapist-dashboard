@@ -23,6 +23,7 @@ import Questionnaires from "./Pages/Questionnaires/Questionnaires";
 import PatientRequestDetails from "./Pages/Dashboard/Patients/PatientRequestDetails";
 import PatientRequestDetailsAssignTherapist from "./Pages/Dashboard/Patients/PatientRequestDetailsAssignTherapist";
 import MatchedRequestDetails from "./Pages/Dashboard/Patients/MatchedRequestDetails";
+import MatchedRequestDetailsChangeTherapist from "./Pages/Dashboard/Patients/MatchedRequestDetailsChangeTherapist";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/allPatients" element={<AllPatients />} />
             <Route path="/matchedTherapist" element={<MatchedTherapist />} />
             <Route path="/matchedTherapist/:id" element={<MatchedRequestDetails />} />
+            <Route path="/matchedTherapist/:id/:id" element={<MatchedRequestDetailsChangeTherapist />} />
             <Route path="/patientsRequest" element={<PatientsRequest />} />
             <Route path="/patientsRequest/:id" element={<PatientRequestDetails />} />
             <Route path="/patientsRequest/:id/:id" element={<PatientRequestDetailsAssignTherapist />} />
