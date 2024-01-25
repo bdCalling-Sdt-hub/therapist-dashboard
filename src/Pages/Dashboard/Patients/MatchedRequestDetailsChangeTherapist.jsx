@@ -1,7 +1,7 @@
 import React from "react";
 import { Breadcrumb } from "antd";
 import { useNavigate } from "react-router-dom";
-import TherapistsListAssign from "../../../Components/Patients/TherapistsListAssign";
+import TherapistsListAssignChangeTherapitList from "../../../Components/Patients/MatchedTherapist/TherapistsListAssignChangeTherapitList";
 
 function MatchedRequestDetailsChangeTherapist() {
   const navigate = useNavigate();
@@ -13,10 +13,10 @@ function MatchedRequestDetailsChangeTherapist() {
           {
             title: (
               <p
-              onClick={() => navigate("/matchedTherapist")}
+                onClick={() => navigate("/matchedTherapist")}
                 className="text-[18px] font-semibold hover:text-primary cursor-pointer text-black"
               >
-                  Matched Request
+                Matched Request
               </p>
             ),
           },
@@ -33,7 +33,7 @@ function MatchedRequestDetailsChangeTherapist() {
           {
             title: (
               <p className="text-[18px] text-primary font-semibold">
-             Change Therapist
+                Change Therapist
               </p>
             ),
           },
@@ -69,7 +69,7 @@ function MatchedRequestDetailsChangeTherapist() {
       </div>
 
       <div>
-        <TherapistsListAssign />
+        <TherapistsListAssignChangeTherapitList />
       </div>
     </div>
   );
