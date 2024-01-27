@@ -206,6 +206,10 @@ function AllTherapistTable() {
     // Add any other styles you want to apply to the entire header
   };
 
+  const handlePdf = () => {
+    window.open("/public/demo.pdf");
+  };
+
   return (
     <div>
       <Table
@@ -286,14 +290,45 @@ function AllTherapistTable() {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="">
               <h1 className=" text-[24px] font-semibold">Information</h1>
               <div className="text-[16px] flex flex-col gap-2">
                 <p>Name: John Doe</p>
-                <p>Date of Birth: 12/08/1996</p>
-                <p>Survey Category: Teen Therapy(13-18)</p>
                 <p>Email: johndoe@gmail.com</p>
+                <p>Phone: +983 54594586</p>
+                <p>Date of Birth: 12/08/1996</p>
+                <p>Address: Plot 54358, Prime Plaza, CBDGaborone, Botswana</p>
+                <p>Survey Category: Teen Therapy(13-18)</p>
                 <p>Session Completed: 56</p>
+              </div>
+              <h1 className=" text-[24px] font-semibold">Documents</h1>
+              <div className="flex gap-5">
+                <div
+                  onClick={handlePdf}
+                  className="bg-secondary flex w-[92px] cursor-pointer items-center flex-col rounded gap-2 "
+                >
+                  <div className=" p-[10px] w-[76px] h-[76px] rounded-full mt-2 flex items-center mx-auto bg-[#8CC374]">
+                    <img
+                      className="ml-[9px]"
+                      src="https://i.ibb.co/JtfwKNg/XMLID-2268.png"
+                      alt=""
+                    />
+                  </div>
+                  <h1>Resume.pdf</h1>
+                </div>
+                <div
+                  onClick={handlePdf}
+                  className="bg-secondary flex w-[92px] cursor-pointer  items-center flex-col rounded gap-2 "
+                >
+                  <div className=" p-[10px] w-[76px] h-[76px] rounded-full mt-2 flex items-center mx-auto bg-[#8CC374]">
+                    <img
+                      className="ml-[9px]"
+                      src="https://i.ibb.co/JtfwKNg/XMLID-2268.png"
+                      alt=""
+                    />
+                  </div>
+                  <h1>Certificate.pdf</h1>
+                </div>
               </div>
             </div>
             <div className="flex mt-[24px]">
