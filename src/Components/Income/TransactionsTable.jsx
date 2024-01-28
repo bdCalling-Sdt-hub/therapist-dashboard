@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Table, Pagination, ConfigProvider, Modal } from "antd";
+import { useReactToPrint } from "react-to-print";
 
 function TransactionsTable() {
+  const componentRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -10,6 +12,11 @@ function TransactionsTable() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    pageStyle: "",
+  });
 
   const data = [
     {
@@ -149,6 +156,17 @@ function TransactionsTable() {
       ),
     },
     {
+      title: "price",
+      dataIndex: "price",
+      render: (_, record) => (
+        <>
+          <div>
+            <p>$60</p>
+          </div>
+        </>
+      ),
+    },
+    {
       title: "dataTime",
       dataIndex: "dataTime",
       render: (_, record) => (
@@ -211,41 +229,42 @@ function TransactionsTable() {
       <Modal
         visible={isModalOpen}
         title={
-          <div className=" py-2 border-b-[1px] border-primary font-['Montserrat'] ">
-            <span className="text-[24px] text-primary ">Patient Details</span>
-            <p className=" text-[14px] text-[#B9B9B9]">
-              See all details about John Doe
+          <div className="py-2 border-b-[1px] border-primary font-['Montserrat'] ">
+            <span className="text-[24px] text-primary">
+              Transaction ID:#3CW489645W55697589
+            </span>
+            <p className="text-[18px] ">
+              You have earned <span className="text-primary">$60</span>
             </p>
           </div>
         }
         onCancel={handleCancel}
         centered
         footer={[]}
-        width={500}
+        width={800}
       >
-        <div className="flex flex-col">
-          <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
-            <img
-              className="w-[70px] h-[70px]"
-              src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
-              alt=""
-            />
-            <h1 className="text-primary text-[24px] ">John Doe</h1>
-          </div>
+        <div ref={componentRef} className="flex flex-col">
           <div>
-            <h1 className=" text-[24px] font-semibold">Information</h1>
+            <h1 className=" text-[24px] font-semibold">
+              Therapist Transaction Details
+            </h1>
             <div className="text-[16px] flex flex-col gap-2">
-              <p>Name: John Doe</p>
-              <p>Email: 6bHnN@example.com</p>
-              <p>Phone Number: 1234567890</p>
-              <p>Date of Birth: 01/01/2000</p>
-              <p>Gender: Male</p>
-              <p>Survey: Teen Therapy(13-18)</p>
+              <p>Transaction ID: #3CW489645W55697589</p>
+              <p>Therapist Name: Jeny Cooper</p>
+              <p>Therapist Id: MGT000002</p>
+              <p>Account Number: **** **** 4589</p>
+              <p>Account Holder Name: Jeny Cooper</p>
+              <p>Received Amount: 600 Bwp</p>
+              <p>Mindgaze Fee: 60 Bwp</p>
+              <p>Total Amount: 560 Bwp</p>
             </div>
           </div>
           <div className="flex mt-[24px]">
-            <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">
-              Block
+            <p
+              onClick={handlePrint}
+              className="bg-primary  cursor-pointer px-5 py-2 text-white rounded"
+            >
+              Download as pdf
             </p>
           </div>
         </div>
