@@ -23,15 +23,9 @@ function TherapistRequest() {
           </h1>
         </div>
         <div className="grid grid-cols-2 gap-4 overflow-hidden overflow-y-scroll h-[700px]">
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
-          <TherapistRequestCard />
+          {[...Array(9)].map((_, index) => (
+            <TherapistRequestCard key={index} />
+          ))}
         </div>
       </div>
       <div className="w-[265px] bg-white rounded h-[420px]">
