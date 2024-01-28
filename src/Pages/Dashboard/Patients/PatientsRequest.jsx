@@ -58,7 +58,7 @@ function PatientsRequest() {
           </Radio.Group>
         </div>
         <div className="my-[20px] pb-3 mx-[16px]  border-secondary border-b-[1px]">
-          <h1 className="text-[18px] font-semibold">Sort by</h1>
+          <h1 className="text-[18px] font-semibold">Survey Category</h1>
           <Radio.Group
             className="flex flex-col gap-2 mt-2"
             onChange={onChange2}
