@@ -1,7 +1,7 @@
 import React from "react";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Checkbox } from "antd";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const formItemLayout = {
   labelCol: {
@@ -81,12 +81,18 @@ function Questionnaires() {
           Manage Questionnaires
         </h1>
 
-        <button onClick={() => navigate("/add-questionnaires")} className="bg-primary rounded-lg text-white px-3 text-[16px] ">
+        <button
+          onClick={() => navigate("/add-questionnaires")}
+          className="bg-primary rounded-lg text-white px-3 text-[16px] "
+        >
           Add Questionnaires
         </button>
       </div>
       <div className="flex gap-[80px]  mt-5">
-        <div className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5">
+        <div
+          onClick={() => navigate("/add-questionnaires")}
+          className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
+        >
           <h1 className="text-primary font-bold text-[24px]">
             Individual Therapy
           </h1>
@@ -94,7 +100,10 @@ function Questionnaires() {
             Total Questions: <span className="text-primary">8</span>
           </p>
         </div>
-        <div className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5">
+        <div
+          onClick={() => navigate("/add-questionnaires")}
+          className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
+        >
           <h1 className="text-primary font-bold text-[24px]">
             Teen Therapy(13-18)
           </h1>
@@ -102,7 +111,10 @@ function Questionnaires() {
             Total Questions: <span className="text-primary">15</span>
           </p>
         </div>
-        <div className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5">
+        <div
+          onClick={() => navigate("/add-questionnaires")}
+          className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
+        >
           <h1 className="text-primary font-bold text-[24px]">Couple Therapy</h1>
           <p>
             Total Questions: <span className="text-primary">10</span>
