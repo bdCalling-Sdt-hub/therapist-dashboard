@@ -78,8 +78,6 @@ const SurveyAnswers = [
   },
 ];
 
-
-
 function PatientRequestDetails() {
   const navigate = useNavigate();
   return (
