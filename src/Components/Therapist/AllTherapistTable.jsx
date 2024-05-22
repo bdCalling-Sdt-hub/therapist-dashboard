@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { Table, Pagination, ConfigProvider, Modal } from "antd";
+import { useGetAllTherapistQuery } from "../../redux/Features/getAllTherapistApi";
 
 function AllTherapistTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
+  const [currentValue, setCurrentValue] = useState(null);
+  const {data,isLoading,isSuccess,isError} = useGetAllTherapistQuery();
+  console.log(data);
+  const handleOpenModal = (value) => {
     setIsModalOpen(true);
+    setCurrentValue(value);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+console.log(isError);
   const BlockListDAta = [
     {
       accountType: "user",
@@ -147,7 +151,7 @@ function AllTherapistTable() {
       surveyCategory: "Teen Therapy(13-18)",
     },
   ];
-
+console.log(currentValue);
   const columns = [
     {
       title: "Name",
@@ -177,7 +181,7 @@ function AllTherapistTable() {
       width: "32%",
       render: (_, record) => (
         <>
-          <p className="text-[16px]">{record?.phoneNumber}</p>
+          <p className="text-[16px]">{record?.phone}</p>
         </>
       ),
     },
@@ -189,7 +193,7 @@ function AllTherapistTable() {
         <>
           <div>
             <p
-              onClick={handleOpenModal}
+              onClick={()=>handleOpenModal(record)}
               className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
             >
               Details
@@ -206,8 +210,11 @@ function AllTherapistTable() {
     // Add any other styles you want to apply to the entire header
   };
 
-  const handlePdf = () => {
-    window.open("/public/demo.pdf");
+  const result = data?.data?.attributes
+
+  const handlePdf = (value) => {
+    window.open(`${import.meta.env.VITE_BASE_URL}/images/users/${value?.
+      filename}`);
   };
 
   return (
@@ -224,7 +231,7 @@ function AllTherapistTable() {
         }}
         pagination={false}
         columns={columns}
-        dataSource={BlockListDAta}
+        dataSource={result}
       />
       <div className="flex justify-between p-5">
         <div className="text-[18px] text-primary">SHOWING 1-8 OF 250</div>
@@ -254,7 +261,7 @@ function AllTherapistTable() {
                 Therapist Details
               </span>
               <p className=" text-[14px] text-[#B9B9B9]">
-                See all details about John Doe
+                See all details about {currentValue?.name}
               </p>
             </div>
           }
@@ -267,11 +274,12 @@ function AllTherapistTable() {
             <div className="flex  gap-5 border-b-[1px] pb-2 border-primary">
               <img
                 className="w-[70px] h-[70px]"
-                src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
+                src={`${import.meta.env.VITE_BASE_URL}/images/users/${currentValue?.image[0].filename
+                  }`}
                 alt=""
               />
               <div>
-                <h1 className="text-primary text-[24px] ">John Doe</h1>
+                <h1 className="text-primary text-[24px] ">{currentValue?.name}</h1>
                 <div className="flex items-center gap-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -293,19 +301,20 @@ function AllTherapistTable() {
             <div className="">
               <h1 className=" text-[24px] font-semibold">Information</h1>
               <div className="text-[16px] flex flex-col gap-2">
-                <p>Name: John Doe</p>
-                <p>Email: johndoe@gmail.com</p>
-                <p>Phone: +983 54594586</p>
-                <p>Date of Birth: 12/08/1996</p>
-                <p>Address: Plot 54358, Prime Plaza, CBDGaborone, Botswana</p>
-                <p>Survey Category: Teen Therapy(13-18)</p>
-                <p>Session Completed: 56</p>
+                <p>Name: {currentValue?.name}</p>
+                <p>Email: {currentValue?.email}</p>
+                <p>Phone: {currentValue?.phone}</p>
+                <p>Date of Birth: {currentValue?.dateOfBirth}</p>
+                <p>Address: {currentValue?.address || "N/A"}</p>
+                <p>Survey Category: {currentValue?.survey || "N/A"}</p>
+                <p>Session Completed: {currentValue?.session || "N/A"}</p>
               </div>
               <h1 className=" text-[24px] font-semibold">Documents</h1>
               <div className="flex gap-5">
+
                 <div
-                  onClick={handlePdf}
-                  className="bg-secondary flex w-[92px] cursor-pointer items-center flex-col rounded gap-2 "
+                  onClick={()=>handlePdf(currentValue?.certificate[0])}
+                  className="bg-secondary flex  cursor-pointer items-center flex-col rounded gap-2 "
                 >
                   <div className=" p-[10px] w-[76px] h-[76px] rounded-full mt-2 flex items-center mx-auto bg-[#8CC374]">
                     <img
@@ -314,11 +323,11 @@ function AllTherapistTable() {
                       alt=""
                     />
                   </div>
-                  <h1>Resume.pdf</h1>
+                  <h1 className="text-wrap p-2">{currentValue?.certificate[0].originalname}</h1>
                 </div>
                 <div
-                  onClick={handlePdf}
-                  className="bg-secondary flex w-[92px] cursor-pointer  items-center flex-col rounded gap-2 "
+                  onClick={()=>handlePdf(currentValue?.resume[0])}
+                  className="bg-secondary flex  text-wrap cursor-pointer  items-center flex-col rounded gap-2 "
                 >
                   <div className=" p-[10px] w-[76px] h-[76px] rounded-full mt-2 flex items-center mx-auto bg-[#8CC374]">
                     <img
@@ -327,7 +336,7 @@ function AllTherapistTable() {
                       alt=""
                     />
                   </div>
-                  <h1>Certificate.pdf</h1>
+                  <h1 className="text-wrap p-2">{currentValue?.resume[0].originalname}</h1>
                 </div>
               </div>
             </div>

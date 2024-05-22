@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { GiQueenCrown } from "react-icons/gi";
 import { FaUserDoctor } from "react-icons/fa6";
+import { TiMessages } from "react-icons/ti";
 import { FaRegUser } from "react-icons/fa";
 import { BsBookmarkCheck } from "react-icons/bs";
 import { FaArrowRightArrowLeft } from "react-icons/fa6";
@@ -87,6 +88,20 @@ const Dashboard = () => {
         ),
       ]
     ),
+
+    getItem(
+      <p
+        onClick={(e) => navigate("/index")}
+        className="text-[22px] leading-normal"
+      >
+        Inbox
+      </p>,
+      "15",
+
+      <TiMessages style={{ fontSize: "18px" }} />
+    ),
+
+
 
     getItem(
       <p className="text-[20px] leading-normal">Patient</p>,

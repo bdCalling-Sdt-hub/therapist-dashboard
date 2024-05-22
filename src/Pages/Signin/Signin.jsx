@@ -2,22 +2,51 @@ import React, { useEffect, useState } from "react";
 import { Input, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import baseURL from "../../config";
 
 function Signin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    navigate("/")
-    // if (email == "" || password == "") {
+  const handleLogin = async() => {
+    // navigate("/")
+    
+    try {
+      const result = {
+        email,password
+      }
+      console.log(result);
+      const response = await baseURL.post("/user/sign-in", result,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authentication: `Bearer ${localStorage.getItem("token")}`,
+          }
+        }
+      );
+      console.log(response);
+      if(response?.status === 200) {
+        localStorage.setItem("token", response?.data?.data?.token);
+        localStorage.setItem("yourInfo", JSON.stringify(response?.data?.data?.attributes));
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: response?.data?.message,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+        navigate("/")
+      }
 
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "Please fill all the fields",
-    //   });
-    // }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Try Again...",
+        text: error?.response?.data?.message,
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
   };
   return (
     <div

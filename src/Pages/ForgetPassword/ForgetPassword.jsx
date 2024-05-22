@@ -2,13 +2,34 @@ import React, { useState } from "react";
 import { Input, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import baseURL from "../../config";
 
 function ForgetPassword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  const handleForgotPassword = () => {
-    navigate("/otp/sdfsd");
+  const handleForgotPassword = async() => {
+    try {
+      const response = await baseURL.post("/user/forgot-password", { email });
+      console.log(response);
+      if (response?.status === 200) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: response?.data?.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(`/otp/${email}`);
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Try Again...",
+        text: error?.response?.data?.message,
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
   };
   return (
     <div
@@ -18,7 +39,7 @@ function ForgetPassword() {
       <div className=" w-[500px] h-[550px] p-[32px] bg-white shadow rounded-3xl my-auto mx-auto">
         <div>
           <svg
-          onClick={() => navigate("/login")}
+            onClick={() => navigate("/login")}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Input, Checkbox } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import OtpInput from "react-otp-input";
+import baseURL from "../../config";
 
 function Otp() {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
+  const {email} = useParams();
+  console.log(email);
 
   const handleOtpResend = () => {
     console.log("Otp Resend");
   };
-  const handleVerifyOtp = () => {
-    navigate("/new-password/skfljsd");
+  const handleVerifyOtp = async () => {
+    try {
+      const result = {
+        email,
+        code: otp
+      }
+      const response = await baseURL.post("/user/verify-code", result )
+      console.log(response?.data);
+
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Try Again...",
+        text: error?.response?.data?.message,
+        footer: '<a href="#">Why do I have this issue?</a>',
+      })
+    }
+    navigate(`/new-password/${email}`);
     console.log("Verify Otp");
   };
   return (

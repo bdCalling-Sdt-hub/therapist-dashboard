@@ -25,6 +25,8 @@ import PatientRequestDetailsAssignTherapist from "./Pages/Dashboard/Patients/Pat
 import MatchedRequestDetails from "./Pages/Dashboard/Patients/MatchedRequestDetails";
 import MatchedRequestDetailsChangeTherapist from "./Pages/Dashboard/Patients/MatchedRequestDetailsChangeTherapist";
 import ManageQuestionnaires from "./Pages/Questionnaires/ManageQuestionnaires";
+import Inbox from "./Pages/Inbox/Inbox";
+import AddSubscription from "./Pages/Dashboard/Subscription/AddSubscription";
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
             <Route path="/allTherapist" element={<AllTherapist />} />
             <Route path="/therapistRequest" element={<TherapistRequest />} />
             <Route path="/allPatients" element={<AllPatients />} />
+            <Route path="/index" element={<Inbox />} />
             <Route path="/matchedTherapist" element={<MatchedTherapist />} />
             <Route path="/matchedTherapist/:id" element={<MatchedRequestDetails />} />
             <Route path="/matchedTherapist/:id/:id" element={<MatchedRequestDetailsChangeTherapist />} />
@@ -56,6 +59,7 @@ function App() {
             <Route path="/totalIncome" element={<TotalIncome />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/subscription" element={<Subscription />} />
+            <Route path="add-subscriptions" element={<AddSubscription />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/settings" element={<Settings />} />
             {/* <Route path="/settings/:dynamic" element={<SettingPage />} /> */}
