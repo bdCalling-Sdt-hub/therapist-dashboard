@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { MdOutlineAttachFile } from "react-icons/md";
+import { Image } from "antd";
+import baseAxios from "../../../Config";
 
 const SinglePersonChatDetails = ({
   chat,
@@ -31,16 +33,16 @@ const SinglePersonChatDetails = ({
 
   useEffect(() => {
     socket.current = io("ws://103.145.138.77:3000");
-
     socket.current.on(`new::${currentChatId}`, (messageData) => {
       console.log("Received message:", messageData);
       setChats((prevChats) => [...prevChats, messageData]);
     });
-
     return () => {
       socket.current.off(`new::${currentChatId}`);
     };
   }, [currentChatId]);
+
+  // console.log(socket);
 
   const handleMessageSend = () => {
     if (messages.trim() !== "") {
@@ -54,16 +56,47 @@ const SinglePersonChatDetails = ({
       });
     }
   };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    // Handle file upload here
+    console.log(file);
+    try {
+      const formData = new FormData();
+ 
+      formData.append("senderId", senderId);
+      formData.append("participant", participantId);
+      if(file && messages){
+        formData.append("message", messages);
+        formData.append("image", file);
+        formData.append("messageType", "text/image");
+      }else if(file){
+        formData.append("image", file);
+        formData.append("messageType", "image");
+      }
+      const response = await baseAxios.post("/message/file", formData,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response);
+      setMessages("");
+    
+    
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(messages);
   const handleIconClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    // Handle file upload here
-    console.log(file);
-  };
+  
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleMessageSend();
@@ -114,7 +147,19 @@ const SinglePersonChatDetails = ({
                   <div className="flex flex-col gap-1 text-wrap">
                     <p className="text-end text-primary font-bold">{UserData?.name}</p>
                     <p className="max-w-[500px] bg-primary text-white border-[1px] border-secondary p-[20px] rounded-[10px] rounded-tr-none text-sm font-normal font-['Montserrat']">
-                      {c?.message ? c?.message : <img className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />}
+                      {/* {c?.message ? c?.message : <img className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />} */}
+                      {
+                        c?.messageType === "text/image" ? (
+                          <div>
+                            <p className="pb-2">{c?.message}</p>
+                            <Image width={300} height={200} className="rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />
+                          </div>
+
+                          
+                        ) : c?.messageType === "text" ? (
+                          <p>{c?.message}</p>) : <Image width={300} height={200} className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />
+                        
+                      }
                     </p>
                     <p className="text-end my-auto text-zinc-400 text-sm font-normal font-['Montserrat']">
                       {getTimeAgo(c?.createdAt)}
@@ -131,7 +176,19 @@ const SinglePersonChatDetails = ({
                   <div className="flex flex-col gap-1 text-wrap">
                     <p className="text-start text-primary font-bold">{`${currentChatPersonName}`}</p>
                     <p className="max-w-[500px] font-medium border-[1px] border-secondary p-[8px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']">
-                      {c?.message ? c?.message : <img className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />}
+                      {/* {c?.message ? c?.message : <img className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />} */}
+                      {
+                        c?.messageType === "text/image" ? (
+                          <div>
+                            <p className="pb-2">{c?.message}</p>
+                            <Image width={300} height={200} className="rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />
+                          </div>
+
+                          
+                        ) : c?.messageType === "text" ? (
+                          <p>{c?.message}</p>) : <Image width={300} height={200} className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />
+                        
+                      }
                     </p>
                     <p className="text-start my-auto text-zinc-400 text-sm font-normal font-['Montserrat']">
                       {getTimeAgo(c?.createdAt)}

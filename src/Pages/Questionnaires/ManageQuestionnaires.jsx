@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import MultipleChoice from "../../Components/Patients/SurveyAnswers/MultipleChoice";
 import CheckboxType from "../../Components/Patients/SurveyAnswers/CheckboxType";
 import InputType from "../../Components/Patients/SurveyAnswers/InputType";
+import baseURL from "../../config";
+import { useGetAllQuestionQuery } from "../../redux/Features/getAllQuestionApi";
+import Swal from "sweetalert2";
 
 const SurveyAnswers = [
   {
@@ -103,10 +106,18 @@ const formItemLayoutWithOutLabel = {
 };
 
 function ManageQuestionnaires() {
-  const navigate = useNavigate();
+  const { data, isLoading, isSuccess } = useGetAllQuestionQuery();
   const [questionnairesName, setQuestionnairesName] =
-    useState("Individual Therapy");
+    useState("Couple Therapy");
+  const [questionType, setQuestionType] = useState({
+    value: "Paragraph",
+    label: "Paragraph",
+  });
   const [fullSurvey, setFullSurvey] = useState();
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  console.log(data?.data?.attributes);
 
   const makeQuestion = [
     {
@@ -252,22 +263,101 @@ function ManageQuestionnaires() {
     },
   ];
 
-  const onFinish = (values) => {
-    console.log("Received values of form:", values);
+  // const onFinish = (values) => {
+  //   console.log("Received values of form:", values);
+  // };
+
+  const handleQuestionSubmit = async (values) => {
+    try {
+      console.log("values", values);
+      const result = {
+        ...values,
+        questionType: questionnairesName,
+        answerType: questionType?.value,
+      };
+      console.log(result);
+      const response = await baseURL.post("/servey/add", result, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      console.log(response);
+      if (response?.data.statusCode === 201) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: response?.data?.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: error?.response?.data?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
-  const [questionType, setQuestionType] = useState("Paragraph");
-  const [question, setQuestion] = useState("");
-  const [option, setOption] = useState([]);
+  const handleMultipleChoiceQuestionSubmit = async (values) => {
+    try {
+      const data = {
+        ...values?.questions[0],
+        questionType: questionnairesName,
+        answerType: questionType?.value,
+      };
+      console.log(data);
+      const response = await baseURL.post("/servey/add", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      console.log(response);
+      if (response?.data.statusCode === 201) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: response?.data?.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        position: "top-center",
+        icon: "error",
+        title: error?.response?.data?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
+  // const [question, setQuestion] = useState("");
+  // const [option, setOption] = useState([]);
 
   const handleChange = (value) => {
     console.log(value);
     setQuestionType(value);
   };
-
+  console.log(questionType);
+  console.log(questionnairesName);
   return (
-    <div>
-      <div className="p-[24px] ">
+    <div className="">
+      <div className="p-[24px]">
         <h1 className="text-black text-[24px] rounded-lg font-semibold">
           Manage Questionnaires
         </h1>
@@ -276,168 +366,273 @@ function ManageQuestionnaires() {
             <h1 className="text-[16px] font-medium mb-3">
               * Questionnaires Name
             </h1>
-            <Input
+            <Select
+              defaultValue="Couple Therapy"
+              style={{
+                width: "100%",
+                height: 60,
+                fontSize: 26,
+                borderRadius: 10,
+                border: "2px solid #54A630",
+              }}
+              onChange={(value) => setQuestionnairesName(value)}
+              options={[
+                {
+                  value: "Couple Therapy",
+                  label: "Couple Therapy",
+                },
+                {
+                  value: "Teen Therapy",
+                  label: "Teen Therapy",
+                },
+                {
+                  value: "Individual",
+                  label: "Individual Therapy",
+                },
+              ]}
+            />
+            {/* <Input
               onChange={(e) => setQuestionnairesName(e.target.value)}
               placeholder="Enter Questionnaires Name"
               className="p-4 bg-white rounded border border-primary w-full justify-start items-center gap-4 inline-flex focus:border-primary "
               type="text"
               // defaultValue={questionnairesName}
-            />
+            /> */}
           </div>
 
           {/* here qu show */}
 
-          <div className="border-b-2 border-secondary pb-5">
-            {SurveyAnswers.map((data, index) => (
+          {/* <div className="border-b-2 border-secondary pb-5">
+            {data?.data?.attributes?.map((data, index) => (
               <div key={index}>
-                {data?.questionType === "multiple-choice" && (
+                {data?.answerType === "Multiple" && (
                   <MultipleChoice
-                    defaultValue={data?.answer}
+                    // defaultValue={data}
                     allData={data}
                     serialNo={index + 1}
                   />
                 )}
-                {data?.questionType === "checkbox" && (
+                {data?.answerType === "Checkbox" && (
                   <CheckboxType
-                    defaultValues={data?.answer}
+                    // defaultValues={data}
                     allData={data}
                     serialNo={index + 1}
                   />
                 )}
 
-                {data?.questionType === "paragraph" && (
+                {data?.answerType === "Paragraph" && (
                   <InputType
-                    defaultValue={data?.answer}
+                    // defaultValue={data}
                     allData={data}
                     serialNo={index + 1}
                   />
                 )}
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* here qu add */}
           <div>
             <div className="flex bg-white  rounded-xl  mt-[24px]">
-              <div className="w-[790px]">
-                <Form
-                  className="py-[24px]"
-                  name="dynamic_form_item"
-                  {...formItemLayoutWithOutLabel}
-                  onFinish={onFinish}
-                  style={{
-                    maxWidth: 600,
-                  }}
-                >
-                  <Form.List
-                    name="questions"
-                    initialValue={[
-                      {
-                        question: "",
-                        options: [""],
-                        isChecked: false,
-                      },
-                    ]}
+              {questionType?.value == "Paragraph" ? (
+                <>
+                  <Form
+                    name="basic"
+                    labelCol={{ span: 22 }}
+                    wrapperCol={{ span: 40 }}
+                    layout="vertical"
+                    // initialValues={{
+                    //   remember: true,
+                    //   matchName: result?.matchName,
+                    //   eventName: result?.eventDetails?.eventName,
+                    // }}
+                    className="mx-5"
+                    onFinish={handleQuestionSubmit}
+                    //   onFinishFailed={handleCompanyInformationFailed}
+                    autoComplete="off"
                   >
-                    {(fields, { add, remove }) => (
-                      <>
-                        {fields.map((field, index) => (
-                          <Form.Item
-                            {...(index === 0
-                              ? formItemLayout
-                              : formItemLayoutWithOutLabel)}
-                            label={index === 0 ? "Questions" : ""}
-                            required={false}
-                            key={field.key}
-                          >
+                    <div className="flex-1">
+                      <Form.Item
+                        name="question"
+                        label={<span className=" text-[18px] ">Question</span>}
+                        className="flex-1"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input your Question!",
+                          },
+                        ]}
+                      >
+                        <Input
+                          // name="publisherName"
+                          // onChange={(e) => setPublisherName(e.target.value)}
+                          placeholder="Enter Question"
+                          className="p-4
+                rounded w-[500px] 
+                justify-start 
+                mt-[12px]
+                items-center 
+                gap-4 inline-flex"
+                        />
+                      </Form.Item>
+                    </div>
+
+                    <Button
+                      htmlType="submit"
+                      // onClick={handleAddToBlog}
+                      block
+                      className="block w-[500px] h-[56px] mt-[30px] px-2 py-4  text-white bg-gradient-to-r from-[#54A630] to-[#54A630] rounded-lg"
+                      style={{
+                        marginTop: "30px",
+                        backgroundColor: "red",
+                        color: "#fff",
+                        size: "18px",
+                        height: "56px",
+                      }}
+                    >
+                      Submit Question
+                    </Button>
+                  </Form>
+                </>
+              ) : (
+                <div className="w-[790px]">
+                  <Form
+                    className="py-[24px]"
+                    name="dynamic_form_item"
+                    {...formItemLayoutWithOutLabel}
+                    onFinish={handleMultipleChoiceQuestionSubmit}
+                    style={{
+                      maxWidth: 600,
+                    }}
+                  >
+                    <Form.List
+                      name="questions"
+                      initialValue={[
+                        {
+                          question: "",
+                          options: [""],
+                          isChecked: false,
+                        },
+                      ]}
+                    >
+                      {(fields, { add, remove }) => (
+                        <>
+                          {fields.map((field, index) => (
                             <Form.Item
-                              {...field}
-                              name={[field.name, "question"]}
-                              validateTrigger={["onChange", "onBlur"]}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message: "Please input the question.",
-                                },
-                              ]}
-                              noStyle
+                              {...(index === 0
+                                ? formItemLayout
+                                : formItemLayoutWithOutLabel)}
+                              label={index === 0 ? "Questions" : ""}
+                              required={false}
+                              key={field.key}
                             >
-                              <Input
-                                className="mb-5"
-                                placeholder="Enter Question"
-                              />
-                            </Form.Item>
-                            <Form.Item
-                              {...field}
-                              name={[field.name, "options"]}
-                              validateTrigger={["onChange", "onBlur"]}
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "Please input at least one option.",
-                                },
-                              ]}
-                              noStyle
-                            >
-                              <Form.List name={[field.name, "options"]}>
-                                {(
-                                  optionFields,
-                                  { add: addOption, remove: removeOption }
-                                ) => (
-                                  <div className="flex flex-col gap-5">
-                                    {optionFields.map(
-                                      (optionField, optionIndex) => (
-                                        <div
-                                          className="flex gap-5"
-                                          key={optionField.key}
-                                        >
-                                          <Form.Item
-                                            {...optionField}
-                                            validateTrigger={[
-                                              "onChange",
-                                              "onBlur",
-                                            ]}
-                                            rules={[
-                                              {
-                                                required: true,
-                                                whitespace: true,
-                                                message: `Please input the option ${
-                                                  optionIndex + 1
-                                                }.`,
-                                              },
-                                            ]}
-                                            noStyle
+                              <Form.Item
+                                {...field}
+                                name={[field.name, "question"]}
+                                validateTrigger={["onChange", "onBlur"]}
+                                rules={[
+                                  {
+                                    required: false,
+                                    whitespace: true,
+                                    message: "Please input the question.",
+                                  },
+                                ]}
+                                noStyle
+                              >
+                                <Input
+                                  className="p-4
+                                 rounded w-[500px] 
+                                 justify-start 
+                                 mt-[12px]
+                                 items-center 
+                                 gap-4 inline-flex mb-5"
+                                  placeholder="Enter Question"
+                                />
+                              </Form.Item>
+                              <Form.Item
+                                {...field}
+                                name={[field.name, "options"]}
+                                validateTrigger={["onChange", "onBlur"]}
+                                rules={[
+                                  {
+                                    required: false,
+                                    message:
+                                      "Please input at least one option.",
+                                  },
+                                ]}
+                              >
+                                <Form.List name={[field.name, "options"]}>
+                                  {(
+                                    optionFields,
+                                    { add: addOption, remove: removeOption }
+                                  ) => (
+                                    <div className="flex flex-col gap-5">
+                                      {optionFields.map(
+                                        (optionField, optionIndex) => (
+                                          <div
+                                            className="flex gap-5"
+                                            key={optionField.key}
                                           >
-                                            <Input
-                                              placeholder={`Option ${
-                                                optionIndex + 1
-                                              }`}
-                                            />
-                                          </Form.Item>
-                                          {optionFields.length > 1 && (
-                                            <MinusCircleOutlined
-                                              className="dynamic-delete-button"
-                                              onClick={() =>
-                                                removeOption(optionField.name)
-                                              }
-                                            />
-                                          )}
-                                        </div>
-                                      )
-                                    )}
-                                    <Button
-                                      type="dashed"
-                                      onClick={() => addOption()}
-                                      icon={<PlusOutlined />}
-                                    >
-                                      Add Option
-                                    </Button>
-                                  </div>
-                                )}
-                              </Form.List>
-                            </Form.Item>
-                            {/* <Form.Item
+                                            <Form.Item
+                                              {...optionField}
+                                              validateTrigger={[
+                                                "onChange",
+                                                "onBlur",
+                                              ]}
+                                              rules={[
+                                                {
+                                                  required: false,
+                                                  whitespace: true,
+                                                  message: `Please input the option ${
+                                                    optionIndex + 1
+                                                  }.`,
+                                                },
+                                              ]}
+                                              noStyle
+                                            >
+                                              <Input
+                                                className="p-4
+                                             rounded w-[500px] 
+                                             justify-start 
+                                             mt-[12px]
+                                             items-center 
+                                             gap-4 inline-flex"
+                                                placeholder={`Option ${
+                                                  optionIndex + 1
+                                                }`}
+                                              />
+                                            </Form.Item>
+                                            {optionFields.length > 0 && (
+                                              <MinusCircleOutlined
+                                                size={50}
+                                                className="text-[25px]"
+                                                onClick={() =>
+                                                  removeOption(optionField.name)
+                                                }
+                                              />
+                                            )}
+                                          </div>
+                                        )
+                                      )}
+                                      <Button
+                                        type="dashed"
+                                        onClick={() => addOption()}
+                                        style={{
+                                          marginTop: "30px",
+                                          backgroundColor: "#54A630",
+                                          color: "white",
+                                          size: "18px",
+                                          height: "56px",
+                                        }}
+                                        icon={<PlusOutlined />}
+                                      >
+                                        Add Option
+                                      </Button>
+                                    </div>
+                                  )}
+                                </Form.List>
+                              </Form.Item>
+                              {/* <Form.Item
                           {...field}
                           name={[field.name, "isChecked"]}
                           valuePropName="checked"
@@ -447,15 +642,15 @@ function ManageQuestionnaires() {
                             Is Checked
                           </Checkbox>
                         </Form.Item> */}
-                            {fields.length > 1 && (
-                              <MinusCircleOutlined
-                                className="dynamic-delete-button"
-                                onClick={() => remove(field.name)}
-                              />
-                            )}
-                          </Form.Item>
-                        ))}
-                        {/* <Form.Item>
+                              {fields.length > 1 && (
+                                <MinusCircleOutlined
+                                  className="dynamic-delete-button"
+                                  onClick={() => remove(field.name)}
+                                />
+                              )}
+                            </Form.Item>
+                          ))}
+                          {/* <Form.Item>
                       <Button
                         type="dashed"
                         onClick={() => add()}
@@ -467,21 +662,37 @@ function ManageQuestionnaires() {
                         Add Question
                       </Button>
                     </Form.Item> */}
-                      </>
-                    )}
-                  </Form.List>
-                  <Form.Item>
-                    <Button htmlType="submit">Submit</Button>
-                  </Form.Item>
-                </Form>
-              </div>
+                        </>
+                      )}
+                    </Form.List>
+                    <Form.Item>
+                      <Button
+                        htmlType="submit"
+                        // onClick={handleAddToBlog}
+                        block
+                        className="block w-[500px] h-[56px] mt-[30px] px-2 py-4 text-white bg-gradient-to-r from-[#54A630] to-[#54A630] rounded-lg"
+                        style={{
+                          marginTop: "30px",
+                          backgroundColor: "#54A630",
+                          color: "#fff",
+                          size: "18px",
+                          height: "56px",
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </div>
+              )}
+
               <div className="p-[24px] border-l-2 border-secondary">
                 <Select
                   className=""
                   labelInValue
                   defaultValue={{
-                    value: questionType,
-                    label: questionType,
+                    value: "Paragraph",
+                    label: "Paragraph",
                   }}
                   style={{
                     width: 250,
@@ -494,7 +705,7 @@ function ManageQuestionnaires() {
                       label: "Paragraph",
                     },
                     {
-                      value: "Multiple Choice",
+                      value: "Multiple",
                       label: "Multiple Choice",
                     },
                     {

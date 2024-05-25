@@ -2,6 +2,7 @@ import React from "react";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useGetAllQuestionQuery } from "../../redux/Features/getAllQuestionApi";
 
 const formItemLayout = {
   labelCol: {
@@ -37,6 +38,7 @@ const formItemLayoutWithOutLabel = {
 
 function Questionnaires() {
   const navigate = useNavigate();
+  const { data, isLoading, isSuccess } = useGetAllQuestionQuery();
   const makeQuestion = [
     {
       id: 1,
@@ -90,34 +92,34 @@ function Questionnaires() {
       </div>
       <div className="flex gap-[80px]  mt-5">
         <div
-          onClick={() => navigate("/add-questionnaires")}
+          onClick={() => navigate("/Individual")}
           className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
         >
           <h1 className="text-primary font-bold text-[24px]">
             Individual Therapy
           </h1>
           <p>
-            Total Questions: <span className="text-primary">8</span>
+            Total Questions: <span className="text-primary">{data?.data?.attributes?.filter((data) => data?.questionType.split(" ")[0]=="Individual").length}</span>
           </p>
         </div>
         <div
-          onClick={() => navigate("/add-questionnaires")}
+          onClick={() => navigate("/Couple")}
           className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
         >
           <h1 className="text-primary font-bold text-[24px]">
             Teen Therapy(13-18)
           </h1>
           <p>
-            Total Questions: <span className="text-primary">15</span>
+            Total Questions: <span className="text-primary">{data?.data?.attributes?.filter((data) => data?.questionType.split(" ")[0]=="Teen").length}</span>
           </p>
         </div>
         <div
-          onClick={() => navigate("/add-questionnaires")}
+          onClick={() => navigate("/Teen")}
           className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
         >
           <h1 className="text-primary font-bold text-[24px]">Couple Therapy</h1>
           <p>
-            Total Questions: <span className="text-primary">10</span>
+            Total Questions: <span className="text-primary">{data?.data?.attributes?.filter((data) => data?.questionType.split(" ")[0]=="Couple").length}</span>
           </p>
         </div>
       </div>

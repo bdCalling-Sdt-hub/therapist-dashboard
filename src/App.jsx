@@ -27,6 +27,7 @@ import MatchedRequestDetailsChangeTherapist from "./Pages/Dashboard/Patients/Mat
 import ManageQuestionnaires from "./Pages/Questionnaires/ManageQuestionnaires";
 import Inbox from "./Pages/Inbox/Inbox";
 import AddSubscription from "./Pages/Dashboard/Subscription/AddSubscription";
+import NumberOfQuestion from "./Pages/Questionnaires/NumberOfQuestion";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/" element={<DashboardHome />} />
             <Route path="/allTherapist" element={<AllTherapist />} />
             <Route path="/therapistRequest" element={<TherapistRequest />} />
+            <Route path="/:id" element={<NumberOfQuestion />} />
             <Route path="/allPatients" element={<AllPatients />} />
             <Route path="/index" element={<Inbox />} />
             <Route path="/matchedTherapist" element={<MatchedTherapist />} />

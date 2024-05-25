@@ -10,16 +10,16 @@ function MultipleChoice({ defaultValue, allData, serialNo }) {
 
   //   console.log(allData);
   //   console.log(allData?.option);
-
+console.log("aiman",allData);
   return (
     <div className="mt-4">
       <h1>
         <span className="text-primary font-semibold">{serialNo}.</span> {" "}
         {allData?.question}
       </h1>
-      <Radio.Group onChange={onChange} value={defaultValue}>
+      <Radio.Group onChange={onChange} >
         <Space direction="vertical">
-          {allData?.option?.map((item) => (
+          {allData?.options?.map((item) => (
             <Radio key={item} value={item}>
               {item}
             </Radio>

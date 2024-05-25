@@ -23,6 +23,7 @@ function CheckboxType({ defaultValues, allData, serialNo }) {
 
 //   console.log(allData.option);
 //   console.log(options);
+console.log("aiman",allData);
 
   return (
     <div className="mt-4">
@@ -33,8 +34,8 @@ function CheckboxType({ defaultValues, allData, serialNo }) {
       <div className="mt-2">
         <Checkbox.Group
           className="flex flex-col gap-3"
-          options={allData?.option}
-          defaultValue={defaultValues}
+          options={allData?.options}
+          // defaultValue={defaultValues}
           onChange={onChange}
         />
       </div>
