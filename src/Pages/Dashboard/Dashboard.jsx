@@ -16,6 +16,7 @@ import { FaClipboardList } from "react-icons/fa6";
 import { Menu } from "antd";
 import Swal from "sweetalert2";
 import Header from "../../Components/Header/Header";
+import { MdAssignmentTurnedIn } from "react-icons/md";
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -77,15 +78,15 @@ const Dashboard = () => {
           </li>,
           "2"
         ),
-        getItem(
-          <li
-            onClick={(e) => navigate("/therapistRequest")}
-            className="text-[20px] leading-normal"
-          >
-            Therapist Request
-          </li>,
-          "3"
-        ),
+        // getItem(
+        //   <li
+        //     onClick={(e) => navigate("/therapistRequest")}
+        //     className="text-[20px] leading-normal"
+        //   >
+        //     Therapist Request
+        //   </li>,
+        //   "3"
+        // ),
       ]
     ),
 
@@ -126,15 +127,15 @@ const Dashboard = () => {
           </li>,
           "5"
         ),
-        getItem(
-          <li
-            onClick={(e) => navigate("/matchedTherapist")}
-            className="text-[20px] leading-normal"
-          >
-            Matched Therapist
-          </li>,
-          "6"
-        ),
+        // getItem(
+        //   <li
+        //     onClick={(e) => navigate("/matchedTherapist")}
+        //     className="text-[20px] leading-normal"
+        //   >
+        //     Matched Therapist
+        //   </li>,
+        //   "6"
+        // ),
       ]
     ),
     getItem(
@@ -146,6 +147,18 @@ const Dashboard = () => {
       </p>,
       "7",
       <BsBookmarkCheck style={{ fontSize: "18px" }} />
+    ),
+    
+    getItem(
+      <p
+        onClick={(e) => navigate("/assign-list")}
+        className="text-[22px] leading-normal"
+      >
+        Assign List
+      </p>,
+      "19",
+
+      <MdAssignmentTurnedIn style={{ fontSize: "18px" }} />
     ),
     getItem(
       <p

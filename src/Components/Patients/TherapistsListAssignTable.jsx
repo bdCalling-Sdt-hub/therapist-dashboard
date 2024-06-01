@@ -1,97 +1,88 @@
 import React, { useState, useRef } from "react";
-import { Table, Pagination, ConfigProvider, Modal, Rate } from "antd";
+import { Table, Pagination, ConfigProvider, Modal } from "antd";
 import { useReactToPrint } from "react-to-print";
 import { useNavigate } from "react-router-dom";
+import { usePostAssigntMutation } from "../../redux/Features/postAssigntApi";
+import Swal from "sweetalert2";
+import baseURL from "../../config";
 
-function TherapistsListAssignTable() {
+function TherapistsListAssignTable({ data, id: patientId }) {
+  const [postAssign, { isLoading, isSuccess, isError, data: result }] = usePostAssigntMutation();
   const navigate = useNavigate();
+  const [userDetails,setUserDetails] = useState({})
   const componentRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (value) => {
     setIsModalOpen(true);
+    setUserDetails(value)
   };
+
   const handleCancel = () => {
     setIsModalOpen(false);
+    
+  };
+  console.log(userDetails);
+console.log(patientId,);
+  // const handleAssign = async (therapistId) => {
+  //   console.log(therapistId);
+  //   try {
+  //    const response = await postAssign({ patientId, therapistId }).unwrap();
+  //    console.log(response);
+  //     Swal.fire({
+  //       position: "top-center",
+  //       icon: "success",
+  //       title: "Therapist assigned successfully",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //     navigate(`/patientsRequest/${patientId}`);
+  //   } catch (error) {
+  //     console.log(error);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: error,
+  //     });
+  //   }
+  // };
+
+  const handleAssign = async (therapistId) => {
+    console.log(therapistId);
+    try {
+      // const response = await postAssign({ patientId, therapistId }).unwrap();
+      const response = await baseURL.post(`/apointment/assign/${patientId}`, {therapistId},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+        
+      );
+
+      console.log(response);
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Therapist assigned successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(`/patientsRequest/${patientId}`);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+      });
+    }   
   };
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     pageStyle: "",
   });
-
-  const data = [
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      email: "jhondoe@me.com",
-      phoneNumber: "+1 2746478994",
-      status: "Completed",
-    },
-  ];
 
   const columns = [
     {
@@ -100,7 +91,7 @@ function TherapistsListAssignTable() {
       render: (_, record) => (
         <>
           <div>
-            <p className=" text-[16px]">{record?.name}</p>
+            <p className="text-[16px]">{record?.name}</p>
           </div>
         </>
       ),
@@ -110,18 +101,28 @@ function TherapistsListAssignTable() {
       dataIndex: "email",
       render: (_, record) => (
         <>
-          <p className=" text-[16px]">{record?.email}</p>
+          <p className="text-[16px]">{record?.email}</p>
         </>
       ),
     },
-
     {
       title: "Phone Number",
       dataIndex: "phoneNumber",
       render: (_, record) => (
         <>
           <div>
-            <p className=" text-[16px]">{record?.phoneNumber}</p>
+            <p className="text-[16px]">{record?.phone}</p>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Type",
+      dataIndex: "therapistType",
+      render: (_, record) => (
+        <>
+          <div>
+            <p className="text-[16px]">{record?.therapistType}</p>
           </div>
         </>
       ),
@@ -131,16 +132,16 @@ function TherapistsListAssignTable() {
       dataIndex: "dataTime",
       render: (_, record) => (
         <>
-          <div className="flex gap-5">
+          <div className="flex gap-2">
             <p
-              onClick={() => navigate("/patientsRequest/sdfsd")}
-              className="px-6 py-1 text-[14px] bg-primary text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
+              onClick={() => handleAssign(record?._id)}
+              className="px-6 py-1 text-[14px] bg-primary text-white font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
             >
               Assign
             </p>
             <p
-              onClick={handleOpenModal}
-              className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
+              onClick={()=>handleOpenModal(record)}
+              className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
             >
               Details
             </p>
@@ -149,10 +150,10 @@ function TherapistsListAssignTable() {
       ),
     },
   ];
-
+// console.log(result,);
   return (
     <div>
-      <div className="overflow-hidden px-5 h-[52vh] ">
+      <div className="overflow-hidden px-5 h-[52vh]">
         <ConfigProvider
           theme={{
             components: {
@@ -179,11 +180,8 @@ function TherapistsListAssignTable() {
           <ConfigProvider
             theme={{
               token: {
-                // Seed Token
                 colorPrimary: "#54A630",
                 borderRadius: 2,
-
-                // Alias Token
                 colorBgContainer: "#f6ffed",
               },
             }}
@@ -196,11 +194,9 @@ function TherapistsListAssignTable() {
       <Modal
         visible={isModalOpen}
         title={
-          <div className=" py-2 border-b-[1px] border-primary font-['Montserrat'] ">
-            <span className="text-[24px] text-primary ">Therapist Details</span>
-            <p className=" text-[14px] text-[#B9B9B9]">
-              See all details about John Doe
-            </p>
+          <div className="py-2 border-b-[1px] border-primary font-['Montserrat']">
+            <span className="text-[24px] text-primary">Therapist Details</span>
+            <p className="text-[14px] text-[#B9B9B9]">See all details about {userDetails?.name}</p>
           </div>
         }
         onCancel={handleCancel}
@@ -209,16 +205,17 @@ function TherapistsListAssignTable() {
         width={500}
       >
         <div className="flex flex-col">
-          <div className="flex  gap-5 border-b-[1px] pb-2 border-primary">
+          <div className="flex gap-5 border-b-[1px] pb-2 border-primary">
             <img
               className="w-[70px] h-[70px]"
-              src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
+              // src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
+              src={`${import.meta.env.VITE_BASE_URL}/${userDetails?.image?.publicFileURL}` || "https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"}
               alt=""
             />
             <div>
-              <h1 className="text-primary text-[24px] ">John Doe</h1>
+              <h1 className="text-primary text-[24px]">{userDetails?.name}</h1>
               <div className="flex items-center gap-1">
-                <svg
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -230,25 +227,25 @@ function TherapistsListAssignTable() {
                     clipRule="evenodd"
                   />
                 </svg>
-
-                <h1 className="text-[18px] font-medium">4.9</h1>
+                <h1 className="text-[18px] font-medium">4.9</h1> */}
+                {userDetails?.email}
               </div>
             </div>
           </div>
           <div>
-            <h1 className=" text-[24px] font-semibold">Information</h1>
+            <h1 className="text-[24px] font-semibold">Information</h1>
             <div className="text-[16px] flex flex-col gap-2">
-              <p>Name: John Doe</p>
-              <p>Date of Birth: 12/08/1996</p>
-              <p>Survey Category: Teen Therapy(13-18)</p>
-              <p>Email: johndoe@gmail.com</p>
-              <p>Session Completed: 56</p>
+              <p>Name: {userDetails?.name}</p>
+              <p>Date of Birth: {userDetails?.dateOfBirth || "N/A"}</p>
+              {/* <p>Survey Category: Teen Therapy (13-18)</p> */}
+              <p>Email: {userDetails?.email}</p>
+              {/* <p>Session Completed: 56</p> */}
             </div>
           </div>
           <div className="flex mt-[24px]">
             <p
-              onClick={() => navigate("/patientsRequest/sdfsd")}
-              className="px-6 py-1 text-[14px] bg-primary text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
+              onClick={() => handleAssign(userDetails?._id)}
+              className="px-6 py-1 text-[14px] bg-primary text-white font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
             >
               Assign
             </p>

@@ -7,49 +7,50 @@ import BlockList from "./BlockList";
 import Activity from "./Activity";
 import Percentage from "./Percentage";
 import Others from "./Others";
-import { useLocation,useParams  } from 'react-router-dom';
+import { Link, useLocation,useNavigate,useParams  } from 'react-router-dom';
 
 function Settings() {
   const location = useLocation();
-  const [currentLink, setCurrentLink] = useState("general");
+  const [currentLink, setCurrentLink] = useState("password-and-security");
 
   console.log('Current URL:', location.search);
   let { link } = useParams();
   console.log(link)
 
   const SettingsHeaderData = [
-    {
-      id: 1,
-      name: "General",
-      link: "general",
-    },
+    // {
+    //   id: 1,
+    //   name: "General",
+    //   link: "general",
+    // },
     {
       id: 2,
-      name: "Personal Details",
-      link: "personal-details",
-    },
-    {
-      id: 3,
       name: "Password and Security",
       link: "password-and-security",
     },
     {
-      id: 4,
-      name: "Block List",
-      link: "block-list",
+      id: 1,
+      name: "Personal Details",
+      link: "personal-details",
     },
+   
+    // {
+    //   id: 4,
+    //   name: "Block List",
+    //   link: "block-list",
+    // },
+    // {
+    //   id: 5,
+    //   name: "Activity",
+    //   link: "activity",
+    // },
     {
-      id: 5,
-      name: "Activity",
-      link: "activity",
-    },
-    {
-      id: 6,
+      id: 3,
       name: "Percentage",
       link: "percentage",
     },
     {
-      id: 7,
+      id: 4,
       name: "Others",
       link: "others",
     },
@@ -60,7 +61,7 @@ function Settings() {
     setCurrentLink("personal-details");
   }
   },[])
-
+const navigate = useNavigate();
   return (
     <div className="p-[24px]">
       <SettingsHeader
@@ -70,8 +71,8 @@ function Settings() {
       />
       {/* Settings Route here */}
       <div className="mt-[24px]">
-        {currentLink === "general" && <General />}
-        {currentLink === "personal-details" && <PersonalDetails />}
+        {/* {currentLink === "general" && <General />} */}
+        {currentLink === "personal-details" && navigate(`/personal-details`)}
         {currentLink === "password-and-security" && <PasswordAndSecurity />}
         {currentLink === "block-list" && <BlockList />}
         {currentLink === "activity" && <Activity />}

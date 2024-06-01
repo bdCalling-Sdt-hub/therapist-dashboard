@@ -4,7 +4,8 @@ import TherapistsListAssignTable from "./TherapistsListAssignTable";
 
 const provinceData = ["All", "Completed", "Pending", "Cancelled"];
 
-function TherapistsListAssign() {
+function TherapistsListAssign({data,id}) {
+  console.log(data);
   const handleChange = (value) => {
     console.log(value);
   };
@@ -12,12 +13,13 @@ function TherapistsListAssign() {
   const onChanges = (date, dateString) => {
     console.log(date, dateString);
   };
+
   return (
     <div className="mt-5">
       <div className="bg-white h-[43vh] rounded-xl overflow-hidden">
         <div className="flex justify-between py-[20px] p-[20px] bg-primary">
           <h1 className="text-[32px] text-white">Therapists List</h1>
-          <div className="flex items-center gap-5">
+          {/* <div className="flex items-center gap-5">
             <div className="flex gap-5">
               <Select
                 labelInValue
@@ -71,10 +73,10 @@ function TherapistsListAssign() {
                 </svg>
               }
             />
-          </div>
+          </div> */}
         </div>
         <div>
-          <TherapistsListAssignTable />
+          <TherapistsListAssignTable data={data} id={id} />
         </div>
       </div>
     </div>

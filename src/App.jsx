@@ -28,6 +28,11 @@ import ManageQuestionnaires from "./Pages/Questionnaires/ManageQuestionnaires";
 import Inbox from "./Pages/Inbox/Inbox";
 import AddSubscription from "./Pages/Dashboard/Subscription/AddSubscription";
 import NumberOfQuestion from "./Pages/Questionnaires/NumberOfQuestion";
+import PersonalDetails from "./Pages/PersonalDetails/PersonalDetails";
+import EditProfileDetails from "./Pages/PersonalDetails/EditProfileDetails";
+import PrivateRoute from "./PrivateRoute";
+import AssignList from "./Pages/AssignList/AssignList";
+import AssignPatientList from "./Pages/AssignPatientList/AssignPatientList";
 
 function App() {
   return (
@@ -37,23 +42,27 @@ function App() {
           <Route
             path="/"
             element={
-              // <PrivateRoute>
+              <PrivateRoute>
               <Dashboard />
-              // </PrivateRoute>
+               </PrivateRoute>
             }
           >
             <Route path="/" element={<DashboardHome />} />
             <Route path="/allTherapist" element={<AllTherapist />} />
             <Route path="/therapistRequest" element={<TherapistRequest />} />
             <Route path="/:id" element={<NumberOfQuestion />} />
+            <Route path="/personal-details" element={<PersonalDetails />} />
+            <Route path="/edit-profile/:id" element={<EditProfileDetails/>} />
             <Route path="/allPatients" element={<AllPatients />} />
             <Route path="/index" element={<Inbox />} />
+            <Route path="/assign-list" element={<AssignList/>} />
+            <Route path="/assign-list/:id" element={<AssignPatientList/>} />
             <Route path="/matchedTherapist" element={<MatchedTherapist />} />
             <Route path="/matchedTherapist/:id" element={<MatchedRequestDetails />} />
             <Route path="/matchedTherapist/:id/:id" element={<MatchedRequestDetailsChangeTherapist />} />
             <Route path="/patientsRequest" element={<PatientsRequest />} />
             <Route path="/patientsRequest/:id" element={<PatientRequestDetails />} />
-            <Route path="/patientsRequest/:id/:id" element={<PatientRequestDetailsAssignTherapist />} />
+            <Route path="/patientsRequest/assign/:id" element={<PatientRequestDetailsAssignTherapist />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/questionnaires" element={<Questionnaires />} />
             <Route path="/add-questionnaires" element={<ManageQuestionnaires />} />

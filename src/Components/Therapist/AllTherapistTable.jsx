@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Table, Pagination, ConfigProvider, Modal } from "antd";
 import { useGetAllTherapistQuery } from "../../redux/Features/getAllTherapistApi";
-
+import Loading from "../Loading/Loading";
 function AllTherapistTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [currentValue, setCurrentValue] = useState(null);
   const {data,isLoading,isSuccess,isError} = useGetAllTherapistQuery();
   console.log(data);
@@ -11,6 +12,9 @@ function AllTherapistTable() {
     setIsModalOpen(true);
     setCurrentValue(value);
   };
+  if(isLoading){
+    return <Loading />
+  }
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -178,10 +182,20 @@ console.log(currentValue);
     {
       title: "Phone Number",
       dataIndex: "PhoneNumber",
-      width: "32%",
+      // width: "32%",
       render: (_, record) => (
         <>
           <p className="text-[16px]">{record?.phone}</p>
+        </>
+      ),
+    },
+    {
+      title: "Type",
+      dataIndex: "therapistType",
+      // width: "32%",
+      render: (_, record) => (
+        <>
+          <p className="text-[16px]">{record?.therapistType}</p>
         </>
       ),
     },
@@ -209,14 +223,16 @@ console.log(currentValue);
     color: "#54A630", // Set your desired text color
     // Add any other styles you want to apply to the entire header
   };
-
+  const handleChangePage = (page) => {
+    setCurrentPage(page);
+    console.log(page);
+  };
   const result = data?.data?.attributes
 
   const handlePdf = (value) => {
-    window.open(`${import.meta.env.VITE_BASE_URL}/images/users/${value?.
-      filename}`);
+    window.open(`${import.meta.env.VITE_BASE_URL}/${value}`);
   };
-
+console.log(data?.pagination?.totalItems);
   return (
     <div>
       <Table
@@ -229,12 +245,19 @@ console.log(currentValue);
         scroll={{
           y: 550,
         }}
-        pagination={false}
+        pagination={{
+          position: ["bottomCenter"],
+          current: currentPage,
+            pageSize:10,
+            total:data?.pagination?.totalItems,
+            showSizeChanger: false,
+            onChange: handleChangePage,
+        }}
         columns={columns}
         dataSource={result}
       />
       <div className="flex justify-between p-5">
-        <div className="text-[18px] text-primary">SHOWING 1-8 OF 250</div>
+        {/* <div className="text-[18px] text-primary">SHOWING 1-8 OF 250</div> */}
         <div>
           <ConfigProvider
             theme={{
@@ -248,7 +271,7 @@ console.log(currentValue);
               },
             }}
           >
-            <Pagination defaultCurrent={1} total={50} />
+            {/* <Pagination defaultCurrent={1} total={50} /> */}
           </ConfigProvider>
         </div>
       </div>
@@ -271,16 +294,19 @@ console.log(currentValue);
           width={500}
         >
           <div className="flex flex-col">
-            <div className="flex  gap-5 border-b-[1px] pb-2 border-primary">
+            <div className="flex items-center  gap-5 border-b-[1px] pb-2 border-primary">
               <img
                 className="w-[70px] h-[70px]"
-                src={`${import.meta.env.VITE_BASE_URL}/images/users/${currentValue?.image[0].filename
+                src={`${import.meta.env.VITE_BASE_URL}/${currentValue?.image?.publicFileURL
                   }`}
                 alt=""
               />
               <div>
                 <h1 className="text-primary text-[24px] ">{currentValue?.name}</h1>
+
+{/* 
                 <div className="flex items-center gap-1">
+
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -295,7 +321,10 @@ console.log(currentValue);
                   </svg>
 
                   <h1 className="text-[18px] font-medium">4.9</h1>
-                </div>
+                </div> */}
+
+
+
               </div>
             </div>
             <div className="">
@@ -305,15 +334,15 @@ console.log(currentValue);
                 <p>Email: {currentValue?.email}</p>
                 <p>Phone: {currentValue?.phone}</p>
                 <p>Date of Birth: {currentValue?.dateOfBirth}</p>
-                <p>Address: {currentValue?.address || "N/A"}</p>
+                {/* <p>Address: {currentValue?.address || "N/A"}</p>
                 <p>Survey Category: {currentValue?.survey || "N/A"}</p>
-                <p>Session Completed: {currentValue?.session || "N/A"}</p>
+                <p>Session Completed: {currentValue?.session || "N/A"}</p> */}
               </div>
               <h1 className=" text-[24px] font-semibold">Documents</h1>
               <div className="flex gap-5">
 
                 <div
-                  onClick={()=>handlePdf(currentValue?.certificate[0])}
+                  onClick={()=>handlePdf(currentValue?.certificate?.publicFileURL)}
                   className="bg-secondary flex  cursor-pointer items-center flex-col rounded gap-2 "
                 >
                   <div className=" p-[10px] w-[76px] h-[76px] rounded-full mt-2 flex items-center mx-auto bg-[#8CC374]">
@@ -323,10 +352,10 @@ console.log(currentValue);
                       alt=""
                     />
                   </div>
-                  <h1 className="text-wrap p-2">{currentValue?.certificate[0].originalname}</h1>
+                  <h1 className="text-wrap p-2">{`${currentValue?.certificate?.publicFileURL.slice(0, 20)}...`}</h1>
                 </div>
                 <div
-                  onClick={()=>handlePdf(currentValue?.resume[0])}
+                  onClick={()=>handlePdf(currentValue?.resume?.publicFileURL)}
                   className="bg-secondary flex  text-wrap cursor-pointer  items-center flex-col rounded gap-2 "
                 >
                   <div className=" p-[10px] w-[76px] h-[76px] rounded-full mt-2 flex items-center mx-auto bg-[#8CC374]">
@@ -336,15 +365,15 @@ console.log(currentValue);
                       alt=""
                     />
                   </div>
-                  <h1 className="text-wrap p-2">{currentValue?.resume[0].originalname}</h1>
+                  <h1 className="text-wrap p-2">{`${currentValue?.resume?.publicFileURL.slice(0, 20)}...`}</h1>
                 </div>
               </div>
             </div>
-            <div className="flex mt-[24px]">
+            {/* <div className="flex mt-[24px]">
               <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">
                 Block
               </p>
-            </div>
+            </div> */}
           </div>
         </Modal>
       </div>

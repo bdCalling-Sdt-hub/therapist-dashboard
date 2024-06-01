@@ -121,7 +121,7 @@ const Header = () => {
             />
           </div>
         </Dropdown>
-        <div onClick={() => navigate("/settings?link=PersonalDetails")} className="flex items-center cursor-pointer mr-[30px] bg-primary text-white rounded-full p-1">
+        <div onClick={() => navigate("/personal-details")} className="flex items-center cursor-pointer mr-[30px] bg-primary text-white rounded-full p-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

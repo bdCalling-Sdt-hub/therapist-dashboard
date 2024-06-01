@@ -1,6 +1,6 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 const { TextArea } = Input;
-import React from "react";
+import React, { useState } from "react";
 import baseURL from "../../../config";
 import Swal from "sweetalert2";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const AddSubscription = () => {
     const navigate = useNavigate();
+    const [plan,setPlan] = useState("")
+    console.log(plan);
     const handleAddSubscription = async (values) => {
         console.log(values);
         console.log();
@@ -16,6 +18,7 @@ const AddSubscription = () => {
           const data = {
             ...values
           }
+          console.log(data);
           const response = await baseURL.post("/subscription/create-plan", data, {
             headers: {
               "Content-Type": "application/json",
@@ -23,6 +26,17 @@ const AddSubscription = () => {
             },
           });
           console.log("----------------------", response);
+          if (response.data?.statusCode === 200) {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: response.data.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/subscription");
+          }
+
          
     
         } catch (error) {
@@ -36,7 +50,7 @@ const AddSubscription = () => {
         }
       };
     return (
-        <div>
+        <div className="overflow-y-auto h-[90vh]">
             <div onClick={() => navigate("/subscription")} className="mt-[44px] cursor-pointer  flex items-center gap-1 p-5">
         <MdOutlineKeyboardArrowLeft
         
@@ -106,7 +120,7 @@ const AddSubscription = () => {
               </Form.Item>
             </div>
 
-            <div className="flex gap-5">
+            <div className="flex-1">
               <Form.Item
                 name="duration"
                 label={<span className="text-[18px]">Duration</span>}
@@ -131,7 +145,7 @@ const AddSubscription = () => {
               gap-4 inline-flex outline-none focus:border-none"
                 />
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 name="liveSession"
                 label={<span className=" text-[18px] ">Live Session</span>}
                 className="flex-1"
@@ -154,27 +168,27 @@ const AddSubscription = () => {
               gap-4 inline-flex outline-none focus:border-none"
                   type="text"
                 />
-              </Form.Item>
+              </Form.Item> */}
             </div>
 
-            <div className="flex gap-5">
+            <div className="flex-1">
               <Form.Item
-                name="liveSessionDuration"
+                name="sessionCount"
                 label={
-                  <span className="text-[18px]">Live Session Duration</span>
+                  <span className="text-[18px]">Session Count</span>
                 }
                 className="flex-1"
                 rules={[
                   {
                     required: true,
-                    message: "Please input Live Session Duration!",
+                    message: "Please input Live Session Count!",
                   },
                 ]}
               >
                 <Input
                   // name="publisherName"
                   // onChange={(e) => setPublisherName(e.target.value)}
-                  placeholder="Live Session Duration"
+                  placeholder="Live ession Count"
                   className="p-4
               rounded w-full 
               justify-start 
@@ -184,30 +198,55 @@ const AddSubscription = () => {
               gap-4 inline-flex outline-none focus:border-none"
                 />
               </Form.Item>
+            
+            </div>
+
+            <div className="flex-1">
               <Form.Item
-                name="weeklyResponse"
-                label={<span className=" text-[18px] ">Weekly Response</span>}
+                name="planType"
+                label={
+                  <span className="text-[18px]">Plan Type</span>
+                }
                 className="flex-1"
                 rules={[
                   {
                     required: true,
-                    message: "Please input Weekly Response!",
+                    message: "Please input Live Session Count!",
                   },
                 ]}
               >
-                <Input
-                  // onChange={(e) => setBlogName(e.target.value)}
-                  placeholder="Weekly Response"
-                  className="p-4
-              rounded w-full 
-              justify-start 
-              border-none
-              mt-[12px]
-              items-center 
-              gap-4 inline-flex outline-none focus:border-none"
-                  type="text"
-                />
+          
+                <Select
+              defaultValue="Individual and Teen"
+              // className="p-4
+              // rounded w-full 
+              // justify-start 
+              // border-none
+              // mt-[12px]
+              // items-center 
+              // gap-4 inline-flex outline-none focus:border-none"
+              style={{
+                width: "100%",
+                height: 60,
+                fontSize: 26,
+                borderRadius: 10,
+                border: "2px solid #54A630",
+              }}
+              // onChange={(value) => setPlan(value)}
+              options={[
+                {
+                  value: "Couple",
+                  label: "Couple",
+                },
+                {
+                  value: "Individual and Teen",
+                  label: "Individual and Teen",
+                },
+                
+              ]}
+            />
               </Form.Item>
+            
             </div>
 
             <div className="flex-1">

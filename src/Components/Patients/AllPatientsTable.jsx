@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { Table, Pagination, ConfigProvider, Modal } from "antd";
+import { useGetAllPatientsQuery } from "../../redux/Features/getAllPatientsApi";
 
 function AllPatientsTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentValue, setCurrentValue] = useState(null);
+  const {data,isLoading,isSuccess,isError} = useGetAllPatientsQuery();
+  console.log(data?.data?.attributes);
+  const [currentPage, setCurrentPage] = useState(1);
+  const handleChangePage = (page) => {
+    setCurrentPage(page);
+    console.log(page);
+  };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (record) => {
+    console.log(record);
+    setCurrentValue(record);
     setIsModalOpen(true);
+
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -174,11 +186,11 @@ function AllPatientsTable() {
 
     {
       title: "Phone Number",
-      dataIndex: "PhoneNumber",
+      dataIndex: "Phone",
       width: "32%",
       render: (_, record) => (
         <>
-          <p className="text-[16px]">{record?.phoneNumber}</p>
+          <p className="text-[16px]">{record?.phone}</p>
         </>
       ),
     },
@@ -190,7 +202,7 @@ function AllPatientsTable() {
         <>
           <div>
             <p
-              onClick={handleOpenModal}
+              onClick={()=>handleOpenModal(record)}
               className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
             >
               Details
@@ -218,29 +230,21 @@ function AllPatientsTable() {
         scroll={{
           y: 550,
         }}
-        pagination={false}
+        pagination={{
+          position: ["bottomCenter"],
+          current: currentPage,
+            pageSize:10,
+            total:data?.pagination?.totalItems,
+            showSizeChanger: false,
+            onChange: handleChangePage,
+        }}
         columns={columns}
-        dataSource={BlockListDAta}
+        dataSource={data?.data?.attributes}
       />
-      <div className="flex justify-between p-5">
-        <div className="text-[18px] text-primary">SHOWING 1-8 OF 250</div>
-        <div>
-          <ConfigProvider
-            theme={{
-              token: {
-                // Seed Token
-                colorPrimary: "#54A630",
-                borderRadius: 2,
+      
+  
 
-                // Alias Token
-                colorBgContainer: "#f6ffed",
-              },
-            }}
-          >
-            <Pagination defaultCurrent={1} total={50} />
-          </ConfigProvider>
-        </div>
-      </div>
+
       <div>
         <Modal
           visible={isModalOpen}
@@ -248,7 +252,7 @@ function AllPatientsTable() {
             <div className=" py-2 border-b-[1px] border-primary font-['Montserrat'] ">
               <span className="text-[24px] text-primary ">Patient Details</span>
               <p className=" text-[14px] text-[#B9B9B9]">
-                See all details about John Doe
+                See all details about {currentValue?.name}
               </p>
             </div>
           }
@@ -261,27 +265,28 @@ function AllPatientsTable() {
             <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
               <img
                 className="w-[70px] h-[70px]"
-                src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
+                src={`${import.meta.env.VITE_BASE_URL}/${currentValue?.image?.publicFileURL
+                }`}
                 alt=""
               />
-              <h1 className="text-primary text-[24px] ">John Doe</h1>
+              <h1 className="text-primary text-[24px] ">{currentValue?.name}</h1>
             </div>
             <div>
               <h1 className=" text-[24px] font-semibold">Information</h1>
               <div className="text-[16px] flex flex-col gap-2">
-                <p>Name: John Doe</p>
-                <p>Email: 6bHnN@example.com</p>
-                <p>Phone Number: 1234567890</p>
-                <p>Date of Birth: 01/01/2000</p>
-                <p>Gender: Male</p>
-                <p>Survey: Teen Therapy(13-18)</p>
+                <p>Name: {currentValue?.name ? currentValue?.name : "N/A"}</p>
+                <p>Email: {currentValue?.email ? currentValue?.email : "N/A"}</p>
+                <p>Phone Number: {currentValue?.phone ? currentValue?.phone : "N/A"}</p>
+                <p>Date of Birth: {currentValue?.address ? currentValue?.address  : "N/A"}</p>
+                {/* <p>Gender: Male</p> */}
+                {/* <p>Survey: Teen Therapy(13-18)</p> */}
               </div>
             </div>
-            <div className="flex mt-[24px]">
+            {/* <div className="flex mt-[24px]">
               <p className="bg-primary cursor-pointer px-5 py-2 text-white rounded">
                 Block
               </p>
-            </div>
+            </div> */}
           </div>
         </Modal>
       </div>

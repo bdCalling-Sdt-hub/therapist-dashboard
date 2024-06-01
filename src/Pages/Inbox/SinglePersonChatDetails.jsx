@@ -141,7 +141,7 @@ const SinglePersonChatDetails = ({
                 <div className="flex flex-row-reverse gap-5 mt-[32px] mr-5 mb-5" key={c._id}>
                   <img
                     className="w-[60px] h-[60px] rounded-full border-2 border-primary"
-                    src={`${imageUrl}/${UserData?.image?.publicFileURL}`}
+                    src={`${imageUrl}${UserData?.image?.publicFileURL}`}
                     alt=""
                   />
                   <div className="flex flex-col gap-1 text-wrap">
@@ -157,7 +157,7 @@ const SinglePersonChatDetails = ({
 
                           
                         ) : c?.messageType === "text" ? (
-                          <p>{c?.message}</p>) : <Image width={300} height={200} className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />
+                          <p>{c?.message}</p>) : <Image width={300} height={200} className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}${c?.publicFileURL}`} alt="" />
                         
                       }
                     </p>
@@ -170,7 +170,7 @@ const SinglePersonChatDetails = ({
                 <div className="flex gap-5 mt-[32px] ml-5 mb-5" key={c._id}>
                   <img
                     className="w-[60px] h-[60px] rounded-full border-2 border-primary"
-                    src={`${imageUrl}/${participantDetails?.participantDetails?.image?.publicFileURL}`}
+                    src={`${imageUrl}${participantDetails?.participantDetails?.image?.publicFileURL}`}
                     alt=""
                   />
                   <div className="flex flex-col gap-1 text-wrap">
@@ -186,7 +186,7 @@ const SinglePersonChatDetails = ({
 
                           
                         ) : c?.messageType === "text" ? (
-                          <p>{c?.message}</p>) : <Image width={300} height={200} className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}/${c?.publicFileURL}`} alt="" />
+                          <p>{c?.message}</p>) : <Image width={300} height={200} className="w-[300px] h-[300px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']" src={`${imageUrl}${c?.publicFileURL}`} alt="" />
                         
                       }
                     </p>

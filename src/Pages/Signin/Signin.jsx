@@ -25,8 +25,9 @@ function Signin() {
           }
         }
       );
-      console.log(response);
-      if(response?.status === 200) {
+      console.log(response?.data);
+      console.log(response?.data?.data?.token);
+      if(response?.data?.statusCode === 200) {
         localStorage.setItem("token", response?.data?.data?.token);
         localStorage.setItem("yourInfo", JSON.stringify(response?.data?.data?.attributes));
         Swal.fire({
@@ -82,10 +83,10 @@ function Signin() {
         </div>
         <div className="flex flex-col gap-[20px] mt-[18px]">
           <div className="flex justify-between">
-            <Checkbox className="text-[18px] items-center">
+            {/* <Checkbox className="text-[18px] items-center">
               Remember me
-            </Checkbox>
-            <h1 onClick={() => navigate("/forget-password")} className="text-primary cursor-pointer text-[24px] font-medium">
+            </Checkbox> */}
+            <h1 onClick={() => navigate("/forget-password")} className="text-primary cursor-pointer text-[14px] font-medium">
               Forgot Password?
             </h1>
           </div>

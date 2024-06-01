@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Input } from "antd";
+import { Modal, Input, Form, Button } from "antd";
 import OtpInput from "react-otp-input";
+import baseURL from "../../config";
+import Swal from "sweetalert2";
+import { IconLock } from "@tabler/icons-react";
 
 function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
   const [step, setStep] = useState(1);
@@ -9,28 +12,115 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
   const [isNewPasswordSet, setIsNewPasswordSet] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleGetOTP = () => {
+  const [form] = Form.useForm();
+  const handleGetOTP = async () => {
     // Logic to send OTP to the provided email
     // Update state to move to the next step
+    try {
+      const response = await baseURL.post(
+        `/user/forgot-password`,{email},{
+          headers: {
+            "Content-Type": "application/json",
+            authentication: `Bearer ${localStorage.getItem("token")}`,
+          }
+        }
+      )
+      console.log(response);
+      if(response?.statusCode == 200){
+        setStep(2);
+      }
+    } catch (error) {
+      console.log(error);
+      setStep(1);
+      Swal.fire({
+        icon: "error",
+        title: "Try Again...",
+        text: error?.response?.data?.message,
+        footer: '<a href="#">Why do I have this issue?</a>',
+      })
+    }
     setStep(2);
     console.log("send otp");
   };
 
-  const handleVerifyOTP = () => {
+  const handleVerifyOTP = async () => {
     // Logic to verify the entered OTP
     // Update state to move to the next step
+    try {
+      const response = await baseURL.post(`/user/verify-code`, {
+        email: email,
+        code: otp,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authentication: `Bearer ${localStorage.getItem("token")}`,
+        }
+      }
+    
+    );
+  
+      console.log(response.data);
+      if(response?.statusCode == 200){
+        setStep(3);
+      }
+      
+        // navigate(`/set_new_password/${email}`);
+        
+      
+    } catch (error) {
+      setStep(2);
+      console.log("Registration Fail", error?.response?.data?.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error...",
+        text: error?.response?.data?.message,
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
+    
     setStep(3);
     console.log("verify otp");
+      
   };
 
-  const handleSetNewPassword = () => {
+  const handleSetNewPassword = async(value) => {
     // Logic to set a new password
     // Update state or perform any necessary actions
+    const data = { email: email, password: value?.password };
+    try {
+      const response = await baseURL.post(`/user/set-password`, data,{
+        headers: {
+          "Content-Type": "application/json",
+          authentication: `Bearer ${localStorage.getItem("token")}`,
+        }
+      });
+
+      console.log(response.data);
+      if (response.data.statusCode == 200) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setIsModalOpen(false);
+      }
+    } catch (error) {
+      console.log("Registration Fail", error?.response?.data?.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error...",
+        text: error?.response?.data?.message,
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
+    // console.log(value);
     setIsNewPasswordSet(true);
     // Optionally close the modal
 
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
     setStep(1);
     console.log("set new password");
   };
@@ -108,7 +198,18 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
             </p>
 
             <div className="flex flex-col mt-[24px] gap-[27px] mb-[80px]">
-              <Input.Password
+            <Form
+              form={form}
+              name="dependencies"
+              autoComplete="off"
+              style={{
+                maxWidth: 600,
+              }}
+              layout="vertical"
+              className="space-y-4 fit-content object-contain"
+              onFinish={handleSetNewPassword}
+            >
+              {/* <Input.Password
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="New password"
                 className="p-4 bg-white rounded border border-primary justify-start items-center gap-4 inline-flex focus:border-primary "
@@ -117,16 +218,95 @@ function ForgotPassword({ isModalOpen, setIsModalOpen, handleCancel }) {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm password"
                 className="p-4 bg-white rounded border border-primary justify-start items-center gap-4 inline-flex focus:border-primary "
-              />
+              /> */}
+
+<Form.Item
+                name="enter_password"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input.Password
+                  size="large"
+                  // onChange={handleChange}
+                  placeholder="New password"
+                  name="set_password"
+                  prefix={
+                    <IconLock
+                      className="mr-2 bg-white rounded-full p-[6px]"
+                      size={28}
+                      color="#FA1131"
+                    />
+                  }
+                  className="p-4 bg-white rounded border border-primary justify-start items-center gap-4 inline-flex focus:border-primary "
+                 
+                />
+              </Form.Item>
+  
+              {/* Field */}
+              <Form.Item
+                name="password"
+                dependencies={["password"]}
+                rules={[
+                  {
+                    required: true,
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("enter_password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The new password that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  size="large"
+                  placeholder="Confirm password"
+                  name="re_enter_password"
+                  prefix={
+                    <IconLock
+                      className="mr-2 bg-white rounded-full p-[6px]"
+                      size={28}
+                      color="#FA1131"
+                    />
+                  }
+                  className="p-4 bg-white rounded border border-primary justify-start items-center gap-4 inline-flex focus:border-primary "
+                 
+                />
+              </Form.Item>
+
+
+
+
+
+                <Form.Item>
+                <Button
+                  
+                  htmlType="submit"
+                  className="w-full h-[60px] p-2.5 bg-primary rounded-md justify-center items-center  gap-2.5 inline-flex text-white text-lg py-5 font-semibold font-['Montserrat']"
+                >
+                  Update password
+                </Button>
+              </Form.Item>
+              </Form>
             </div>
 
-            <div onClick={handleSetNewPassword} className="cursor-pointer">
+          
+            {/* <div onClick={handleSetNewPassword} className="cursor-pointer">
               <div className="w-full h-[60px] p-2.5 bg-primary rounded-md justify-center items-center  gap-2.5 inline-flex">
                 <div className="text-white text-lg py-5 font-semibold font-['Montserrat']">
                   Confirm
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         )
       default:

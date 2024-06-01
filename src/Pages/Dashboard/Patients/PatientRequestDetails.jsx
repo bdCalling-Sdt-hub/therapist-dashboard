@@ -1,85 +1,33 @@
 import React from "react";
 import { Breadcrumb } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MultipleChoice from "../../../Components/Patients/SurveyAnswers/MultipleChoice";
 import CheckboxType from "../../../Components/Patients/SurveyAnswers/CheckboxType";
 import InputType from "../../../Components/Patients/SurveyAnswers/InputType";
-
-const SurveyAnswers = [
-  {
-    id: 1,
-    question: "How old is your child?",
-    answer: "18",
-    questionType: "multiple-choice",
-    option: ["13", "14", "15", "16", "17", "18", "19", "20", "21"],
-  },
-  {
-    id: 2,
-    question: "What is their sex?",
-    answer: "Female",
-    questionType: "multiple-choice",
-    option: ["Male", "Female"],
-  },
-  {
-    id: 3,
-    question:
-      "Please share with us why you’re looking for help today. ( You can select up to 3)",
-    answer: [
-      "I’m seeking one on one therapy for my child only",
-      "I just want parental advice",
-    ],
-    questionType: "checkbox",
-    option: [
-      {
-        label: "I’m seeking one on one therapy for my child only",
-        value: "I’m seeking one on one therapy for my child only",
-      },
-      {
-        label: "I want therapy for both me and my child",
-        value: "I want therapy for both me and my child",
-      },
-      {
-        label: "I just want parental advice",
-        value: "I just want parental advice",
-      },
-    ],
-  },
-  {
-    id: 4,
-    question:
-      "What issues are you having with your child that therapy can help with? (Please type in less then 200 words.)",
-    answer:
-      "Physical space is often conceived in three linear dimensions, although modern physicists usually con Physical space is often conceived in three linear dimensions, although modern physicists usually con Physical space is often conceived in three linear dimensions, although modern physicists usually conPhysical space is often conceived in three linear dimensions, although modern physicists usually con",
-    questionType: "paragraph",
-  },
-  {
-    id: 5,
-    question:
-      "Please share with us why you’re looking for help today. ( You can select up to 3)",
-    answer: [
-      "I’m seeking one on one therapy for my child only",
-      "I just want parental advice",
-    ],
-    questionType: "checkbox",
-    option: [
-      {
-        label: "I’m seeking one on one therapy for my child only",
-        value: "I’m seeking one on one therapy for my child only",
-      },
-      {
-        label: "I want therapy for both me and my child",
-        value: "I want therapy for both me and my child",
-      },
-      {
-        label: "I just want parental advice",
-        value: "I just want parental advice",
-      },
-    ],
-  },
-];
+import { useGetSinglePatientsQuery } from "../../../redux/Features/getSinglePatientsApi";
+import { useGetAnswereUserQuery } from "../../../redux/Features/getAnswereUserApi";
+import Loading from "../../../Components/Loading/Loading";
 
 function PatientRequestDetails() {
+  const { id } = useParams();
   const navigate = useNavigate();
+console.log(id);
+  const { data, isLoading, isError } = useGetSinglePatientsQuery({id});
+  const { data: data2, isLoading: loading } = useGetAnswereUserQuery({id});
+
+  if (isLoading || loading) {
+    return <Loading />;
+  }
+
+  // if (isError) {
+  //   return <div>Error loading patient data.</div>;
+  // }
+
+  const result = data?.data?.attributes;
+  const question = data2?.data?.attributes?.[0]?.answer || [];
+  console.log(result);
+  console.log(question);
+
   return (
     <div className="p-[24px]">
       <Breadcrumb
@@ -104,37 +52,23 @@ function PatientRequestDetails() {
       />
       <div className="bg-white h-[79vh] rounded-xl overflow-hidden overflow-y-scroll mt-[24px]">
         <div>
-          <div className="flex bg-white rounded-md  p-[16px]">
+          <div className="flex bg-white rounded-md p-[16px]">
             <div>
               <img
                 className="w-[100px] h-[100px] rounded-full"
-                src="https://i.ibb.co/f1YyLM4/Ellipse-2322.png"
+                src={`${import.meta.env.VITE_BASE_URL}/${result?.image?.publicFileURL}`}
                 alt=""
               />
             </div>
-            <div className="flex gap-3 flex-col ">
+            <div className="flex gap-3 flex-col">
               <div>
-                <h1 className="text-[22px] font-semibold">Dianne Russell</h1>
-                <p className="text-[14px] font-medium ">Teen Therapy(13-18)</p>
+                <h1 className="text-[22px] font-semibold">{result?.name}</h1>
+                <p className="text-[14px] font-medium">{result?.email}</p>
               </div>
-              {/* <div className="flex gap-5">
-                <button className="text-white bg-primary text-[18px] rounded  px-[20px]">
-                  Accept
-                </button>
-                <button
-                  onClick={() => navigate("/patientsRequest")}
-                  className=" border-[1px] border-primary text-primary text-[18px]  rounded  p-[4px] px-[20px] "
-                >
-                  Delete
-                </button>
-              </div> */}
               <div className="flex gap-5">
-                <button className=" border-[1px] border-primary text-primary text-[18px]  rounded  p-[4px] px-[20px] ">
-                  Accepted
-                </button>
                 <button
-                  onClick={() => navigate("/patientsRequest/skdfls/sdflkjsd")}
-                  className="text-white bg-primary text-[18px] rounded  px-[20px]"
+                  onClick={() => navigate(`/patientsRequest/assign/${id}`)}
+                  className="text-white bg-primary text-[18px] rounded py-2 px-[20px]"
                 >
                   Assign Therapist
                 </button>
@@ -146,35 +80,34 @@ function PatientRequestDetails() {
         {/* Patients Details */}
         <div className="p-[24px]">
           <h1 className="text-[18px] font-semibold">Patient Details</h1>
-          <p>User Name: Dianne Russell</p>
-          <p>Email: diannerussell@gmail.com</p>
-          <p>Date of Birth: 17/12/2023</p>
-          <p>Survey: Teen Therapy(13-18)</p>
+          <p>User Name: {result?.name}</p>
+          <p>Email: {result?.email}</p>
+          <p>Date of Birth: {result?.dateOfBirth || "N/A"}</p>
+          <p>Survey: {result?.survey || "N/A"}</p>
         </div>
-        {/* Therapists List */}
+
+        {/* Survey Answers */}
         <div className="px-[24px] mb-6">
           <h1 className="text-[18px] font-semibold">Survey Answers</h1>
-
-          {SurveyAnswers.map((data, index) => (
+          {question?.map((data, index) => (
             <div key={index}>
-              {data?.questionType === "multiple-choice" && (
+              {data?.answerType === "Multiple" && (
                 <MultipleChoice
-                  defaultValue={data?.answer}
+                  ans={data?.answer}
                   allData={data}
                   serialNo={index + 1}
                 />
               )}
-              {data?.questionType === "checkbox" && (
+              {data?.answerType === "Checkbox" && (
                 <CheckboxType
-                  defaultValues={data?.answer}
+                  ans={data?.answer}
                   allData={data}
                   serialNo={index + 1}
                 />
               )}
-
-              {data?.questionType === "paragraph" && (
+              {data?.answerType === "Paragraph" && (
                 <InputType
-                  defaultValue={data?.answer}
+                  ans={data?.answer}
                   allData={data}
                   serialNo={index + 1}
                 />

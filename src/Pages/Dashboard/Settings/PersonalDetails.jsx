@@ -51,8 +51,8 @@ function PersonalDetails() {
           Personal Information
         </h1>
       </div>
-      <div className="rounded-xl border-1 h-[325px] p-[24px] flex justify-between bg-white border-secondary">
-        <div className="w-[200px] ">
+      <div className="rounded-xl border-1 h-[300px] p-[24px] flex justify-between bg-white border-secondary">
+        <div className="w-[250px]">
           <img className="w-[200px] h-[160px]" src={imageUrl} alt="" />{" "}
           {/* Update the src attribute */}
           <div className="mt-[20px] flex justify-center items-center">

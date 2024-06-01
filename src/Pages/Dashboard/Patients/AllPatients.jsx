@@ -1,8 +1,11 @@
 import React from "react";
 import { Input } from "antd";
 import AllPatientsTable from "../../../Components/Patients/AllPatientsTable";
+import { useGetAllPatientsQuery } from "../../../redux/Features/getAllPatientsApi";
 
 function AllPatients() {
+  const {data,isLoading,isSuccess,isError} = useGetAllPatientsQuery();
+  console.log(data?.data?.attributes);
   return (
     <div className="p-[24px] ">
       <div className="bg-white h-[85vh] rounded-xl overflow-hidden">

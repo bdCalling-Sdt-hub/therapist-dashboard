@@ -5,7 +5,7 @@ const SignleUser = ({ status, item, handleChat, setParticipantDetails }) => {
 
 //   console.log(item?.message?.message)
 setParticipantDetails(item);
-// console.log(item);
+console.log(item?.lastMessage?.message);
   return (
     <div
       onClick={() => handleChat(item)}
@@ -18,7 +18,7 @@ setParticipantDetails(item);
       <div>
         <img
           className="w-[60px] h-[60px] rounded-full"
-          src={`${import.meta.env.VITE_BASE_URL}/${ item?.participantDetails?.image?.publicFileURL}`}
+          src={`${import.meta.env.VITE_BASE_URL}${ item?.participantDetails?.image?.publicFileURL}`}
         // src={item?.img}
           alt=""
         />
@@ -30,7 +30,7 @@ setParticipantDetails(item);
         </h1>
         <p className="text-sm font-normal font-['Montserrat']">
           {/* {item?.message?.message.slice(0, 11)} {item?.message?.message.length > 11 && "..."} */}
-        { item?.lastMessage?.message ? item?.lastMessage?.message > 18 && "..." : "File Attached"}
+        { item?.lastMessage?.message ? item?.lastMessage?.message.slice(0, 18)+"..."  : "File Attached"}
         </p>
       </div>
     </div>

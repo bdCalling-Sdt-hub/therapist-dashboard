@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 const NumberOfQuestion = () => {
     const { data, isLoading, isSuccess } = useGetAllQuestionQuery();
     const {id} = useParams();
+    console.log(data);
     console.log(id);
     const filter = data?.data?.attributes?.filter((data) => data?.questionType.split(" ")[0]==id);
     return (

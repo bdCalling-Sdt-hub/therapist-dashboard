@@ -103,7 +103,7 @@ function Questionnaires() {
           </p>
         </div>
         <div
-          onClick={() => navigate("/Couple")}
+          onClick={() => navigate("/Teen")}
           className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
         >
           <h1 className="text-primary font-bold text-[24px]">
@@ -114,7 +114,7 @@ function Questionnaires() {
           </p>
         </div>
         <div
-          onClick={() => navigate("/Teen")}
+          onClick={() => navigate("/Couple")}
           className="rounded-lg border-1 cursor-pointer shadow-lg w-[300px] flex-col items-center py-[16px] px-[14px] bg-white border-primary border-[1px] p-[24px] flex gap-5"
         >
           <h1 className="text-primary font-bold text-[24px]">Couple Therapy</h1>

@@ -1,6 +1,7 @@
 import React from "react";
 
-function InputType({ serialNo, allData, defaultValue }) {
+function InputType({ serialNo, allData, defaultValue,ans=[] }) {
+  console.log(ans);
   console.log(allData);
   return (
     <div className="mt-4">
@@ -12,6 +13,7 @@ function InputType({ serialNo, allData, defaultValue }) {
         {/* <div className="border-[1px] border-primary rounded p-[16px]">
           {defaultValue}
         </div> */}
+        {ans.length > 0 && ans[0]}
       </div>
     </div>
   );
