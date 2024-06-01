@@ -26,7 +26,7 @@ const AddSubscription = () => {
             },
           });
           console.log("----------------------", response);
-          if (response.data?.statusCode === 200) {
+          if (response.data?.statusCode === 201) {
             Swal.fire({
               position: "top-center",
               icon: "success",
@@ -210,7 +210,7 @@ const AddSubscription = () => {
                 className="flex-1"
                 rules={[
                   {
-                    required: true,
+                    // required: true,
                     message: "Please input Live Session Count!",
                   },
                 ]}
