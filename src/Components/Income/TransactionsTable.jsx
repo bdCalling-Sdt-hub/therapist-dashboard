@@ -201,14 +201,14 @@ function TransactionsTable() {
     <div>
       <div className="overflow-hidden  h-[52vh] overflow-y-scroll">
         <Table
-          showHeader={false}
-          pagination={false}
+          showHeader={true}
+          pagination={true}
           columns={columns}
           dataSource={data}
         />
       </div>
       <div className="flex justify-between p-5">
-        <div className="text-[18px] text-black">SHOWING 1-8 OF 250</div>
+        {/* <div className="text-[18px] text-black">SHOWING 1-8 OF 250</div> */}
         <div>
           <ConfigProvider
             theme={{

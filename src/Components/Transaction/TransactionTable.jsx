@@ -1,11 +1,17 @@
 import React, { useState, useRef } from "react";
 import { Table, Pagination, ConfigProvider, Modal, Rate, Input } from "antd";
 import { useReactToPrint } from "react-to-print";
-
+import { useGetAllTransactionQuery } from "../../redux/Features/getAllTransactionApi";
+import  Loading  from "../../Components/Loading/Loading";
 function TransactionTable() {
   const componentRef = useRef();
   const [isModalOpenDetails, setIsModalOpenDetails] = useState(false);
   const [isModalOpenSendMoney, setIsModalOpenSendMoney] = useState(false);
+  const {data:allTransaction,isSuccess,isError,isLoading} = useGetAllTransactionQuery();
+if(isLoading){
+  return <Loading />
+}
+  console.log(allTransaction?.data?.attributes);
 
   const handleOpenModalDetails = () => {
     setIsModalOpenDetails(true);
@@ -20,10 +26,10 @@ function TransactionTable() {
     setIsModalOpenSendMoney(false);
   };
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    pageStyle: "",
-  });
+  // const handlePrint = useReactToPrint({
+  //   content: () => componentRef.current,
+  //   pageStyle: "",
+  // });
 
   const data = [
     {
@@ -107,24 +113,36 @@ function TransactionTable() {
 
   const columns = [
     {
-      title: "transactionsId",
-      dataIndex: "name",
-      render: (_, record) => (
-        <>
-          <div>
-            <p className="text-[12px] w-[80px]">{record?.transactionId}</p>
-          </div>
-        </>
-      ),
-    },
-    {
       title: "Name",
       dataIndex: "name",
       render: (_, record) => (
         <>
           <div>
-            <p className="text-primary text-[16px]">{record?.name}</p>
-            <p className="text-[#979797] text-[12px]">#{record?.userId}</p>
+            <p className="text-primary text-[16px]">{record?.therapistId?.name}</p>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      render: (_, record) => (
+        <>
+          <div>
+            <p className="text-primary text-[16px]">{record?.therapistId?.email}</p>
+            {/* <p className="text-[#979797] text-[12px]">#{record?.userId}</p> */}
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      render: (_, record) => (
+        <>
+          <div>
+            <p className="text-primary text-[16px]">{record?.therapistId?.phone}</p>
+            {/* <p className="text-[#979797] text-[12px]">#{record?.userId}</p> */}
           </div>
         </>
       ),
@@ -134,7 +152,7 @@ function TransactionTable() {
       dataIndex: "accountType",
       render: (_, record) => (
         <>
-          <p>{record?.accountType}</p>
+          <p className="text-primary text-[16px]">{record?.therapistId?.therapistType}</p>
         </>
       ),
     },
@@ -144,18 +162,21 @@ function TransactionTable() {
       render: (_, record) => (
         <>
           <div>
-            <p>{record?.data}</p>
-            <p>{record?.timeRange}</p>
+            <p className="text-primary text-[16px]">{record?.date}</p>
+            <p className="text-primary text-[16px]">{record?.time[0] && `${record?.time[0]?.from} to ${record?.time[0]?.to}`}</p>
           </div>
         </>
       ),
     },
     {
-      title: "dataTime",
-      dataIndex: "dataTime",
+      title: "Payment",
+      dataIndex: "payment",
       render: (_, record) => (
         <>
-          <div>
+        <p className="text-[#6B6319] text-[12px] rounded inline-block px-1 bg-[#FFF9C2]">
+                {record?.therapistPayment || "N/A"}
+              </p>
+          {/* <div>
             {record?.status === "Completed" ? (
               <p className="text-primary text-[12px] rounded inline-block px-1 bg-secondary">
                 Completed
@@ -165,7 +186,7 @@ function TransactionTable() {
                 Pending
               </p>
             )}
-          </div>
+          </div> */}
         </>
       ),
     },
@@ -175,21 +196,23 @@ function TransactionTable() {
       render: (_, record) => (
         <>
           <div>
-            {record?.status === "Completed" ? (
+             
               <p
                 onClick={handleOpenModalDetails}
                 className="px-[40px] py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
               >
                 Details
               </p>
-            ) : (
+            
+            
+            {/* : (
               <p
                 onClick={handleOpenModalSendMoney}
                 className="px-6 py-1 text-[14px] bg-primary text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block"
               >
                 Send Money
               </p>
-            )}
+            )} */}
           </div>
         </>
       ),
@@ -198,33 +221,19 @@ function TransactionTable() {
 
   return (
     <div>
-      <div className="overflow-hidden px-5 h-[52vh] overflow-y-scroll">
+      <div className="overflow-hidden px-5 overflow-y-scroll">
         <Table
-          showHeader={false}
-          pagination={false}
+          // showHeader={false}
+          pagination={
+            {
+              position: ["bottomCenter"],
+            }
+          }
           columns={columns}
-          dataSource={data}
+          dataSource={allTransaction?.data?.attributes}
         />
       </div>
-      <div className="flex justify-between p-5">
-        <div className="text-[18px] text-black">SHOWING 1-8 OF 250</div>
-        <div>
-          <ConfigProvider
-            theme={{
-              token: {
-                // Seed Token
-                colorPrimary: "#54A630",
-                borderRadius: 2,
-
-                // Alias Token
-                colorBgContainer: "#f6ffed",
-              },
-            }}
-          >
-            <Pagination defaultCurrent={1} total={50} />
-          </ConfigProvider>
-        </div>
-      </div>
+      
 
       <Modal
         visible={isModalOpenDetails}
@@ -320,7 +329,7 @@ function TransactionTable() {
 
           <div className="flex gap-4 mt-[24px]">
             <p
-              onClick={handlePrint}
+              // onClick={handlePrint}
               className="bg-primary cursor-pointer px-5 py-2 text-white rounded"
             >
               Download as PDF

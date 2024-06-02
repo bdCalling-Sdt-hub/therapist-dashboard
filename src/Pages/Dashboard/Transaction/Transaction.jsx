@@ -5,7 +5,7 @@ import AllTransaction from '../../../Components/Transaction/AllTransaction'
 function Transaction() {
   return (
     <div className="p-[32px]">
-      <TransactionStatus />
+      {/* <TransactionStatus /> */}
       <AllTransaction />
     </div>
   )

@@ -19,10 +19,10 @@ function AllTransaction() {
   
   return (
     <div className="mt-5">
-      <div className="bg-white h-[70vh] rounded-xl overflow-hidden">
+      <div className="bg-white rounded-xl overflow-hidden">
         <div className="flex justify-between py-[20px] p-[20px] bg-primary">
           <h1 className="text-[32px] text-white">Transactions</h1>
-          <div className="flex items-center gap-5">
+          {/* <div className="flex items-center gap-5">
             <div className="flex gap-5">
               <Select
                 labelInValue
@@ -81,7 +81,7 @@ function AllTransaction() {
                 </svg>
               }
             />
-          </div>
+          </div> */}
         </div>
         <div>
           <TransactionTable />
