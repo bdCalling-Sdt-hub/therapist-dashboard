@@ -297,7 +297,7 @@ console.log(data?.pagination?.totalItems);
             <div className="flex items-center  gap-5 border-b-[1px] pb-2 border-primary">
               <img
                 className="w-[70px] h-[70px]"
-                src={`${import.meta.env.VITE_BASE_URL}/${currentValue?.image?.publicFileURL
+                src={`${import.meta.env.VITE_BASE_URL}${currentValue?.image?.publicFileURL
                   }`}
                 alt=""
               />

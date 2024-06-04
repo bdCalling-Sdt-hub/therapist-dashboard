@@ -40,12 +40,15 @@ function Subscription() {
           className="overflow-y-auto"
           style={{ maxHeight: "calc(100vh - 200px)" }}
         >
-          <div className="grid grid-cols-3 gap-5 p-5 overflow-y-auto">
+          {
+            data?.data?.attributes?.length ? <div className="grid grid-cols-3 gap-5 p-5 overflow-y-auto">
             {isSuccess &&
               result?.map((item) => {
                 return <SubscriptionCart key={item?._id} item={item} />;
               })}
-          </div>
+          </div> : <p className="flex justify-center text-[50px]  h-[90vh] items-center">Subscription Not Found</p>
+          }
+          
         </div>
       </div>
     </div>

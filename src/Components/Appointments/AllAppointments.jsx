@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Input, Select, DatePicker } from "antd";
 import AppointmentsTable from "./AppointmentsTable";
+import { useGetAllAppointmentQuery } from "../../redux/Features/getAllAppointmemtApi";
+import Loading from "../Loading/Loading";
 
 const provinceData = ["All", "Completed", "Pending", "Cancelled"];
 
 function AllAppointments() {
+ 
   const handleChange = (value) => {
     console.log(value);
   };
@@ -15,10 +18,10 @@ function AllAppointments() {
 
   return (
     <div className="mt-5">
-      <div className="bg-white h-[70vh] rounded-xl overflow-hidden">
+      <div className="bg-white h-[80vh] rounded-xl overflow-hidden">
         <div className="flex justify-between py-[20px] p-[20px] bg-primary">
           <h1 className="text-[32px] text-white">All Appointments</h1>
-          <div className="flex items-center gap-5">
+          {/* <div className="flex items-center gap-5">
             <div className="flex gap-5">
               <Select
                 labelInValue
@@ -77,10 +80,10 @@ function AllAppointments() {
                 </svg>
               }
             />
-          </div>
+          </div> */}
         </div>
         <div>
-          <AppointmentsTable />
+          <AppointmentsTable  />
         </div>
       </div>
     </div>

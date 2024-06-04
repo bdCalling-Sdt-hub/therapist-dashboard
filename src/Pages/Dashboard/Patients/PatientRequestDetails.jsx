@@ -55,8 +55,8 @@ console.log(id);
           <div className="flex bg-white rounded-md p-[16px]">
             <div>
               <img
-                className="w-[100px] h-[100px] rounded-full"
-                src={`${import.meta.env.VITE_BASE_URL}/${result?.image?.publicFileURL}`}
+                className="w-[100px] h-[100px] rounded-full mr-5"
+                src={`${import.meta.env.VITE_BASE_URL}${result?.image?.publicFileURL}`}
                 alt=""
               />
             </div>

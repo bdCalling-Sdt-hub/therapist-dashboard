@@ -7,7 +7,7 @@ function Appointments() {
   
   return (
     <div className="p-[32px]">
-      <Status />
+      {/* <Status /> */}
       <AllAppointments />
     </div>
   );

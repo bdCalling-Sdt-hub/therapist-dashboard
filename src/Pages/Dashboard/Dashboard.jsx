@@ -78,15 +78,15 @@ const Dashboard = () => {
           </li>,
           "2"
         ),
-        // getItem(
-        //   <li
-        //     onClick={(e) => navigate("/therapistRequest")}
-        //     className="text-[20px] leading-normal"
-        //   >
-        //     Therapist Request
-        //   </li>,
-        //   "3"
-        // ),
+        getItem(
+          <li
+            onClick={(e) => navigate("/therapistRequest")}
+            className="text-[20px] leading-normal"
+          >
+            Therapist Request
+          </li>,
+          "3"
+        ),
       ]
     ),
 
@@ -181,31 +181,35 @@ const Dashboard = () => {
       <FaArrowRightArrowLeft style={{ fontSize: "18px" }} />
     ),
 
-    getItem(
-      <p className="text-[20px] leading-normal">Income</p>,
-      "sub3",
-      <IoWalletOutline style={{ fontSize: "18px" }} />,
-      [
-        getItem(
-          <li
-            onClick={(e) => navigate("/totalIncome")}
-            className="text-[20px] leading-normal"
-          >
-            Total Income
-          </li>,
-          "10"
-        ),
-        getItem(
-          <li
-            onClick={(e) => navigate("/wallet")}
-            className="text-[20px] leading-normal"
-          >
-            Wallet
-          </li>,
-          "11"
-        ),
-      ]
-    ),
+    // getItem(
+    //   <p className="text-[20px] leading-normal">Income</p>,
+    //   "sub3",
+    //   <IoWalletOutline style={{ fontSize: "18px" }} />,
+    //   [
+    //     getItem(
+    //       <li
+    //         onClick={(e) => navigate("/totalIncome")}
+    //         className="text-[20px] leading-normal"
+    //       >
+    //         Total Income
+    //       </li>,
+    //       "10"
+    //     ),
+    //     getItem(
+    //       <li
+    //         onClick={(e) => navigate("/wallet")}
+    //         className="text-[20px] leading-normal"
+    //       >
+    //         Wallet
+    //       </li>,
+    //       "11"
+    //     ),
+    //   ]
+    // ),
+
+
+
+
     getItem(
       <p
         onClick={(e) => navigate("/subscription")}

@@ -1,10 +1,16 @@
 import React from "react";
 import { DatePicker, Table } from "antd";
+import { useGetAllSessionQuery } from "../../../redux/Features/getAllSessionApi";
+import Loading from "../../../Components/Loading/Loading";
 
 function RecentSession() {
+  const {data:allSession,isSuccess,isError,isLoading} = useGetAllSessionQuery()
   const onChange = (date, dateString) => {
     console.log(date, dateString);
   };
+  if(isLoading){
+    return <Loading />
+  }
 
   const data = [
     {
@@ -113,6 +119,8 @@ function RecentSession() {
     },
   ];
 
+  console.log(allSession?.data?.attributes);
+
   const columns = [
     {
       title: "Name",
@@ -120,8 +128,8 @@ function RecentSession() {
       render: (_, record) => (
         <>
           <div>
-            <p className="text-primary text-[16px]">{record?.name}</p>
-            <p className="text-[#979797] text-[12px]">#{record?.userId}</p>
+            <p className="text-primary text-[16px]">{record?.therapistId?.name}</p>
+            <p className="text-[#979797] text-[12px]">#{record?.therapistId?.email}</p>
           </div>
         </>
       ),
@@ -131,48 +139,49 @@ function RecentSession() {
       dataIndex: "accountType",
       render: (_, record) => (
         <>
-          <p>{record?.accountType}</p>
+          <p>{record?.therapistId?.therapistType}</p>
         </>
       ),
     },
     {
-      title: "dataTime",
+      title: "Phone",
       dataIndex: "dataTime",
       render: (_, record) => (
         <>
           <div>
-            <p>{record?.data}</p>
-            <p>{record?.timeRange}</p>
-          </div>
-        </>
-      ),
-    },
-    {
-      title: "dataTime",
-      dataIndex: "dataTime",
-      render: (_, record) => (
-        <>
-          <div>
-            <p className="text-primary text-[12px] rounded inline-block px-1 bg-secondary">
-              {record?.status}
+            <p className="text-primary text-[12px] rounded inline-block px-1">
+              {record?.therapistId?.countryCode ? `${record?.therapistId?.countryCode}${record?.therapistId?.phone}`:"N/A"}
             </p>
           </div>
         </>
       ),
     },
     {
-      title: "viewDetails",
+      title: "Data & Time",
       dataIndex: "dataTime",
       render: (_, record) => (
         <>
           <div>
-            <p className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block">
-              Details
-            </p>
+            <p>{record?.date}</p>
+            <p>{`${record?.time[0]?.from}-${record?.time[0]?.to}`}</p>
           </div>
         </>
       ),
     },
+    
+    // {
+    //   title: "viewDetails",
+    //   dataIndex: "dataTime",
+    //   render: (_, record) => (
+    //     <>
+    //       <div>
+    //         <p className="px-6 py-1 text-[14px] text-primary hover:bg-primary hover:text-white  font-medium cursor-pointer border-[1px] border-primary rounded inline-block">
+    //           Details
+    //         </p>
+    //       </div>
+    //     </>
+    //   ),
+    // },
   ];
   return (
     <div className="mt-5 bg-white rounded-xl border-1 h-[325px] shadow-xl border-secondary">
@@ -184,10 +193,10 @@ function RecentSession() {
       </div>
       <div className="overflow-hidden px-5 h-[250px] overflow-y-scroll">
         <Table
-          showHeader={false}
+          showHeader={true}
           pagination={false}
           columns={columns}
-          dataSource={data}
+          dataSource={allSession?.data?.attributes}
         />
       </div>
     </div>

@@ -16,7 +16,7 @@ function PatientRequestDetailsAssignTherapist() {
     return <Loading/>
   }
 
-  console.log(singlePatients);
+  console.log("----------------",singlePatients);
   console.log(data2?.data?.attributes);
 
   return (
@@ -60,7 +60,7 @@ function PatientRequestDetailsAssignTherapist() {
               <img
                 className="w-[100px] h-[100px] rounded-full"
                 // src="https://i.ibb.co/f1YyLM4/Ellipse-2322.png"
-                src={`${import.meta.env.VITE_BASE_URL}/${singlePatients?.data?.attributes?.image?.publicFileURL}`}
+                src={`${import.meta.env.VITE_BASE_URL}${singlePatients?.data?.attributes?.image?.publicFileURL}`}
                 alt=""
               />
             </div>

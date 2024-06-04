@@ -3,7 +3,7 @@ import React from "react";
 const AssignCart = ({ data }) => {
   console.log(data);
   return (
-    <div className="mx-10 p-5 bg-white rounded my-5">
+    <div className="p-5 bg-white rounded my-5 border-2 ml-10">
       <h1 className="text-2xl font-bold flex justify-center">
         Assign List Details
       </h1>
@@ -49,10 +49,10 @@ const AssignCart = ({ data }) => {
         <div>
           {/* <h1 className="font-bold  text-[22px]">Patient Details</h1> */}
           <div>
-            <div className="flex justify-center items-center my-2">
+            <div className="flex justify-center items-center my--1 ">
                  <div className="mr-2">
                 <img
-                  className="w-[100px] h-[100px]  border-2 border-primary"
+                  className="w-[70px] h-[70px]  border-2 border-primary"
                   src={`${import.meta.env.VITE_BASE_URL}${
                     data?.userId?.image?.publicFileURL
                   }`}
@@ -63,7 +63,7 @@ const AssignCart = ({ data }) => {
                 <p className="font-medium text-[18px]">
                   {data?.userId?.name || "N/A"}
                 </p>
-                <p className="font-medium text-sm">
+                <p className="font-medium text-[14px]">
                   {data?.userId?.email || "N/A"}
                 </p>
                  </div>

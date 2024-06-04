@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Radio } from "antd";
 import TherapistRequestCard from "../../../Components/Therapist/TherapistRequestCard";
+import { useGetAllTherapistRequestQuery } from "../../../redux/Features/getAllTherapistRequest";
 
 function TherapistRequest() {
+  const {data,isSuccess,isLoading,isError} = useGetAllTherapistRequestQuery();
+  console.log(data?.data?.attributes);
+  console.log(data);
   const [value, setValue] = useState("all");
+
   const [value2, setValue2] = useState("all");
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
@@ -15,20 +20,27 @@ function TherapistRequest() {
   };
 
   return (
-    <div className="p-[24px] flex gap-[25px]">
+    <div className="p-[24px] gap-[25px]">
       <div>
-        <div className="w-[790px]">
+        <div className="">
           <h1 className="text-[24px] font-semibold text-white rounded bg-primary p-[16px]">
             Therapist Request
           </h1>
         </div>
-        <div className="grid grid-cols-2 gap-4 overflow-hidden overflow-y-scroll h-[700px]">
-          {[...Array(9)].map((_, index) => (
-            <TherapistRequestCard key={index} />
-          ))}
+
+        {
+
+data?.data?.attributes?.length ? <div className="grid grid-cols-2 gap-4 overflow-hidden overflow-y-scroll">
+          {
+             (data?.data?.attributes?.map((item,index)=>{
+              return <TherapistRequestCard key={item?.id} item={item} />
+            }))
+          }
+        </div>:  <p className="flex justify-center text-[50px]  h-[90vh] items-center">No Request Found</p>
+        }
         </div>
-      </div>
-      <div className="w-[265px] bg-white rounded h-[420px]">
+        
+      {/* <div className="w-[265px] bg-white rounded h-[420px]">
         <h1 className="text-[24px] font-semibold text-white rounded bg-primary rounded-b-none p-[16px]">
           Filters
         </h1>
@@ -73,7 +85,7 @@ function TherapistRequest() {
         <button className="text-[18px] cursor-pointer  mx-[16px]  border-[1px] bg-primary text-white rounded-[4px] border-primary py-[4px] px-[10px]">
           Apply
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

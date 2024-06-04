@@ -19,7 +19,7 @@ const AssignPatientList = () => {
         Assign Patient List
         </h1>
       </div>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-3 gap-2">
         {data?.data?.attributes?.map((item) => (
           <AssignCart data={item} key={item?._id} />
         ))}
