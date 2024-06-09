@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Status from "./Status";
 import BarChartIncomeRatio from "./BarChartIncomeRatio";
 import RecentSession from "./RecentSession";
@@ -7,6 +7,9 @@ import TopTherapist from "./TopTherapist";
 
 
 function DashboardHome() {
+  // useEffect(() => {
+  //   window.location.reload();
+  // },[])
   return (
     <div>
       <div className="flex h-[90vh] overflow-hidden overflow-y-scroll">

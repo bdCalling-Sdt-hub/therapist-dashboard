@@ -15,8 +15,8 @@ function Subscription() {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(data?.data?.attributes);
-  const result = data?.data?.attributes;
+  console.log(data?.data);
+  const result = data?.data;
   return (
     <div className="">
       <div>
@@ -41,7 +41,7 @@ function Subscription() {
           style={{ maxHeight: "calc(100vh - 200px)" }}
         >
           {
-            data?.data?.attributes?.length ? <div className="grid grid-cols-3 gap-5 p-5 overflow-y-auto">
+            data?.data?.length ? <div className="grid grid-cols-3 gap-5 p-5 overflow-y-auto">
             {isSuccess &&
               result?.map((item) => {
                 return <SubscriptionCart key={item?._id} item={item} />;

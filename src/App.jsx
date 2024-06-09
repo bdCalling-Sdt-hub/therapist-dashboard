@@ -33,8 +33,12 @@ import EditProfileDetails from "./Pages/PersonalDetails/EditProfileDetails";
 import PrivateRoute from "./PrivateRoute";
 import AssignList from "./Pages/AssignList/AssignList";
 import AssignPatientList from "./Pages/AssignPatientList/AssignPatientList";
+import { useEffect } from "react";
 
 function App() {
+  // useEffect(() => {
+  //   window.location.reload();
+  // },[])
   return (
     <>
       <Router>
