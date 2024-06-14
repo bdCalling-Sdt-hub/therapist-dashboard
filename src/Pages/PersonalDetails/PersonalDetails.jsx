@@ -16,6 +16,7 @@ const PersonalDetails = () => {
       console.log(user);
       setCurrentUser(user);
     },[])
+
     return (
         <div>
       <div className="flex justify-between items-center mx-[24px] pt-[40px] mb-[63px]">
@@ -38,8 +39,8 @@ const PersonalDetails = () => {
         <div className="w-[33%] bg-white rounded-xl ml-[24px] flex flex-col justify-center items-center gap-[30px] p-10">
           <img
             className="w-[242px] h-[242px] rounded-full"
-            // src={`${import.meta.env.VITE_BASE_URL}${currentUser?.image?.publicFileURL}`}
-            src="https://i.ibb.co/VBcnsLy/download.jpg"
+            src={`${import.meta.env.VITE_BASE_URL}${currentUser?.image?.publicFileURL}`}
+            // src="https://i.ibb.co/VBcnsLy/download.jpg"
             alt=""
           />
           <div className="flex flex-col justify-center items-center">
