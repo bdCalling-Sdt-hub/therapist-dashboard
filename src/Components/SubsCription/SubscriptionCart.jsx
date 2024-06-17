@@ -2,7 +2,7 @@
 
 const SubscriptionCart = ({item}) => {
     console.log(item);
-    const {title,price,description,duration,sessionCount,liveSession,liveSessionDuaration,weeklyResponse} = item
+    const {title,price,description,duration,sessionCount, planType,liveSession,liveSessionDuaration,weeklyResponse} = item
     const handleDelete = (id) => {
         console.log(id);
     }
@@ -25,11 +25,11 @@ const SubscriptionCart = ({item}) => {
                 {sessionCount}
                 </div>
 
-                {/* <div className="text-[18px] my-2 flex justify-between">
-               <p className="font-bold">Live Session Duration(Hours):</p>  
+                <div className="text-[18px] my-2 flex justify-between">
+               <p className="font-bold">Plan Type:</p>  
                 
-                {liveSessionDuaration}
-                </div> */}
+                {planType}
+                </div>
 
                 {/* <div className="text-[18px] my-2 flex justify-between">
                <p className="font-bold">Weekly Response:</p>  

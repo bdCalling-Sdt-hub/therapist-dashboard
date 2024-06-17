@@ -34,7 +34,10 @@ const AddSubscription = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-            navigate("/subscription");
+            setTimeout(() => {
+              navigate("/subscription");
+            }, 1500);
+            // navigate("/subscription");
           }
 
          
