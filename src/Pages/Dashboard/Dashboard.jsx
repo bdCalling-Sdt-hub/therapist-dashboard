@@ -56,7 +56,12 @@ const Dashboard = () => {
       }
     });
   };
+
+
+
+
   const items = [
+
     getItem(
       <p onClick={(e) => navigate("/")} className="text-[20px] leading-normal">
         Dashboard
@@ -64,6 +69,7 @@ const Dashboard = () => {
       "1",
       <RxDashboard style={{ fontSize: "18px" }} />
     ),
+
     getItem(
       <p className="text-[20px] leading-normal">Therapist</p>,
       "sub1",

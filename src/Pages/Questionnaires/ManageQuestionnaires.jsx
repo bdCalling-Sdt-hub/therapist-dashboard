@@ -484,7 +484,7 @@ function ManageQuestionnaires() {
                       className="block w-[500px] h-[56px] mt-[30px] px-2 py-4  text-white bg-gradient-to-r from-[#54A630] to-[#54A630] rounded-lg"
                       style={{
                         marginTop: "30px",
-                        backgroundColor: "red",
+                        backgroundColor: "#54A630",
                         color: "#fff",
                         size: "18px",
                         height: "56px",
@@ -525,6 +525,7 @@ function ManageQuestionnaires() {
                               label={index === 0 ? "Questions" : ""}
                               required={false}
                               key={field.key}
+                              className="font-semibold"
                             >
                               <Form.Item
                                 {...field}
