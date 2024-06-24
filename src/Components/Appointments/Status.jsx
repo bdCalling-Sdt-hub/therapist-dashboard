@@ -1,6 +1,8 @@
 import React from "react";
 
+
 function Status() {
+ 
   return (
     <div className=" flex justify-between">
       <div className="rounded-lg border-1 shadow-lg items-center py-[16px] px-[84px] bg-white border-primary border-[1px] p-[24px] flex gap-5">
