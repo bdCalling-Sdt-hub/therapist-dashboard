@@ -8,118 +8,14 @@ function RecentSession() {
   const onChange = (date, dateString) => {
     console.log(date, dateString);
   };
-  if(isLoading){
-    return <Loading />
-  }
 
-  const data = [
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-    {
-      name: "Esther Howard",
-      userId: "00014563",
-      accountType: "Individual",
-      data: "10/12/2023",
-      timeRange: "7pm-8:30pm",
-      status: "Completed",
-    },
-  ];
 
-  console.log(allSession?.data?.attributes);
+  // if(isLoading){
+  //   return <Loading />
+  // }
+
+ 
+  console.log(allSession?.data?. attributes);
 
   const columns = [
     {
@@ -196,7 +92,7 @@ function RecentSession() {
           showHeader={true}
           pagination={false}
           columns={columns}
-          dataSource={allSession?.data?.attributes}
+          dataSource={allSession?.data?. attributes}
         />
       </div>
     </div>

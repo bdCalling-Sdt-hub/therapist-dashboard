@@ -1,6 +1,13 @@
-import React from "react";
+import { useGetNotificationQuery } from "../../../redux/Features/getNotificationApi";
+
+
+
+
 
 function Notification() {
+  const {data:allSession,isSuccess,isError,isLoading,error} = useGetNotificationQuery();
+console.log(error);
+console.log(allSession);
   return (
     <div>
       <div className="p-[24px] ">

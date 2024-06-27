@@ -4,9 +4,9 @@ import Loading from "../../../Components/Loading/Loading";
 
 function Status() {
   const {data,isLoading,isSuccess,isError} = useGetAllStatusQuery();
-  if(isLoading){
-    return <Loading/>
-  }
+  // if(isLoading){
+  //   return <Loading/>
+  // }
   console.log("aimannnnnnnnn",data?.data?.attributes);
   return (
     <div className="flex gap-5">
