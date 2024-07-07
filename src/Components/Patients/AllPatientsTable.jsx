@@ -187,10 +187,20 @@ function AllPatientsTable() {
     {
       title: "Phone Number",
       dataIndex: "Phone",
-      width: "32%",
+      // width: "32%",
       render: (_, record) => (
         <>
           <p className="text-[16px]">{record?.phone}</p>
+        </>
+      ),
+    },
+    {
+      title: "Subscription",
+      dataIndex: "subscription",
+      // width: "32%",
+      render: (_, record) => (
+        <>
+          <p className="text-[16px]">{record?.subscription}</p>
         </>
       ),
     },
@@ -278,7 +288,7 @@ function AllPatientsTable() {
                 <p>Email: {currentValue?.email ? currentValue?.email : "N/A"}</p>
                 <p>Phone Number: {currentValue?.phone ? currentValue?.phone : "N/A"}</p>
                 <p>Date of Birth: {currentValue?.address ? currentValue?.address  : "N/A"}</p>
-                {/* <p>Gender: Male</p> */}
+                <p>Subscription: {currentValue?.subscription ? currentValue?.subscription : "N/A"}</p>
                 {/* <p>Survey: Teen Therapy(13-18)</p> */}
               </div>
             </div>

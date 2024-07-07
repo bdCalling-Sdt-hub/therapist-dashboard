@@ -5,84 +5,13 @@ import baseURL from "../../../config";
 import Swal from "sweetalert2";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-import { usePostSubscriptionMutation } from "../../../redux/Features/postSubscriptionApi";
 
-const AddSubscription = () => {
+const EditSubscription = () => {
     const navigate = useNavigate();
-    const [plan,setPlan] = useState("");
-    const [setSubsCription, { isLoading }] = usePostSubscriptionMutation();
-    console.log(plan);
-
-    const handleAddSubscription = async (values) => {
-        console.log(values);
-        console.log();
-        
-       
-        // try {
-        //   const data = {
-        //     ...values
-        //   }
-        //   console.log(data);
-        //   const response = await baseURL.post("/subscription/create-plan", data, {
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //       authorization: `Bearer ${localStorage.getItem("token")}`,
-        //     },
-        //   });
-        //   console.log("----------------------", response);
-        //   if (response.data?.statusCode === 201) {
-        //     Swal.fire({
-        //       position: "top-center",
-        //       icon: "success",
-        //       title: response.data.message,
-        //       showConfirmButton: false,
-        //       timer: 1500,
-        //     });
-        //     setTimeout(() => {
-        //       navigate("/subscription");
-        //     }, 1500);
-        //     // navigate("/subscription");
-        //   }
-
-         
     
-        // } catch (error) {
-        //   console.log(error);
-        //   Swal.fire({
-        //     icon: "error",
-        //     title: "Oops...",
-        //     text: "Something went wrong!",
-        //     message: error.response.data.message,
-        //   });
-        // }
-try {
-  const response = await setSubsCription(values);
-  console.log(response);
-     if (response.data?.statusCode === 201) {
-            Swal.fire({
-              position: "top-center",
-              icon: "success",
-              title: response.data.message,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            setTimeout(() => {
-              navigate("/subscription");
-            }, 1500);
-            // navigate("/subscription");
-          }
-} catch (error) {
-     console.log(error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-            message: error.response.data.message,
-          });
-}
-
-      };
-
+    const handleEditSubscription = async (values) => {
+        console.log(values);
+    }
     return (
         <div className="overflow-y-auto h-[90vh]">
             <div onClick={() => navigate("/subscription")} className="mt-[44px] cursor-pointer  flex items-center gap-1 p-5">
@@ -90,7 +19,7 @@ try {
         
           size={34}
         />
-        <h1 className="text-[24px]  font-semibold">Add Subscription</h1>
+        <h1 className="text-[24px] font-semibold">Edit Subscription</h1>
       </div>
 
       <div className="p-5">
@@ -102,7 +31,7 @@ try {
             initialValues={{
               remember: true,
             }}
-            onFinish={handleAddSubscription}
+            onFinish={handleEditSubscription}
             //   onFinishFailed={handleCompanyInformationFailed}
             autoComplete="off"
           >
@@ -332,4 +261,4 @@ try {
     );
 }
 
-export default AddSubscription;
+export default EditSubscription;

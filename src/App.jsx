@@ -34,6 +34,7 @@ import PrivateRoute from "./PrivateRoute";
 import AssignList from "./Pages/AssignList/AssignList";
 import AssignPatientList from "./Pages/AssignPatientList/AssignPatientList";
 import { useEffect } from "react";
+import EditSubscription from "./Pages/Dashboard/Subscription/EditSubscription";
 
 function App() {
   // useEffect(() => {
@@ -74,6 +75,7 @@ function App() {
             <Route path="/totalIncome" element={<TotalIncome />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/subscription" element={<Subscription />} />
+            <Route path="/subscription-update/:id" element={<EditSubscription />} />
             <Route path="add-subscriptions" element={<AddSubscription />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/settings" element={<Settings />} />

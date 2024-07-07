@@ -8,6 +8,7 @@ import InputType from "../../Components/Patients/SurveyAnswers/InputType";
 import baseURL from "../../config";
 import { useGetAllQuestionQuery } from "../../redux/Features/getAllQuestionApi";
 import Swal from "sweetalert2";
+import { FaArrowLeft } from "react-icons/fa";
 
 const SurveyAnswers = [
   {
@@ -107,6 +108,7 @@ const formItemLayoutWithOutLabel = {
 
 function ManageQuestionnaires() {
   const { data, isLoading, isSuccess } = useGetAllQuestionQuery();
+  const navigate = useNavigate();
   const [questionnairesName, setQuestionnairesName] =
     useState("Couple Therapy");
   const [questionType, setQuestionType] = useState({
@@ -355,9 +357,16 @@ function ManageQuestionnaires() {
   };
   console.log(questionType);
   console.log(questionnairesName);
+
   return (
     <div className="">
       <div className="p-[24px]">
+      <h1
+        onClick={() => navigate("/questionnaires")}
+        className="text-black cursor-pointer text-[24px] font-semibold pt-5  flex items-center gap-2"
+      >
+        <FaArrowLeft  size={18}/> Back
+      </h1>
         <h1 className="text-black text-[24px] rounded-lg font-semibold">
           Manage Questionnaires
         </h1>

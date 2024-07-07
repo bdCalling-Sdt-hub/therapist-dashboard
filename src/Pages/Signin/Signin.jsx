@@ -9,41 +9,41 @@ function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async() => {
-    // navigate("/")
-    
+  const handleLogin = async () => {
     try {
       const result = {
-        email,password
-      }
+        email,
+        password,
+      };
       console.log(result);
-      const response = await baseURL.post("/user/sign-in", result,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authentication: `Bearer ${localStorage.getItem("token")}`,
-          }
-        }
-      );
+      const response = await baseURL.post("/user/sign-in", result, {
+        headers: {
+          "Content-Type": "application/json",
+          authentication: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       console.log(response?.data);
       console.log(response?.data?.data?.token);
-      if(response?.data?.statusCode === 200) {
+      if (response?.data?.statusCode === 200) {
         localStorage.setItem("token", response?.data?.data?.token);
-        localStorage.setItem("yourInfo", JSON.stringify(response?.data?.data?.attributes));
+        localStorage.setItem(
+          "yourInfo",
+          JSON.stringify(response?.data?.data?.attributes)
+        );
         Swal.fire({
           position: "top-center",
           icon: "success",
           title: response?.data?.message,
           showConfirmButton: false,
           timer: 1500,
-        })
-        navigate("/")
+        });
+        navigate("/");
       }
-
     } catch (error) {
+      console.log(error?.response?.data);
       Swal.fire({
         icon: "error",
-        title: "Try Again...",
+        title: error?.response?.data?.statusCode,
         text: error?.response?.data?.message,
         footer: '<a href="#">Why do I have this issue?</a>',
       });
@@ -70,13 +70,13 @@ function Signin() {
         </div>
         <div className="flex flex-col mt-[24px] gap-[27px]">
           <Input
-          onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             className="p-4 bg-white rounded border border-primary justify-start items-center gap-4 inline-flex focus:border-primary "
             type="email"
           />
           <Input.Password
-          onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             className="p-4 bg-white rounded border border-primary justify-start items-center gap-4 inline-flex focus:border-primary "
           />
@@ -86,12 +86,18 @@ function Signin() {
             {/* <Checkbox className="text-[18px] items-center">
               Remember me
             </Checkbox> */}
-            <h1 onClick={() => navigate("/forget-password")} className="text-primary cursor-pointer text-[14px] font-medium">
+            <h1
+              onClick={() => navigate("/forget-password")}
+              className="text-primary cursor-pointer text-[14px] font-medium"
+            >
               Forgot Password?
             </h1>
           </div>
           <div>
-            <button onClick={handleLogin} className="w-full p-3 bg-primary rounded text-white text-[24px]">
+            <button
+              onClick={handleLogin}
+              className="w-full p-3 bg-primary rounded text-white text-[24px]"
+            >
               Sign In
             </button>
           </div>
