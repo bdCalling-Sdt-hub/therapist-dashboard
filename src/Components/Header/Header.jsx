@@ -90,9 +90,9 @@ const Header = () => {
   );
 
   return (
-    <div className="flex w-[1138px] justify-between  mt-[32px] mb-[16px]">
+    <div className="flex w-[1138px] border-l-2  justify-between  pt-[32px] pb-[16px]">
       <div>
-        <svg
+        {/* <svg
           className="cursor-pointer"
           width="32"
           height="32"
@@ -107,10 +107,10 @@ const Header = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-        </svg>
+        </svg> */}
       </div>
       <div className="flex gap-5">
-        <Dropdown overlay={menu} placement="bottomRight" arrow>
+        {/* <Dropdown overlay={menu} placement="bottomRight" arrow>
           <div
             onClick={(e) => navigate("/notification")}
             className="relative flex items-center "
@@ -120,7 +120,7 @@ const Header = () => {
               className={` bg-primary w-[40px] h-[40px] text-white rounded-full p-1 `}
             />
           </div>
-        </Dropdown>
+        </Dropdown> */}
         <div onClick={() => navigate("/personal-details")} className="flex items-center cursor-pointer mr-[30px] bg-primary text-white rounded-full p-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"

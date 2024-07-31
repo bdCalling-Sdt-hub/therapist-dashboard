@@ -5,80 +5,72 @@ import {
   Bar,
   Rectangle,
   XAxis,
+  YAxis,
 } from "recharts";
 
 const data = [
   {
-    name: "01",
-    ThisMonth: 4000,
-    LastMonth: 2400,
+    name: "Jan",
+    ThisMonth: 40,
+  
   },
   {
-    name: "02",
-    ThisMonth: 3000,
-    LastMonth: 1398,
+    name: "Feb",
+    ThisMonth: 30,
+
   },
   {
-    name: "03",
-    ThisMonth: 2000,
-    LastMonth: 9800,
+    name: "Mar",
+    ThisMonth: 20,
+
   },
   {
-    name: "04",
-    ThisMonth: 2780,
-    LastMonth: 3908,
+    name: "Apr",
+    ThisMonth: 27,
+ 
   },
   {
-    name: "05",
-    ThisMonth: 1890,
-    LastMonth: 4800,
-    amt: 2181,
+    name: "May",
+    ThisMonth: 18,
+   
+ 
   },
   {
-    name: "06",
-    ThisMonth: 2390,
-    LastMonth: 3800,
+    name: "Jun",
+    ThisMonth: 23,
+  
   },
   {
-    name: "07",
-    ThisMonth: 3490,
-    LastMonth: 4300,
+    name: "Jul",
+    ThisMonth: 34,
+ 
   },
   {
-    name: "08",
-    ThisMonth: 3490,
-    LastMonth: 4300,
+    name: "Aug",
+    ThisMonth: 34,
+ 
   },
   {
-    name: "09",
-    ThisMonth: 5465,
-    LastMonth: 5245,
+    name: "Sep",
+    ThisMonth: 54,
+ 
   },
   {
-    name: "10",
-    ThisMonth: 3490,
-    LastMonth: 4300,
+    name: "Oct",
+    ThisMonth: 34,
+ 
   },
   {
-    name: "11",
-    ThisMonth: 3490,
-    LastMonth: 4300,
+    name: "Nov",
+    ThisMonth: 34,
+
   },
   {
-    name: "12",
-    ThisMonth: 3490,
-    LastMonth: 4300,
+    name: "Dec",
+    ThisMonth: 39,
+   
   },
-  {
-    name: "13",
-    ThisMonth: 3490,
-    LastMonth: 4300,
-  },
-  {
-    name: "14",
-    ThisMonth: 3490,
-    LastMonth: 4300,
-  },
+  
 ];
 
 function BarChartIncomeRatio() {
@@ -95,10 +87,6 @@ function BarChartIncomeRatio() {
               <span className="bg-[#54A630] w-4 h-4 rounded-full"></span>
               <span>This month</span>
             </div>
-            <div className="flex gap-2 items-center">
-              <span className="bg-[#B0D6A0] w-4 h-4 rounded-full"></span>
-              <span>Last month</span>
-            </div>
           </div>
         </div>
         <div>
@@ -112,22 +100,17 @@ function BarChartIncomeRatio() {
           data={data}
           margin={{
             top: 5,
-            right: 30,
-            left: 20,
+            right: 20,
+            left: 0,
             bottom: 5,
           }}
         >
           <XAxis dataKey="name" />
-          <Bar
-            dataKey="LastMonth"
-            fill="#B0D6A0"
-            barSize={6}
-            activeBar={<Rectangle fill="pink" stroke="blue" />}
-          />
+          <YAxis />
           <Bar
             dataKey="ThisMonth"
             fill="#54A630"
-            barSize={6}
+            barSize={20}
             activeBar={<Rectangle fill="gold" stroke="purple" />}
           />
         </BarChart>

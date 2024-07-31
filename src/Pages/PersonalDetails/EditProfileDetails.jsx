@@ -67,6 +67,7 @@ const EditProfileDetails = () => {
         },
       };
 console.log(phoneNumber);
+console.log("=================>",fileList);
   const handleUpdateProfile = async (values) => {
     console.log(values);
     const updateProfile = {
@@ -74,7 +75,7 @@ console.log(phoneNumber);
       image: fileList[0]?.originFileObj,
       phone:phoneNumber,
     };
-    console.log(updateProfile);
+    console.log("aiman======>",updateProfile);
     const formData = new FormData();
     formData.append("name", updateProfile?.name);
     formData.append("email", updateProfile?.email);
@@ -93,6 +94,7 @@ console.log(phoneNumber);
           },
         }
       );
+      console.log(`${localStorage.getItem("token")}`);
       console.log(response?.data);
       if (response?.status == 200) {
         Swal.fire({
@@ -112,7 +114,7 @@ console.log(phoneNumber);
         setTimeout(() => window.location.reload(), 1700);
       }
     } catch (error) {
-      console.log("Registration Fail", error?.response?.data?.message);
+      console.log("Registration Fail", error);
       Swal.fire({
         icon: "error",
         title: "Error...",

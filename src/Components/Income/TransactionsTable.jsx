@@ -269,7 +269,7 @@ function TransactionsTable() {
           </div>
         </div>
       </Modal>
-      0
+      
     </div>
   );
 }

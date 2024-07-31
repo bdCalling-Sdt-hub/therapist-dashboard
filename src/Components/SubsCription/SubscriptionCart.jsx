@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { usePostDeleteSubscriptionMutation } from "../../redux/Features/postDeleteAppoinmentApi";
+import Swal from "sweetalert2";
 
 const SubscriptionCart = ({ item }) => {
   console.log(item);
+  const [setData,res] = usePostDeleteSubscriptionMutation()
   const navigate = useNavigate();
   const {
     title,
@@ -14,8 +17,38 @@ const SubscriptionCart = ({ item }) => {
     liveSessionDuaration,
     weeklyResponse,
   } = item;
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     console.log(id);
+    try {
+      const response = await setData(id);
+      console.log(response);
+      if (response.data?.status == 'Success') {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }else{
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        message: error.response.data.message,
+      })
+    }
   };
   const handleUpdate = (id) => {
       navigate(`/subscription-update/${id}`)
