@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useGetIncomeQuery } from "../../../redux/Features/getIncomeApi";
 
 const data = [
   {
@@ -74,9 +75,13 @@ const data = [
 ];
 
 function BarChartIncomeRatio() {
+  const {data,isSuccess} = useGetIncomeQuery();
+  const [] = 
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
+    console.log(dateString);
   };
+  console.log(data?.data);
+  const result = data?.data;
   return (
     <div className="bg-white mt-5 rounded-xl border-1 shadow-xl border-secondary ">
       <div className="flex justify-between p-[16px]">
@@ -90,25 +95,25 @@ function BarChartIncomeRatio() {
           </div>
         </div>
         <div>
-          <DatePicker onChange={onChange}  picker="month" />
+          <DatePicker onChange={onChange}  picker="year" />
         </div>
       </div>
       <div>
         <BarChart
           width={690}
           height={200}
-          data={data}
+          data={result}
           margin={{
             top: 5,
-            right: 20,
+            right: 10,
             left: 0,
             bottom: 5,
           }}
         >
-          <XAxis dataKey="name" />
-          <YAxis />
+          <XAxis dataKey="month" />
+          <YAxis dataKey="income" />
           <Bar
-            dataKey="ThisMonth"
+            dataKey="income"
             fill="#54A630"
             barSize={20}
             activeBar={<Rectangle fill="gold" stroke="purple" />}
