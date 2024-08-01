@@ -273,12 +273,29 @@ function AllPatientsTable() {
         >
           <div className="flex flex-col">
             <div className="flex items-center gap-5 border-b-[1px] pb-2 border-primary">
-              <img
+
+              {
+                !currentValue?.image?.publicFileURL ? (
+                  <img
+                    className="w-[70px] h-[70px]"
+                    src={`${import.meta.env.VITE_BASE_URL}${currentValue?.image?.publicFileURL
+                    }`}
+                    alt=""
+                  />
+                ):(
+                  <img
+                    className="w-[70px] h-[70px]"
+                    src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+                    alt=""
+                  />
+                )
+              }
+              {/* <img
                 className="w-[70px] h-[70px]"
                 src={`${import.meta.env.VITE_BASE_URL}${currentValue?.image?.publicFileURL
                 }`}
                 alt=""
-              />
+              /> */}
               <h1 className="text-primary text-[24px] ">{currentValue?.name}</h1>
             </div>
             <div>

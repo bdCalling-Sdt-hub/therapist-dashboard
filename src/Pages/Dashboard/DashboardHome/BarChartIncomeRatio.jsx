@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState } from "react";
 import {  DatePicker } from "antd";
 import {
   BarChart,
@@ -75,11 +75,14 @@ const data = [
 ];
 
 function BarChartIncomeRatio() {
-  const {data,isSuccess} = useGetIncomeQuery();
-  const [] = 
+  const [year,setYear] = useState(new Date().getFullYear());
+  const {data,isSuccess} = useGetIncomeQuery(year);
+ 
   const onChange = (date, dateString) => {
     console.log(dateString);
+    setYear(dateString);
   };
+  console.log(year);
   console.log(data?.data);
   const result = data?.data;
   return (

@@ -32,7 +32,8 @@ const SinglePersonChatDetails = ({
   });
 
   useEffect(() => {
-    socket.current = io("ws://103.145.138.77:3000");
+    // socket.current = io("ws://103.145.138.77:3000");
+    socket.current = io("https://api.mindgaze.org");
     socket.current.on(`new::${currentChatId}`, (messageData) => {
       console.log("Received message:", messageData);
       setChats((prevChats) => [...prevChats, messageData]);
@@ -139,11 +140,26 @@ const SinglePersonChatDetails = ({
             .map((c) =>
               c?.senderId === UserData?._id ? (
                 <div className="flex flex-row-reverse gap-5 mt-[32px] mr-5 mb-5" key={c._id}>
-                  <img
+                  {
+                    UserData?.image?.publicFileURL ? (
+                      <img
+                        className="w-[60px] h-[60px] rounded-full border-2 border-primary"
+                        src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="w-[60px] h-[60px] rounded-full border-2 border-primary"
+                        src={`${imageUrl}${UserData?.image?.publicFileURL}`}
+                        alt=""
+                      />
+                    )
+                  }
+                  {/* <img
                     className="w-[60px] h-[60px] rounded-full border-2 border-primary"
                     src={`${imageUrl}${UserData?.image?.publicFileURL}`}
                     alt=""
-                  />
+                  /> */}
                   <div className="flex flex-col gap-1 text-wrap">
                     <p className="text-end text-primary font-bold">{UserData?.name}</p>
                     <p className="max-w-[500px] bg-primary text-white border-[1px] border-secondary p-[20px] rounded-[10px] rounded-tr-none text-sm font-normal font-['Montserrat']">
@@ -168,11 +184,27 @@ const SinglePersonChatDetails = ({
                 </div>
               ) : (
                 <div className="flex gap-5 mt-[32px] ml-5 mb-5" key={c._id}>
-                  <img
+
+{
+                    !participantDetails?.participantDetails?.image?.publicFileURL ? (
+                      <img
+                        className="w-[60px] h-[60px] rounded-full border-2 border-primary"
+                        src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="w-[60px] h-[60px] rounded-full border-2 border-primary"
+                        src={`${imageUrl}${participantDetails?.participantDetails?.image?.publicFileURL}`}
+                        alt=""
+                      />
+                    )
+                  }
+                  {/* <img
                     className="w-[60px] h-[60px] rounded-full border-2 border-primary"
                     src={`${imageUrl}${participantDetails?.participantDetails?.image?.publicFileURL}`}
                     alt=""
-                  />
+                  /> */}
                   <div className="flex flex-col gap-1 text-wrap">
                     <p className="text-start text-primary font-bold">{`${currentChatPersonName}`}</p>
                     <p className="max-w-[500px] font-medium border-[1px] border-secondary p-[8px] rounded-[10px] rounded-tl-none text-zinc-800 text-sm font-['Montserrat']">

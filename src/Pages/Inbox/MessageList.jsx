@@ -10,7 +10,8 @@ const MessageList = ({ chatList, handleChat,setParticipantDetails }) => {
             </h1>
             <div className="overflow-y-scroll h-[690px]">
               {chatList?.map((item, index) => {
-                return (
+                console.log(item);
+             return  item?. participantDetails &&  (
                   <SignleUser
                     key={index}
                     setParticipantDetails={setParticipantDetails}

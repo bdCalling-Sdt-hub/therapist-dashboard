@@ -244,6 +244,7 @@ console.log("=================>",fileList);
                           mt-[12px]
                           items-center 
                           gap-4 inline-flex"
+                          readOnly
                     />
                   </Form.Item>
                 </div>

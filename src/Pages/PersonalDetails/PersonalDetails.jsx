@@ -7,22 +7,22 @@ import { CiCalendarDate } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
 const PersonalDetails = () => {
-    const [currentUser,setCurrentUser] = useState()
-    const navigate = useNavigate();
-    const baseUrl = import.meta.env.VITE_API_URL;
-    useEffect(()=>{
-      const storedUser = localStorage.getItem('yourInfo');
-      const user = JSON.parse(storedUser);
-      console.log(user);
-      setCurrentUser(user);
-    },[])
+  const [currentUser, setCurrentUser] = useState();
+  const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_API_URL;
+  useEffect(() => {
+    const storedUser = localStorage.getItem("yourInfo");
+    const user = JSON.parse(storedUser);
+    console.log(user);
+    setCurrentUser(user);
+  }, []);
 
-    return (
-        <div>
+  return (
+    <div>
       <div className="flex justify-between items-center mx-[24px] pt-[40px] mb-[63px]">
         <h1 className="text-[30px] font-medium">Profile Information</h1>
         <div
-            onClick={(e) =>navigate(`/edit-profile/${currentUser?._id}`)}
+          onClick={(e) => navigate(`/edit-profile/${currentUser?._id}`)}
           className="flex gap-2 items-center py-[15px]
                  px-[40px]
                   bg-primary
@@ -37,16 +37,30 @@ const PersonalDetails = () => {
       </div>
       <div className="lg:flex ml-[24px] p-[36px] rounded-xl gap-5">
         <div className="w-[33%] bg-white rounded-xl ml-[24px] flex flex-col justify-center items-center gap-[30px] p-10">
-          <img
-            className="w-[242px] h-[242px] rounded-full"
-            src={`${import.meta.env.VITE_BASE_URL}${currentUser?.image?.publicFileURL}`}
-            // src="https://i.ibb.co/VBcnsLy/download.jpg"
-            alt=""
-          />
+          {!currentUser?.image?.publicFileURL ? (
+            <img
+              className="w-[242px] h-[242px] rounded-full"
+              src={
+                `${import.meta.env.VITE_BASE_URL}${
+                  currentUser?.image?.publicFileURL
+                }` || "https://i.ibb.co/GtxhMsK/aiman.jpg"
+              }
+              alt=""
+            />
+          ) : (
+            <img
+              className="w-[242px] h-[242px] rounded-full"
+              src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+              alt=""
+            />
+          )}
+
           <div className="flex flex-col justify-center items-center">
-            <p className="text-[15px] ">{currentUser?.role?.toUpperCase() || "Admin"}</p>
+            <p className="text-[15px] ">
+              {currentUser?.role?.toUpperCase() || "Admin"}
+            </p>
             <h1 className="text-[22px] font-medium">
-             {currentUser?.name?.toUpperCase() || "user"}
+              {currentUser?.name?.toUpperCase() || "user"}
             </h1>
           </div>
         </div>
@@ -55,14 +69,10 @@ const PersonalDetails = () => {
           <div className="flex flex-col gap-[24px]">
             <div className="flex gap-[25px]">
               <div className="flex-1">
-                <label
-                  htmlFor=""
-                  className=" text-[18px] font-medium"
-                >
+                <label htmlFor="" className=" text-[18px] font-medium">
                   Name
                 </label>
                 <Input
-              
                   placeholder="First name"
                   value={currentUser?.name}
                   className="p-4 
@@ -78,17 +88,12 @@ const PersonalDetails = () => {
                   readOnly
                 />
               </div>
-              
             </div>
             <div className="flex-1">
-              <label
-                htmlFor=""
-                className="  text-[18px] font-medium mb-[12px]"
-              >
+              <label htmlFor="" className="  text-[18px] font-medium mb-[12px]">
                 Email
               </label>
               <Input
-          
                 placeholder="Email"
                 value={` ${currentUser?.email}`}
                 className="p-4 
@@ -105,14 +110,10 @@ const PersonalDetails = () => {
               />
             </div>
             <div className="flex-1">
-              <label
-                htmlFor=""
-                className="  text-[18px] font-medium mb-[12px]"
-              >
+              <label htmlFor="" className="  text-[18px] font-medium mb-[12px]">
                 Phone Number
               </label>
               <Input
-            
                 placeholder="Phone"
                 value={`${currentUser?.phone}` || "Not Provided"}
                 className="p-4 
@@ -154,8 +155,8 @@ const PersonalDetails = () => {
           </div>
         </div>
       </div>
-        </div>
-    );
-}
+    </div>
+  );
+};
 
 export default PersonalDetails;

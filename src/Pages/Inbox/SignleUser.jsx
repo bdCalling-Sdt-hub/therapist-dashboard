@@ -16,12 +16,21 @@ console.log(item?.lastMessage?.message);
       } `}
     >
       <div>
-        <img
-          className="w-[60px] h-[60px] rounded-full"
-          src={`${import.meta.env.VITE_BASE_URL}${ item?.participantDetails?.image?.publicFileURL}`}
-        // src={item?.img}
-          alt=""
-        />
+        {
+          item?.participantDetails?.image?.publicFileURL ? (
+            <img
+              className="w-[50px] h-[50px] rounded-full"
+              src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+              alt=""
+            />
+          ) : (
+            <img
+              className="w-[50px] h-[50px] rounded-full"
+              src={`${import.meta.env.VITE_BASE_URL}${item?.participantDetails?.image?.publicFileURL}`}
+              alt=""
+            />
+          )
+        }
       </div>
       <div>
         <h1 className="text-primary font-semibold font-['Montserrat'] text-lg">

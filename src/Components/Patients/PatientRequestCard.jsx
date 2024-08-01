@@ -7,13 +7,21 @@ function PatientRequestCard({item}) {
   return (
     <div className="flex bg-white rounded-md  mt-5 p-[16px] border-2 ">
       <div className="mr-5">
-        <img
-          className="w-[100px] h-[100px] rounded-full"
-          
-          src={`${import.meta.env.VITE_BASE_URL}${item?.image?.publicFileURL
-          }`  }
-          alt=""
-        />
+        {
+          item?.image?.publicFileURL ? (
+            <img
+              className="w-[100px] h-[100px] rounded-full"
+              src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+              alt=""
+            />
+          ) : (
+            <img
+              className="w-[100px] h-[100px] rounded-full"
+              src={`${import.meta.env.VITE_BASE_URL}${item?.image?.publicFileURL}`}
+              alt=""
+            />
+          )
+        }
       </div>
       <div className="flex gap-3 flex-col ">
         <div>
