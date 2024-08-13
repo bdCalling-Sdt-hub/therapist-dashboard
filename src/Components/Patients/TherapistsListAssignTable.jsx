@@ -206,12 +206,28 @@ console.log(patientId,);
       >
         <div className="flex flex-col">
           <div className="flex gap-5 border-b-[1px] pb-2 border-primary">
+          {
+          userDetails?.image?.publicFileURL ? (
             <img
-              className="w-[70px] h-[70px]"
-              // src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
-              src={`${import.meta.env.VITE_BASE_URL}/${userDetails?.image?.publicFileURL}` || "https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"}
+               className="w-[70px] h-[70px]"
+              src="https://i.ibb.co/GtxhMsK/aiman.jpg"
               alt=""
             />
+          ) : (
+            <img
+              className="w-[70px] h-[70px]"
+              src={`${import.meta.env.VITE_BASE_URL}${userDetails?.image?.publicFileURL}`}
+              alt=""
+            />
+          )
+        }
+            {/* <img
+              className="w-[70px] h-[70px]"
+              // src="https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"
+              // src={`${import.meta.env.VITE_BASE_URL}/${userDetails?.image?.publicFileURL}` || "https://i.ibb.co/Pw9b56k/b3b76175bc84084ec18597109498f96d.png"}
+              
+              alt=""
+            /> */}
             <div>
               <h1 className="text-primary text-[24px]">{userDetails?.name}</h1>
               <div className="flex items-center gap-1">

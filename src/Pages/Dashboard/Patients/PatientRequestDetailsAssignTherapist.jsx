@@ -57,12 +57,27 @@ function PatientRequestDetailsAssignTherapist() {
         <div>
           <div className="flex items-center gap-5 bg-white rounded-md  p-[16px]">
             <div>
-              <img
+              {/* <img
                 className="w-[100px] h-[100px] rounded-full"
                 // src="https://i.ibb.co/f1YyLM4/Ellipse-2322.png"
                 src={`${import.meta.env.VITE_BASE_URL}${singlePatients?.data?.attributes?.image?.publicFileURL}`}
                 alt=""
-              />
+              /> */}
+                {
+         singlePatients?.data?.attributes?.image?.publicFileURL ? (
+            <img
+              className="w-[100px] h-[100px] rounded-full"
+              src="https://i.ibb.co/GtxhMsK/aiman.jpg"
+              alt=""
+            />
+          ) : (
+            <img
+              className="w-[100px] h-[100px] rounded-full"
+              src={`${import.meta.env.VITE_BASE_URL}${singlePatients?.data?.attributes?.image?.publicFileURL}`}
+              alt=""
+            />
+          )
+        }
             </div>
             <div className="flex gap-3 flex-col ">
               <div>
